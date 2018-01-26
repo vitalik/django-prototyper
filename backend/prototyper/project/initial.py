@@ -1,0 +1,70 @@
+
+
+def create_new_project(name):
+    result = INITIAL_PROJECT.copy()
+    result['settings']['ADMIN_SITE_HEADER'] = name
+    result['settings']['EMAIL_SUBJECT_PREFIX'] = '[{}] '.format(name)
+    return result
+
+
+INITIAL_PROJECT = {
+    'version': '0.1',
+    'ui': {'apps_compact': False},  # TODO: think maybe ui better be on some ~/.djangoprototyper.json
+    'settings': {
+        'ADMIN_SITE_HEADER': 'Barbecook',
+        'DEFAULT_FROM_EMAIL': 'support@barbecook.com',
+        'EMAIL_SUBJECT_PREFIX': '[barbecook] ',
+        'LANGUAGE_CODE': 'en-us',
+        'TIME_ZONE': 'Europe/Brussels',
+        'USE_I18N': True,
+        'USE_L10N': True,
+        'django_contrib_apps': ['django.contrib.admin',
+                                'django.contrib.auth',
+                                'django.contrib.contenttypes',
+                                'django.contrib.sessions',
+                                'django.contrib.messages',
+                                'django.contrib.staticfiles']},
+    'apps': [{'models': [{'admin': {'generate': True},
+                       'fields': [{'name': 'title', 'type': 'models.CharField'},
+                                  {'name': 'km', 'type': 'models.IntegerField'},
+                                  {'name': 'max_height',
+                                   'type': 'models.IntegerField'},
+                                  {'name': 'map', 'type': 'models.ImageField'}],
+                       'name': 'SkiAarea'},
+                      {'admin': {'generate': True},
+                       'fields': [{'name': 'title', 'type': 'models.CharField'},
+                                  {'name': 'stars',
+                                   'type': 'models.PositiveSmallIntegerField'},
+                                  {'name': 'type', 'type': 'models.CharField'},
+                                  {'name': 'description',
+                                   'type': 'models.TextField'},
+                                  {'name': 'description2',
+                                   'type': 'models.TextField'},
+                                  {'name': 'description3',
+                                   'type': 'models.TextField'},
+                                  {'name': 'description4',
+                                   'type': 'models.TextField'},
+                                  {'name': 'description5',
+                                   'type': 'models.TextField'},
+                                  {'name': 'description6',
+                                   'type': 'models.TextField'},
+                                  {'name': 'description7',
+                                   'type': 'models.TextField'}],
+                       'name': 'Hotel'},
+                      {'admin': {'generate': True},
+                       'fields': [{'name': 'description',
+                                   'type': 'models.TextField'}],
+                       'name': 'Accommodation'},
+                      {'admin': {'generate': True},
+                       'fields': [],
+                       'name': 'Skipass'},
+                      {'admin': {'generate': True},
+                       'fields': [],
+                       'name': 'Shop'},
+                      {'admin': {'generate': True},
+                       'fields': [],
+                       'name': 'Eqipment'}],
+           'name': 'configuration'},
+          {'models': [], 'name': 'offers'},
+          {'models': [], 'name': 'orders'}],
+}

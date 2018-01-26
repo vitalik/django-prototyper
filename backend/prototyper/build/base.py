@@ -2,7 +2,7 @@ import traceback
 from .log import get_logger
 
 
-class Project(object):
+class BuildProject(object):
     def __init__(self, settings, details):
         self.logger = get_logger()
         self.success = False  # succesful build finished

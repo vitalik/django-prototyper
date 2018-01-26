@@ -39,13 +39,10 @@ settings.configure(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_project')
-    project_path = os.path.abspath(parser.parse_args().path_to_project)
 
-    settings.PROTOTYPER = {
-        'BUILD_PATH': project_path,
-        'PROJECT_PATH': os.path.join(project_path, '.djangoprototyper'),
-        'NAME': os.path.basename(project_path)
-    }
+    from prototyper.project import Project
+
+    settings.PROTOTYPER_PROJECT = Project(parser.parse_args().path_to_project)
 
     import django
     django.setup()

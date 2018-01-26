@@ -4,7 +4,7 @@
             <span class="navbar-text">
                 <span  class="badge badge-light" style="font-size: 1.1rem; font-weight: 100">Prototyper</span>
                 &nbsp;
-                {{project_settings.NAME}}
+                TODO name
                  
                 <span v-if="is_saving" class="badge badge-warning">Saving...</span>
             </span>
@@ -41,7 +41,6 @@ export default {
         return {
             project: store.project,
             is_saving: false,
-            project_settings: SETTINGS, // comes from globals
         }
     },
     watch: {

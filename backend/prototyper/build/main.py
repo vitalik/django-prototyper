@@ -1,4 +1,4 @@
-from .base import Project, BuildStage, pipeline
+from .base import BuildProject, BuildStage, pipeline
 
 
 class FirstStage(BuildStage):
@@ -26,7 +26,7 @@ class AdminStage(BuildStage):
 
 
 def run_build(settings):
-    project = Project(settings, None)
+    project = BuildProject(settings, None)
     ok = pipeline(project, [
         FirstStage,
         SettingsStage,
