@@ -1,0 +1,31 @@
+body, html, #app { /// take all available height
+    height: 100%;
+}
+
+
+#app {
+    >.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+    >.container-fluid {
+        padding-top: 3rem;
+
+        .column {
+            padding-top: 1rem;
+        }
+    }
+}
+
+.siebar {
+    background-color: #F4F6F8;
+    border-right: 1px solid #DFE3E8;
+
+    .nav-pills .nav-link.active {
+        color: black;
+        background-color: #DFE3E8;
+    }
+}

@@ -1,0 +1,16 @@
+.DS_Store
+*.pyc
+*.*~
+*.swp
+*.swo
+
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.idea
+.vscode
+.venv
+frontend/node_modules
+frontend/webpack-stats.json
+frontend/dist
