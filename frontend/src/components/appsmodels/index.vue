@@ -1,6 +1,7 @@
 <template>
     <div>
         <h2>Apps and Models</h2>
+        <hr>
 
         <div class="d-flex justify-content-between mb-2">
             <div>

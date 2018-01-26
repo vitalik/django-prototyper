@@ -1,6 +1,8 @@
 <template>
     <div>
         <h2>Build</h2>
+        <hr>
+        
         <button @click="on_buld_click" class="btn btn-danger">RUN</button>
         
         <div v-if="show_complete" class="mt-2">
