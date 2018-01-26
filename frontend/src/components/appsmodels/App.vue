@@ -5,20 +5,24 @@
         </div>
         <div class="card-body">
             <div v-if="compact">
-                <span v-for="model in app.models" 
-                    class="badge mr-1"
-                    style="font-size: 1.1rem; font-weight: 100; background-color: #eee;">
-                        {{ model.name }}
-                </span>
+                <draggable v-model="app.models">
+                    <span v-for="model in app.models" 
+                        class="badge mr-2"
+                        style="font-size: 1.1rem; font-weight: 100; background-color: #eee;">
+                            <a href="#">{{ model.name }}</a>
+                    </span>
+                </draggable>
             </div>
 
             <table v-else>
-                <tr v-for="model in app.models">
-                    <td class="model-name">{{ model.name }}</td>
-                    <td class="fields pl-2">
-                        <span v-for="field in model.fields" class="badge badge-secondary mr-1">{{ field.name }}</span>
-                    </td>
-                </tr>
+                <draggable v-model="app.models">
+                    <tr v-for="model in app.models">
+                        <td class="model-name">{{ model.name }}</td>
+                        <td class="fields pl-2">
+                            <span v-for="field in model.fields" class="badge badge-secondary mr-1">{{ field.name }}</span>
+                        </td>
+                    </tr>
+                </draggable>
             </table>
 
             <pattern-input class="new-model mt-1"
@@ -34,6 +38,7 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import PatternInput from '../utils/PatternInput'
 import { store } from '../../store'
 
@@ -50,6 +55,7 @@ export default {
     },
     components: {
         PatternInput,
+        draggable,
     }
 }
 
