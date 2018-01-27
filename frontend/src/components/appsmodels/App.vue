@@ -50,6 +50,10 @@ export default {
     },
     methods: {
         add_model(name) {
+            if (store.models_get(this.app.name, name) !== undefined) {
+                alert(`Model "${name}" already exist`)
+                return
+            }
             store.models_add(this.app.name, name)
         }
     },
