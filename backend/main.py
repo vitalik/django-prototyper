@@ -3,6 +3,7 @@ import sys
 import os
 import argparse
 
+import django
 from django.conf import settings
 
 BASE_DIR = os.path.dirname(__file__)
@@ -36,16 +37,31 @@ settings.configure(
 )
 
 
-if __name__ == "__main__":
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_project')
+    parser.add_argument('--build', action='store_true')
+    return parser.parse_args()
+
+
+def run_server():
+    from django.core.management import call_command
+    call_command('runserver')
+
+
+def build():
+    from prototyper.build import run_build
+    run_build()
+
+
+if __name__ == "__main__":
+    args = parse_args()
 
     from prototyper.project import Project
-
-    settings.PROTOTYPER_PROJECT = Project(parser.parse_args().path_to_project)
-
-    import django
+    settings.PROTOTYPER_PROJECT = Project(args.path_to_project)
     django.setup()
-    from django.core.management import call_command
 
-    call_command('runserver')
+    if args.build is True:
+        build()
+    else:
+        run_server()

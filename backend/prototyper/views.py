@@ -32,7 +32,7 @@ def main_view(request):
 
 
 def api_build(request):
-    project = run_build(settings.PROTOTYPER_PROJECT)
+    project = run_build()
     return JsonResponse({
         'success': project.success,
         'logs': project.logger.serialize()

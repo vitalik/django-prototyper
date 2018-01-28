@@ -3,7 +3,8 @@ from .log import get_logger
 
 
 class BuildProject(object):
-    def __init__(self, settings, details):
+    def __init__(self, settings):
+        self.details = settings.load()
         self.logger = get_logger()
         self.success = False  # succesful build finished
     

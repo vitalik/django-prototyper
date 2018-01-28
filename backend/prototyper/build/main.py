@@ -1,4 +1,5 @@
 from .base import BuildProject, BuildStage, pipeline
+from django.conf import settings
 
 
 class FirstStage(BuildStage):
@@ -13,20 +14,19 @@ class SettingsStage(BuildStage):
 
 class ModelsStage(BuildStage):
     def run(self):
-        for i in ['app1', 'foobar', 'blogs']:
-            self.log('%s/models.py' % i)
+        for i in self.project.details['apps']:
+            self.log('%s/models.py' % i['name'])
         self.project.logger.warn('test')
-        #raise RuntimeError('oops')
 
 
 class AdminStage(BuildStage):
     def run(self):
-        for i in ['app1', 'foobar', 'blogs']:
-            self.log('%s/admin.py' % i)
+        for i in self.project.details['apps']:
+            self.log('%s/admin.py' % i['name'])
 
 
-def run_build(settings):
-    project = BuildProject(settings, None)
+def run_build():
+    project = BuildProject(settings.PROTOTYPER_PROJECT)
     ok = pipeline(project, [
         FirstStage,
         SettingsStage,
