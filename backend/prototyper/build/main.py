@@ -1,10 +1,6 @@
-from .base import BuildProject, BuildStage, pipeline
+from .base import Build, BuildStage, pipeline
+from .stages import FirstStage
 from django.conf import settings
-
-
-class FirstStage(BuildStage):
-    def run(self):
-        self.log('manage.py')
 
 
 class SettingsStage(BuildStage):
@@ -14,24 +10,24 @@ class SettingsStage(BuildStage):
 
 class ModelsStage(BuildStage):
     def run(self):
-        for i in self.project.details['apps']:
+        for i in self.build.details['apps']:
             self.log('%s/models.py' % i['name'])
-        self.project.logger.warn('test')
+        self.build.logger.warn('test')
 
 
 class AdminStage(BuildStage):
     def run(self):
-        for i in self.project.details['apps']:
+        for i in self.build.details['apps']:
             self.log('%s/admin.py' % i['name'])
 
 
 def run_build():
-    project = BuildProject(settings.PROTOTYPER_PROJECT)
-    ok = pipeline(project, [
+    build = Build(settings.PROTOTYPER_PROJECT)
+    ok = pipeline(build, [
         FirstStage,
         SettingsStage,
         ModelsStage,
         AdminStage,
     ])
-    project.success = ok
-    return project
+    build.success = ok
+    return build

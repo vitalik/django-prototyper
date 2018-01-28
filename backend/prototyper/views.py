@@ -32,10 +32,10 @@ def main_view(request):
 
 
 def api_build(request):
-    project = run_build()
+    build = run_build()
     return JsonResponse({
-        'success': project.success,
-        'logs': project.logger.serialize()
+        'success': build.success,
+        'logs': build.logger.serialize()
     })
 
 

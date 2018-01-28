@@ -1,10 +1,13 @@
+import os
 import traceback
 from .log import get_logger
 
 
-class BuildProject(object):
-    def __init__(self, settings):
-        self.details = settings.load()
+class Build(object):
+    def __init__(self, project):
+        self.details = project.load()
+        self.project = project
+        self.build_path = os.path.join(project.path, project.name)
         self.logger = get_logger()
         self.success = False  # succesful build finished
     
@@ -13,22 +16,22 @@ class BuildProject(object):
 
 
 class BuildStage(object):
-    def __init__(self, project):
-        self.project = project
+    def __init__(self, build):
+        self.build = build
     
     def run(self):
         raise NotImplementedError('please implement run')
     
     def log(self, message):
-        self.project.log(message)
+        self.build.log(message)
 
 
-def pipeline(project, stages):
+def pipeline(build, stages):
     for cls in stages:
         try:
-            stage = cls(project)
+            stage = cls(build)
             stage.run()
         except Exception as e:
-            project.logger.error(traceback.format_exc())
+            build.logger.error(traceback.format_exc())
             return False
     return True
