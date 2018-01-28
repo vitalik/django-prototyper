@@ -1,6 +1,6 @@
 <template>
 
-    <select v-model.boolean="selection" @change="$emit('input', selection)">
+    <select v-model.boolean="selection" @change="$emit('input', selection)" style="width: auto;">
         <option :value="true">True</option>
         <option :value="false">False</option>
     </select>
