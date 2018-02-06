@@ -31,5 +31,12 @@ export var store = {
             fields:[],
             admin: {'generate': true},
         })
-    }
+    },
+
+    fields_add(model_fields, name) {
+        model_fields.push({
+            name,
+            'type': 'models.CharField',
+        })
+    },
 }

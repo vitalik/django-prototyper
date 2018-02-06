@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Admin from './components/admin'
 import AppsModels from './components/appsmodels'
+import ModelEditor from './components/appsmodels/ModelEditor'
 import Build from './components/build'
 import BuildSettings from './components/buildsettings'
 import Settings from './components/settings'
@@ -24,6 +25,11 @@ export default new Router({
             path: '/apps/',
             name: 'appsmodels',
             component: AppsModels
+        },
+        {
+            path: '/apps/:app/:model',
+            name: 'model',
+            component: ModelEditor
         },
         {
             path: '/admin/',
