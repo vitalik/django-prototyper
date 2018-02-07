@@ -1,11 +1,7 @@
-from .base import Build, BuildStage, pipeline
-from .stages import FirstStage
+import shutil
 from django.conf import settings
-
-
-class SettingsStage(BuildStage):
-    def run(self):
-        self.log('settings.py')
+from .base import Build, BuildStage, pipeline
+from .stages import FirstStage, AppsPackages, SettingsStage, UrlsStage, WsgiStage
 
 
 class ModelsStage(BuildStage):
@@ -23,11 +19,14 @@ class AdminStage(BuildStage):
 
 def run_build():
     build = Build(settings.PROTOTYPER_PROJECT)
-    ok = pipeline(build, [
+    pipeline(build, [
         FirstStage,
+        AppsPackages,
         SettingsStage,
+        UrlsStage,
+        WsgiStage,
         ModelsStage,
         AdminStage,
     ])
-    build.success = ok
+    build.cleanup()
     return build
