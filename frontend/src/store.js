@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import API from './backend'
+import { guess_type}  from './django/fields'
 
 
 export var store = {
@@ -36,7 +37,7 @@ export var store = {
     fields_add(model_fields, name) {
         model_fields.push({
             name,
-            'type': 'models.CharField',
+            'type': guess_type(name),
         })
     },
 }

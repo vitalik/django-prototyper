@@ -1,23 +1,28 @@
 <template>
     <div>
-        <table class="table table-sm">
-            <draggable v-model="model.fields" element="tbody">
-                <field v-for="field in model.fields" 
-                    :field="field" key="field.name">
-                </field>
-            </draggable>
-            <tr>
-                <td style="width: 250px;">
-                    <pattern-input 
-                        @save="add_field"
-                        placeholder="Type field..."
-                        btnlabel="Add"
-                        :regExp="/^[a-z][a-z0-9_]*$/i">
-                    </pattern-input>
-                </td>
-                <td></td>
-            </tr>
-        </table>
+        <div class="row">
+            <div class="col-5">
+                <table class="table table-sm table-striped ">
+                    <draggable v-model="model.fields" element="tbody">
+                        <field v-for="field in model.fields" 
+                            :field="field" :key="field.name">
+                        </field>
+                    </draggable>
+                </table>
+            </div>
+            <div class="col-7">
+                TODO
+            </div>
+        </div>
+
+
+        <pattern-input 
+            @save="add_field"
+            style="width: 250px;"
+            placeholder="Type field..."
+            btnlabel="Add"
+            :regExp="/^[a-z][a-z0-9_]*$/i">
+        </pattern-input>
 
     </div>
 </template>
