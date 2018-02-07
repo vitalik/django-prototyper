@@ -17,7 +17,9 @@
             <table v-else>
                 <draggable v-model="app.models">
                     <tr v-for="model in app.models">
-                        <td class="model-name">{{ model.name }}</td>
+                        <td class="model-name">
+                            <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}">{{ model.name }}</router-link>
+                        </td>
                         <td class="fields pl-2">
                             <span v-for="field in model.fields" class="badge badge-secondary mr-1">{{ field.name }}</span>
                         </td>
