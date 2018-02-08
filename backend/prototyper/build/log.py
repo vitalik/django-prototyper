@@ -7,9 +7,12 @@ class LogHandler(logging.Handler):
     def __init__(self, logger):
         super(LogHandler, self).__init__()
         self.logger = logger
+        self.start_ts = 0
         
     def emit(self, record):
-        print ('%20s %s' % (record.created, record.msg))
+        if self.start_ts == 0:
+            self.start_ts = record.created
+        print ('%.5f %s' % (record.created - self.start_ts, record.msg))
         self.logger.records.append(record)
 
 

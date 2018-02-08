@@ -45,7 +45,9 @@ class BuildStage(object):
 
 def pipeline(build, stages):
     for cls in stages:
+        assert issubclass(cls, BuildStage)
         try:
+            build.log('Running ' + cls.__name__)
             stage = cls(build)
             stage.run()
         except Exception as e:
