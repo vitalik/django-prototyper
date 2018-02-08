@@ -27,7 +27,9 @@ class Project(object):
     
     def load(self):
         with open(self.storage_file, 'r') as f:
-            return json.load(f)
+            data = json.load(f)
+        data['name'] = self.name
+        return data
     
     def save(self, data):
         with open(self.storage_file, 'w') as f:
