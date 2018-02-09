@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Admin from './components/admin'
+import AdminEditor from './components/admin/Editor'
 import AppsModels from './components/appsmodels'
 import ModelEditor from './components/appsmodels/ModelEditor'
 import Build from './components/build'
@@ -35,6 +36,11 @@ export default new Router({
             path: '/admin/',
             name: 'admin',
             component: Admin
+        },
+        {
+            path: '/admin/:app/:model',
+            name: 'admin-edit',
+            component: AdminEditor
         },
         {
             path: '/build/',
