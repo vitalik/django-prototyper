@@ -2,7 +2,6 @@ import { startsWith, endsWith, includes } from 'lodash'
 
 
 export function guess_type(name) {
-    console.info(startsWith(name, 'is_'))
     if (startsWith(name, 'is_') || startsWith(name, 'has_') || startsWith(name, 'have_') || startsWith('allow_'))
         return 'models.BooleanField'
     
