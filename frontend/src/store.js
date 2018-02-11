@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import API from './backend'
-import { guess_type}  from './django/fields'
+import { guess_type}  from './django/guess'
 
 
 export var store = {
