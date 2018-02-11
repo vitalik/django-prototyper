@@ -4,11 +4,14 @@
             <div class="col-5">
                 <table class="table table-sm table-striped ">
                     <draggable v-model="model.fields" element="tbody">
-                        <field v-for="field in model.fields" 
+                        <field v-for="(field, pos) in model.fields" 
                             @activate="on_field_activate"
                             @activatenext="on_field_next"
                             @activateprev="on_field_prev"
-                            :field="field" :key="field.name">
+                            :field="field" 
+                            :pos="pos"
+                            :id="'f_' + pos"
+                            :key="pos">
                         </field>
                     </draggable>
                 </table>
@@ -40,9 +43,6 @@ import draggable from 'vuedraggable'
 import Field from './Field'
 import PatternInput from '../utils/PatternInput'
 
-import FieldEvent from './fieldevents'
-
-
 export default {
     name: 'fieldsediror',
     props: {
@@ -67,19 +67,15 @@ export default {
         on_field_activate(field) {
             this.active_field = field
         },
-        on_field_next(field) {
-            let ind = _.findIndex(this.model.fields, {name:field.name})
-            console.info(`Indes of "${field.name}" is ${ind}`)
-            ind += 1
+        on_field_next(pos) {
+            let ind = pos + 1
             if (ind < this.model.fields.length)
-                FieldEvent.activate(this.model.fields[ind].name)
+                document.querySelector(`#f_${ind} input`).focus()
         },
-        on_field_prev(field) {
-            let ind = _.findIndex(this.model.fields, {name:field.name})
-            console.info(`Indes of "${field.name}" is ${ind}`)
-            ind -= 1
+        on_field_prev(pos) {
+            let ind = pos - 1
             if (ind >= 0)
-                FieldEvent.activate(this.model.fields[ind].name)
+                document.querySelector(`#f_${ind} input`).focus()
         }
     },
     components: {

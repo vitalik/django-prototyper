@@ -20,35 +20,27 @@
 
 <script>
 
-import FieldEvent from './fieldevents'
-
 export default {
     name: 'field',
     props: {
         field: {
             required: true,
             type: Object
+        },
+        pos: {
+            required: true,
+            type: Number
         }
-    },
-    mounted() {
-        FieldEvent.on_activate((field_name) => {
-            if (this.field.name == field_name) {
-                this.$refs.textinput.focus()
-            }
-        })
-    },
-    beforeDestroy() {
-        FieldEvent.unsubscribe()
     },
     methods: {
         on_focus() {
             this.$emit('activate', this.field)
         },
         on_keydown() {
-            this.$emit('activatenext', this.field)
+            this.$emit('activatenext', this.pos)
         },
         on_keyup() {
-            this.$emit('activateprev', this.field)
+            this.$emit('activateprev', this.pos)
         }
     }
 }
