@@ -8,6 +8,7 @@
                             @activate="on_field_activate"
                             @activatenext="on_field_next"
                             @activateprev="on_field_prev"
+                            :class="{'table-primary': active_field && active_field.name == field.name}"
                             :field="field" 
                             :pos="pos"
                             :id="'f_' + pos"
@@ -15,23 +16,21 @@
                         </field>
                     </draggable>
                 </table>
+                <pattern-input 
+                    @save="add_field"
+                    style="width: 250px;"
+                    placeholder="Type field..."
+                    btnlabel="Add"
+                    :regExp="/^[a-z][a-z0-9_]*$/i">
+                </pattern-input>
             </div>
             <div class="col-7">
                 <div v-if="active_field" class="card">
-                    {{active_field.name}} details
+                    <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
+                    <attrs-editor :field="active_field" class="card-body"></attrs-editor>
                 </div>
-                
             </div>
         </div>
-
-
-        <pattern-input 
-            @save="add_field"
-            style="width: 250px;"
-            placeholder="Type field..."
-            btnlabel="Add"
-            :regExp="/^[a-z][a-z0-9_]*$/i">
-        </pattern-input>
 
     </div>
 </template>
@@ -40,6 +39,7 @@
 import { store } from '../../store'
 import _ from 'lodash'
 import draggable from 'vuedraggable'
+import AttrsEditor from './AttrsEditor'
 import Field from './Field'
 import PatternInput from '../utils/PatternInput'
 
@@ -62,7 +62,7 @@ export default {
                 alert(`Field "${name}" already exist.`)
                 return
             }
-            store.fields_add(this.model.fields, name)
+            this.active_field = store.fields_add(this.model.fields, name)
         },
         on_field_activate(field) {
             this.active_field = field
@@ -80,6 +80,7 @@ export default {
     },
     components: {
         draggable,
+        AttrsEditor,
         Field,
         PatternInput,
     }

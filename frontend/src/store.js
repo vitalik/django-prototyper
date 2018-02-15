@@ -35,9 +35,11 @@ export var store = {
     },
 
     fields_add(model_fields, name) {
-        model_fields.push({
+        let fld = {
             name,
             'type': guess_type(name),
-        })
+        }
+        model_fields.push(fld)
+        return fld
     },
 }
