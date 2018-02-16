@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-5">
+            <div class="col-6">
                 <table class="table table-sm table-striped ">
                     <draggable v-model="model.fields" element="tbody">
                         <field v-for="(field, pos) in model.fields" 
@@ -24,7 +24,7 @@
                     :regExp="/^[a-z][a-z0-9_]*$/i">
                 </pattern-input>
             </div>
-            <div class="col-7">
+            <div class="col-6 col-lg-4">
                 <div v-if="active_field" class="card">
                     <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
                     <attrs-editor :field="active_field" class="card-body"></attrs-editor>

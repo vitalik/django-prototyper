@@ -1,12 +1,8 @@
 <template>
     <div>
-        <table>
+        <table style="width: 100%;">
             <Attr v-for="attr in field_attrs" :field="field" :attr="attr" :key="attr" />
         </table>
-        
-        <div style="font-size: 12px; background-color: #f5f5f5;">
-            <pre>{{field}}</pre>
-        </div>
     </div>
 </template>
 

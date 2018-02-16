@@ -2,8 +2,8 @@
 
     <select v-model="selection" @change="$emit('input', selection)" style="width: auto;">
         <option :value="null" v-if="canbenull">None</option>
-        <option :value="true">True</option>
-        <option :value="false">False</option>
+        <option :value="true">{{ true_label }}</option>
+        <option :value="false">{{ false_label }}</option>
     </select>
 
 </template>
@@ -14,7 +14,8 @@ export default {
     name: 'InputTrueFalse',
     props: {
         value: {required: true},
-        canbenull: {required: false, type: Boolean, default: false}
+        canbenull: {required: false, type: Boolean, default: false},
+        showdefault: {required: false, default: null}
     },
     data() {
         return {
@@ -23,6 +24,20 @@ export default {
     },
     mounted() {
         this.selection = this.value
+    },
+    computed: {
+        true_label() {
+            let suffix = ''
+            if (this.showdefault === true)
+                suffix = ' (default)'
+            return 'True' + suffix
+        },
+        false_label() {
+            let suffix = ''
+            if (this.showdefault === false)
+                suffix = ' (default)'
+            return 'False' + suffix
+        }
     },
     watch: {
         value(new_val) {
