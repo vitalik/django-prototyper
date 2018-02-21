@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-100">
         <h2>Apps and Models</h2>
         <hr>
 
@@ -14,18 +14,24 @@
             </div>
             <div>
                 <div class="btn-group">
-                    <button :class="{active:!ui.apps_compact}" @click="ui.apps_compact=false" class="btn btn-outline-secondary">full</button>
-                    <button :class="{active:ui.apps_compact}"  @click="ui.apps_compact=true"  type="button" class="btn btn-outline-secondary">compact</button>
+                    <button :class="{active:ui.models_view=='full'}" @click="ui.models_view='full'" class="btn btn-outline-secondary">full</button>
+                    <button :class="{active:ui.models_view=='compact'}"  @click="ui.models_view='compact'"  type="button" class="btn btn-outline-secondary">compact</button>
+                    <button :class="{active:ui.models_view=='designer'}"  @click="ui.models_view='designer'"  type="button" class="btn btn-outline-secondary">designer</button>
                 </div>
             </div>
         </div>
 
-        <app v-for="app in apps" 
-            :app="app" 
-            :key="app.name" 
-            :compact="ui.apps_compact"
-            class="mb-2">
-        </app>
+        <model-designer v-if="ui.models_view=='designer'" />
+
+        <div v-else>
+            <app v-for="app in apps" 
+                :app="app" 
+                :key="app.name" 
+                :compact="ui.models_view == 'compact'"
+                class="mb-2">
+            </app>
+        </div>
+
 
     </div>
 </template>
@@ -34,6 +40,7 @@
 import _ from 'lodash'
 import { store } from '../../store'
 import App from './App'
+import ModelDesigner from './designer'
 import PatternInput from '../utils/PatternInput'
 
 export default {
@@ -62,6 +69,7 @@ export default {
     components: {
         App,
         PatternInput,
+        ModelDesigner
     }
 }
 

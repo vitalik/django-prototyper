@@ -7,7 +7,7 @@
             <div v-if="compact">
                 <draggable v-model="app.models">
                     <span v-for="model in app.models" 
-                        class="badge mr-2"
+                        class="badge mr-2 mb-2"
                         style="font-size: 1.1rem; font-weight: 100; background-color: #eee;">
                             <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}">{{ model.name }}</router-link>
                     </span>

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import API from './backend'
-import { guess_type}  from './django/guess'
+import { guess_type }  from './django/guess'
 
 
 export var store = {
@@ -32,6 +32,10 @@ export var store = {
             fields:[],
             admin: {'generate': true},
         })
+    },
+
+    fields_get(model, name) {
+        return _.find(model.fields, {name})
     },
 
     fields_add(model_fields, name) {

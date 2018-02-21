@@ -66,7 +66,7 @@ export default {
     },
     methods: {
         add_field(name) {
-            if (_.find(this.model.fields, {name}) !== undefined) {
+            if (store.fieds_get(this.model, name) !== undefined) {
                 alert(`Field "${name}" already exist.`)
                 return
             }

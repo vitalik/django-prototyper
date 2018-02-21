@@ -9,7 +9,7 @@ def create_new_project(name):
 
 INITIAL_PROJECT = {
     'version': '0.1',
-    'ui': {'apps_compact': False},  # TODO: think maybe ui better be on some ~/.djangoprototyper.json
+    'ui': {'models_view': 'full'},  # TODO: think maybe ui better be on some ~/.djangoprototyper.json
     'settings': {
         'ADMIN_SITE_HEADER': 'Barbecook',
         'DEFAULT_FROM_EMAIL': 'support@barbecook.com',
