@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr class="field-attr">
         <td class="text-right text-nowrap" style="width: 150px;">{{attr}} = </td>
         <td>
             <input v-if="attr_value_type == String" v-model.lazy="attr_value" type="text" class="form-control form-control-sm">
@@ -58,4 +58,13 @@ export default {
     }
 }
 </script>
+
+<style>
+    .field-attr .form-control-sm {
+        padding: 0.1rem 0.2rem;
+    }
+    .field-attr select.form-control-sm {
+        height: 20px !important;
+    }
+</style>
 

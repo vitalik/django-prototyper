@@ -2,31 +2,29 @@
     <div class="card">
         <strong class="card-header">Meta</strong>
         <div class="card-body">
+            <check-label v-model="abstract" label="abstract" :initial="false" />
+            <check-label v-model="proxy"    label="proxy"    :initial="false" />
+            <check-label v-model="managed"  label="managed"  :initial="true" />
+            
+            
             <pre>
-abstract
-proxy
-managed
-
-
+.
+//multivalue (with "-" opt)
 ordering
-order_with_respect_to
 get_latest_by
 
+//multivalue
 indexes
 unique_together
-index_together
 
 
+// empty-by-default string attrs
+order_with_respect_to
 verbose_name
 verbose_name_plural
-
-
 app_label
 db_table
-
-
 base_manager_name
-
 db_tablespace
 default_manager_name
 default_related_name
@@ -38,6 +36,7 @@ default_related_name
 
 <script>
 
+import CheckLabel from '../utils/CheckLabel'
 
 
 export default {
@@ -47,6 +46,16 @@ export default {
             required: true,
             type: Object
         }
+    },
+    data() {
+        return {
+            abstract: false,
+            managed: true,
+            proxy: false,
+        }
+    },
+    components: {
+        CheckLabel,
     }
 }
 </script>
