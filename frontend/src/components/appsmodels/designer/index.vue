@@ -1,7 +1,13 @@
 <template>
     <div class="card h-100">
+        
+        <modal v-show="edit_colors" title="App colours" @close="edit_colors=false" class="appcolors">
+            <app-colors />
+        </modal>
+        
         <div class="card-header">
-            <button @click="autosort" class="btn btn-secondary">Auto sort</button>
+            <button @click="edit_colors=true" class="btn btn-secondary float-right ml-2">colors</button>
+            <button @click="autosort" class="btn btn-secondary float-right">Auto sort</button>
         </div>
         <div class="card-body designer h-100">
             
@@ -21,10 +27,16 @@
 import _ from 'lodash'
 import { store } from '../../../store'
 import Model from './Model'
-
+import AppColors from './AppColors'
+import Modal from '../../utils/Modal'
 
 export default {
     name: 'modeldesigner',
+    data() {
+        return {
+            edit_colors: false,
+        }
+    },
     computed: {
         apps() {
             return store.project.apps
@@ -69,6 +81,8 @@ export default {
     },
     components: {
         Model,
+        AppColors,
+        Modal,
     }
 }
 
@@ -94,6 +108,9 @@ export default {
         padding-left: 8px;
         padding-top: 6px;
         box-shadow: 0px 0px 4px #ccc;
+    }
+    .appcolors .modal-dialog {
+        max-width: 700px;
     }
 </style>
 

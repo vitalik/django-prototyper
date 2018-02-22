@@ -39,8 +39,7 @@
 import { store } from '../../../store'
 import PatternInput from '../../utils/PatternInput'
 import lightness from 'lightness'
-
-const APP_COLORS = ["#fef4f9", "#f5f4fe", "#f4fbfe", "#f4fefa", "#f7fef4", "#fefef4", "#fef9f4", "#ececec", "#fff0c5"]
+import {get_some_color} from './colors'
 
 export default {
     name: 'model',
@@ -63,8 +62,7 @@ export default {
         },
         app_color() {
             if (this.app.ui_color == undefined) {
-                let color = APP_COLORS[_.random(APP_COLORS.length-1)]
-                this.$set(this.app, 'ui_color', color)
+                this.$set(this.app, 'ui_color', get_some_color())
             }
             return this.app.ui_color
         },

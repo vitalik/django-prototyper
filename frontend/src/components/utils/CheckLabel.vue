@@ -18,15 +18,6 @@ export default {
         toggle() {
             this.$emit('input', !this.value)
         }
-    },
-    // data() {
-    //     return {
-    //         lable: false,
-    //     }
-    // },
-    // mounted() {
-    //     this.selection = this.value
-    // },
-
+    }
 }
 </script>
