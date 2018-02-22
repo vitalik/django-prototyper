@@ -7,7 +7,12 @@
          :class="{active:active}"
          :style="css_styles">
 
-            <a v-show="active" href="#" style="right: 5px; position: absolute;">...</a>
+
+            <router-link 
+                v-show="active" 
+                class="float-right"
+                :to="{name: 'model', params: {app: app.name, model:model.name}}">...</router-link>
+            
             <strong>{{ model.name }}</strong>
             
             
