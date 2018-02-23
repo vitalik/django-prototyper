@@ -1,6 +1,7 @@
 <template>
     <div class="card djangoapp">
         <div class="card-header">
+            <button @click="delete_app" class="btn btn-link text-danger btn-sm float-right">&times;</button>
             {{ app.name }}
         </div>
         <div class="card-body">
@@ -57,6 +58,10 @@ export default {
                 return
             }
             store.models_add(this.app.name, name)
+        },
+        delete_app() {
+            store.app_delete(this.app.name)
+            this.$forceUpdate()
         }
     },
     components: {

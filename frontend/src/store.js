@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Vue from 'vue'
 import API from './backend'
 import { guess_type }  from './django/guess'
 
@@ -19,12 +20,16 @@ export var store = {
             models: [],
         })
     },
+    app_delete(name) {
+        //alert(name + ' about to be delted')
+        let ind = _.findIndex(this.project.apps, {name:name})
+        Vue.delete(this.project.apps, ind)
+    },
 
     models_get(app_name, name) {
         let app = this.app_get(app_name)
         return _.find(app.models, {name})
     },
-
     models_add(app_name, name) {
         let app = this.app_get(app_name)
         app.models.push({
@@ -32,6 +37,11 @@ export var store = {
             fields:[],
             admin: {'generate': true},
         })
+    },
+    models_delete(app_name, name) {
+        let app = this.app_get(app_name)
+        let ind = _.findIndex(app.models, {name:name})
+        Vue.delete(app.models, ind)
     },
 
     fields_get(model, name) {

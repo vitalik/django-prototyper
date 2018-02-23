@@ -1,6 +1,9 @@
 <template>
     <div class="settings">
-        <h2>{{ app.name }}.{{ model.name }}</h2>
+        <h2>
+            {{ app.name }}.{{ model.name }}
+            <button @click="delete_model" class="btn btn-outline-danger float-right">Delete</button>
+        </h2>
         <hr>
         <div class="row">
             <div class="col-6">
@@ -71,6 +74,10 @@ export default {
                 return
             }
             this.active_field = store.fields_add(this.model.fields, name)
+        },
+        delete_model() {
+            store.models_delete(this.app.name, this.model.name)
+            this.$router.push('/apps/')
         },
         on_field_activate(field) {
             this.active_field = field
