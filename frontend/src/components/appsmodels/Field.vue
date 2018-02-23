@@ -11,7 +11,7 @@
         </td>
         <td>
             <select v-model="field.type" style="width: 100%;" @focus="on_focus">
-                <option v-for="type in field_choices">{{type}}</option>
+                <option v-for="t in field_choices">{{t}}</option>
             </select>
         </td>
         <td class="quickattr"><span @click="toggle('null')" :class="{'badge-primary': field.null == true, 'badge-light': field.null == false}" class="badge">N</span></td>

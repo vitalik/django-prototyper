@@ -15,7 +15,7 @@ import {ATTRIBUTES} from '../../django/fields'
 import InputTrueFalse from '../utils/InputTrueFalse'
 
 export default {
-    name: 'attrs-editor',
+    name: 'field-attr',
     props: {
         field: {
             required: true,

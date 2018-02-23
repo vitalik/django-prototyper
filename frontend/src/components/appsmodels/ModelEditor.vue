@@ -35,7 +35,7 @@
             <div class="col-6 col-lg-4">
                 <div v-if="active_field" class="card">
                     <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
-                    <attrs-editor :field="active_field" class="card-body"></attrs-editor>
+                    <field-attrs-editor :field="active_field" class="card-body" />
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
 import { store } from '../../store'
 import _ from 'lodash'
 import draggable from 'vuedraggable'
-import AttrsEditor from './AttrsEditor'
+import FieldAttrsEditor from './FieldAttrsEditor'
 import Field from './Field'
 import MetaEditor from './MetaEditor'
 import PatternInput from '../utils/PatternInput'
@@ -95,7 +95,7 @@ export default {
     },
     components: {
         draggable,
-        AttrsEditor,
+        FieldAttrsEditor,
         Field,
         PatternInput,
         MetaEditor,
