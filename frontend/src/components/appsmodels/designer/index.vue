@@ -6,10 +6,31 @@
         </modal>
         
         <div class="card-header">
-            {{selected_models}}
-            <button @click="edit_colors=true" class="btn btn-secondary float-right ml-2">colors</button>
-            <button @click="autosort" class="btn btn-secondary float-right">Auto sort</button>
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <select v-model="selected_app" class="form-control form-control-sm">
+                        <option :value="null">Select app...</option>
+                        <option v-for="app in apps">{{ app.name }}</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <pattern-input class="new-model"
+                        @save="add_model"
+                        style="width: 220px"
+                        placeholder="Type model name..."
+                        btnlabel="Add"
+                        :small="true"
+                        :regExp="/^[a-z][a-z0-9_]*$/i">
+                    </pattern-input>
+                </div>
+                <div class="col-auto text-right">
+                    &nbsp; &nbsp; &nbsp; &nbsp; 
+                    <button @click="edit_colors=true" class="btn btn-sm btn-secondary">colors</button>
+                    <button @click="autosort" class="btn btn-sm btn-secondary">Auto sort</button>
+                </div>
+            </div>
         </div>
+        
         <div class="card-body designer h-100">
 
             <model v-for="item in models" 
@@ -32,12 +53,14 @@ import { store } from '../../../store'
 import Model from './Model'
 import AppColors from './AppColors'
 import Modal from '../../utils/Modal'
+import PatternInput from '../../utils/PatternInput'
 
 export default {
     name: 'modeldesigner',
     data() {
         return {
             edit_colors: false,
+            selected_app: null,
             selected_models: [],
         }
     },
@@ -83,6 +106,13 @@ export default {
                 }
             })
         },
+        add_model(name) {
+            if (store.models_get(this.selected_app, name) !== undefined) {
+                alert(`Model "${name}" already exist`)
+                return
+            }
+            store.models_add(this.selected_app, name)
+        },
         select_model(item, event) {
             let modifier = event.shiftKey || event.altKey || event.ctrlKey
             if (!modifier)
@@ -95,6 +125,7 @@ export default {
         Model,
         AppColors,
         Modal,
+        PatternInput,
     }
 }
 
