@@ -10,9 +10,7 @@
                 class="name">
         </td>
         <td>
-            <select v-model="field.type" style="width: 100%;" @focus="on_focus">
-                <option v-for="t in field_choices">{{t}}</option>
-            </select>
+            <field-type :field="field" @focus="on_focus" />
         </td>
         <td class="quickattr"><span @click="toggle('null')" :class="{'badge-primary': field.null == true, 'badge-light': field.null == false}" class="badge">N</span></td>
         <td class="quickattr"><span @click="toggle('blank')" :class="{'badge-primary': field.blank == true, 'badge-light': field.blank == false}" class="badge">B</span></td>
@@ -22,8 +20,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
-import {FIELDS} from '../../django/fields'
+import FieldType from './FieldType'
 
 export default {
     name: 'field',
@@ -35,11 +32,6 @@ export default {
         pos: {
             required: true,
             type: Number
-        }
-    },
-    computed: {
-        field_choices() {
-            return _.keys(FIELDS)
         }
     },
     methods: {
@@ -59,6 +51,9 @@ export default {
             else
                 this.field[attr] = !this.field[attr]
         }
+    },
+    components: {
+        FieldType,
     }
 }
 </script>

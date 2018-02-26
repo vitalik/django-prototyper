@@ -33,6 +33,10 @@ export const FIELDS = {
     DateField:  ['auto_now', 'auto_now_add'],
 }
 
+export const RELATIONAL_FIELDS = [
+    'ForeignKey', 'OneToOneField', 'ManyToManyField'
+]
+
 export const ATTRIBUTES = {
        allow_files: {type: Boolean, default: true},
      allow_folders: {type: Boolean, default: false},

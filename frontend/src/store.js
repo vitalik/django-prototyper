@@ -21,7 +21,6 @@ export var store = {
         })
     },
     app_delete(name) {
-        //alert(name + ' about to be delted')
         let ind = _.findIndex(this.project.apps, {name:name})
         Vue.delete(this.project.apps, ind)
     },
@@ -43,15 +42,24 @@ export var store = {
         let ind = _.findIndex(app.models, {name:name})
         Vue.delete(app.models, ind)
     },
+    models_keys() {
+        let result = []
+        _.each(_.sortBy(store.project.apps, ['name']), (app) => {
+            _.each(app.models, (model) => result.push(app.name + '.' + model.name))
+        })
+        return result
+    },
 
     fields_get(model, name) {
         return _.find(model.fields, {name})
     },
 
     fields_add(model_fields, name) {
+        let res = guess_type(name, this)
         let fld = {
             name,
-            'type': guess_type(name),
+            'type': res.type,
+            'relation': res.relation,
         }
         model_fields.push(fld)
         return fld

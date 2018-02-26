@@ -1,36 +1,74 @@
-import { startsWith, endsWith, includes } from 'lodash'
+import _ from 'lodash'
 
 
-export function guess_type(name) {
-    if (startsWith(name, 'is_') || startsWith(name, 'has_') || startsWith(name, 'have_') || startsWith('allow_') || startsWith('can_'))
+
+function guess_common_names(name) {
+    if (_.startsWith(name, 'is_') || _.startsWith(name, 'has_') || _.startsWith(name, 'have_') || _.startsWith('allow_') || _.startsWith('can_'))
         return 'BooleanField'
-    
-    if (includes(name, 'slug'))
+
+    if (_.includes(name, 'slug'))
         return 'SlugField'
-    
-    if (includes(name, 'time'))
+
+    if (_.includes(name, 'time'))
         return 'DateTimeField'
-    
-    if (includes(name, 'date'))
+
+    if (_.includes(name, 'date'))
         return 'DateField'
-    
-    if (includes(name, 'duration'))
+
+    if (_.includes(name, 'duration'))
         return 'DurationField'
-    
-    if (includes(name, 'email'))
+
+    if (_.includes(name, 'email'))
         return 'EmailField'
-    
-    if (endsWith(name, 'url'))
+
+    if (_.endsWith(name, 'url'))
         return 'URLField'
-    
-    if (includes(name, 'file') || includes(name, 'pdf'))
+
+    if (_.includes(name, 'file') || _.includes(name, 'pdf'))
         return 'FileField'
-    
-    if (includes(name, 'image') || includes(name, 'picture') || includes(name, 'photo') || includes(name, 'avatar'))
+
+    if (_.includes(name, 'image') || _.includes(name, 'picture') || _.includes(name, 'photo') || _.includes(name, 'avatar'))
         return 'ImageField'
-    
-    if (includes(name, 'text') || includes(name, 'description') || includes(name, 'message') || includes(name, 'intro') || includes(name, 'content'))
+
+    if (_.includes(name, 'text') || _.includes(name, 'description') || _.includes(name, 'message') || _.includes(name, 'intro') || _.includes(name, 'content'))
         return 'TextField'
     
-    return 'CharField'
+    return null
+}
+
+function guess_relational(name, store) {
+    let model_names = _.keyBy(store.models_keys(), (key) => {
+        return key.split('.')[1].toLowerCase()
+    })
+    if (model_names[name] !== undefined)
+        return {type: 'ForeignKey', relation: model_names[name]}
+    if (_.endsWith(name, 's')) {
+        let m2m_name = name.slice(0, -1)
+        if (model_names[m2m_name] !== undefined)
+        return {type: 'ManyToManyField', relation: model_names[m2m_name]}
+    }
+    if (_.endsWith(name, 'ies')) { // countries > country, industries > industry...
+        let m2m_name = name.slice(0, -3) + 'y'
+        if (model_names[m2m_name] !== undefined)
+        return {type: 'ManyToManyField', relation: model_names[m2m_name]}
+    }
+    return null
+}
+
+
+
+export function guess_type(name, store) {
+    // tries to guess a type by name (returns dict(type, relation))
+    let result = guess_common_names(name)
+    if (result !== null) {
+        return {type: result, relation: null}
+    }
+    
+    result = guess_relational(name, store)
+    if (result !== null) {
+        return result
+    }
+    
+    // by default we put it as charfield as seems the most common case
+    return {type: 'CharField', relation: null}
 }
