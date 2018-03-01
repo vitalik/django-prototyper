@@ -8,11 +8,15 @@
          :style="css_styles">
 
 
-            <router-link 
-                v-show="active" 
-                class="float-right"
-                :to="{name: 'model', params: {app: app.name, model:model.name}}">...</router-link>
-            
+            <div v-show="active" class="dropdown float-right" :class="{show:show_menu}" v-click-outside="hide_menu">
+                <button @click="show_menu=true" class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" :class="{show:show_menu}">
+                    <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}" class="dropdown-item" href="#">Edit</router-link>
+                    <a @click="delete_model" class="dropdown-item" href="#">Delete</a>
+                </div>
+            </div>
+
+            <div v-show="active" class="badge model-app" :style="css_styles">{{ app.name }}</div>
             <strong>{{ model.name }}</strong>
             
             
@@ -58,6 +62,7 @@ export default {
         return {
             active: false,
             drag_start_pos: null,
+            show_menu: false,
         }
     },
 
@@ -82,10 +87,10 @@ export default {
 
     methods: {
         expand() {
-            this.active = true;
+            this.active = true
         },
         shrink() {
-            this.active = false;
+            this.active = false
         },
         add_field(name) {
             if (store.fields_get(this.model, name) !== undefined) {
@@ -93,6 +98,12 @@ export default {
                 return
             }
             store.fields_add(this.model.fields, name)
+        },
+        delete_model() {
+            store.models_delete(this.app.name, this.model.name)
+        },
+        hide_menu() {
+            this.show_menu = false
         },
         dragstart(e) {
             this.drag_start_pos = [e.clientX, e.clientY]
@@ -114,4 +125,14 @@ export default {
 }
 
 </script>
+
+<style>
+    .model-app {
+        position: absolute; 
+        top: -20px; 
+        left: 0; 
+        font-weight: normal;
+    }
+</style>
+
 
