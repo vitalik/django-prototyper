@@ -2,11 +2,15 @@
     <div class="settings">
         <h2>
             {{ app.name }}.{{ model.name }}
-            <button @click="delete_model" class="btn btn-outline-danger float-right">Delete</button>
+            <button @click="delete_model" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
+            <button @click="go_to_model(1)" class="btn btn-sm btn-outline-secondary float-right ml-1"><i class="fas fa-chevron-right"></i></button>
+            <button @click="go_to_model(-1)" class="btn btn-sm btn-outline-secondary float-right"><i class="fas fa-chevron-left"></i></button>
+            
         </h2>
         <hr>
         <div class="row">
             <div class="col-6">
+                <h5>Fields:</h5>
                 <table class="table table-sm table-striped ">
                     <draggable v-model="model.fields" element="tbody">
                         <field v-for="(field, pos) in model.fields" 
@@ -68,6 +72,14 @@ export default {
         }
     },
     methods: {
+        go_to_model(pos) {
+            let keys = store.models_keys()
+            let ind = _.indexOf(keys, `${this.app.name}.${this.model.name}`) + pos
+            if (ind < 0) ind = keys.length-1
+            if (ind >= keys.length) ind = 0
+            let key = keys[ind].split('.')
+            this.$router.push({name: 'model', params: {app: key[0], model:key[1]}})
+        },
         add_field(name) {
             if (store.fields_get(this.model, name) !== undefined) {
                 alert(`Field "${name}" already exist.`)
