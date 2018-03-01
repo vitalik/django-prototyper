@@ -8,7 +8,10 @@
                  
                 <span v-if="is_saving" class="badge badge-warning">Saving...</span>
             </span>
-            <router-link class="btn btn-outline-light my-2 my-sm-0" to="/build/">Build</router-link>
+            <router-link class="btn btn-outline-light my-2 my-sm-0" to="/build/">
+                <i class="fas fa-rocket"></i>
+                Build
+            </router-link>
             
         </nav>
         <div class="container-fluid h-100">
