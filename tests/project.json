@@ -1,0 +1,198 @@
+{
+ "version": "0.1",
+ "ui": {
+  "models_view": "designer"
+ },
+ "settings": {
+  "ADMIN_SITE_HEADER": "project1",
+  "DEFAULT_FROM_EMAIL": "support@barbecook.com",
+  "EMAIL_SUBJECT_PREFIX": "[project1] ",
+  "LANGUAGE_CODE": "en-us",
+  "TIME_ZONE": "Europe/Brussels",
+  "USE_I18N": true,
+  "USE_L10N": true,
+  "django_contrib_apps": [
+   "django.contrib.admin",
+   "django.contrib.auth",
+   "django.contrib.contenttypes",
+   "django.contrib.sessions",
+   "django.contrib.messages",
+   "django.contrib.staticfiles"
+  ]
+ },
+ "apps": [
+  {
+   "name": "products",
+   "models": [
+    {
+     "name": "Category",
+     "fields": [
+      {
+       "name": "title",
+       "type": "CharField",
+       "relation": null
+      },
+      {
+       "name": "slug",
+       "type": "SlugField",
+       "relation": null
+      }
+     ],
+     "admin": {
+      "generate": true
+     },
+     "ui_top": 20,
+     "ui_left": 20
+    },
+    {
+     "name": "Product",
+     "fields": [
+      {
+       "name": "title",
+       "type": "CharField",
+       "relation": null
+      },
+      {
+       "name": "slug",
+       "type": "SlugField",
+       "relation": null
+      },
+      {
+       "name": "categories",
+       "type": "ManyToManyField",
+       "relation": "products.Category"
+      },
+      {
+       "name": "description",
+       "type": "TextField",
+       "relation": null
+      },
+      {
+       "name": "price",
+       "type": "DecimalField",
+       "relation": null,
+       "max_digits": "10",
+       "decimal_places": "2"
+      }
+     ],
+     "admin": {
+      "generate": true
+     },
+     "ui_top": 104,
+     "ui_left": 20
+    },
+    {
+     "name": "Image",
+     "fields": [
+      {
+       "name": "product",
+       "type": "ForeignKey",
+       "relation": "products.Product"
+      },
+      {
+       "name": "image",
+       "type": "ImageField",
+       "relation": null,
+       "upload_to": "products/%y/%m"
+      }
+     ],
+     "admin": {
+      "generate": true
+     },
+     "ui_top": 264,
+     "ui_left": 20
+    }
+   ],
+   "ui_color": "#C1ABB7"
+  },
+  {
+   "name": "orders",
+   "models": [
+    {
+     "name": "Order",
+     "fields": [
+      {
+       "name": "number",
+       "type": "CharField",
+       "relation": null
+      },
+      {
+       "name": "timestamp",
+       "type": "DateTimeField",
+       "relation": null
+      }
+     ],
+     "admin": {
+      "generate": true
+     },
+     "ui_top": 20,
+     "ui_left": 200
+    },
+    {
+     "name": "OrderItem",
+     "fields": [
+      {
+       "name": "order",
+       "type": "ForeignKey",
+       "relation": "orders.Order"
+      },
+      {
+       "name": "product",
+       "type": "ForeignKey",
+       "relation": "products.Product"
+      },
+      {
+       "name": "quantity",
+       "type": "CharField",
+       "relation": null
+      }
+     ],
+     "admin": {
+      "generate": true
+     },
+     "ui_top": 100,
+     "ui_left": 200
+    }
+   ],
+   "ui_color": "#F77A5E"
+  },
+  {
+   "name": "news",
+   "models": [
+    {
+     "name": "News",
+     "fields": [
+      {
+       "name": "title",
+       "type": "CharField",
+       "relation": null
+      },
+      {
+       "name": "slug",
+       "type": "SlugField",
+       "relation": null
+      },
+      {
+       "name": "text",
+       "type": "TextField",
+       "relation": null
+      },
+      {
+       "name": "publication_time",
+       "type": "DateTimeField",
+       "relation": null,
+       "auto_now_add": false
+      }
+     ],
+     "admin": {
+      "generate": true
+     },
+     "ui_top": 40,
+     "ui_left": 420
+    }
+   ],
+   "ui_color": "#D7E684"
+  }
+ ],
+ "name": "project1"
+}

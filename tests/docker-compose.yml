@@ -1,0 +1,10 @@
+version: '3'
+services:
+  prototyper:
+    build:
+      context: ../
+      dockerfile: tests/Dockerfile
+    tty: true
+    volumes:
+     - ../backend:/code/backend
+     - .:/code/tests
