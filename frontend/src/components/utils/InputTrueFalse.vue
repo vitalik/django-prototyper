@@ -15,7 +15,9 @@ export default {
     props: {
         value: {required: true},
         canbenull: {required: false, type: Boolean, default: false},
-        showdefault: {required: false, default: null}
+        showdefault: {required: false, default: null},
+        option_true: {default: "True"},
+        option_false: {default: "False"},
     },
     data() {
         return {
@@ -30,13 +32,13 @@ export default {
             let suffix = ''
             if (this.showdefault === true)
                 suffix = ' (default)'
-            return 'True' + suffix
+            return this.option_true + suffix
         },
         false_label() {
             let suffix = ''
             if (this.showdefault === false)
                 suffix = ' (default)'
-            return 'False' + suffix
+            return this.option_false + suffix
         }
     },
     watch: {

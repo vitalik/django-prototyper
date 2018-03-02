@@ -3,6 +3,7 @@
  "ui": {
   "models_view": "designer"
  },
+ "build_settings": {},
  "settings": {
   "ADMIN_SITE_HEADER": "project1",
   "DEFAULT_FROM_EMAIL": "support@barbecook.com",

@@ -19,20 +19,22 @@ def camel_to_spaces(s):
 
 class ModelsStage(BuildStage):
     def run(self):
+        self.use_ugettext = self.build.details['build_settings'].get('ugettext_lazy', True)
         for app in self.build.details['apps']:
             self._handle_app(app)
     
     def _handle_app(self, app):
         mdodels_py = Path(self.build.build_path) / app['name'] / 'models.py'
-
         contents = ['from django.db import models']
+        if self.use_ugettext:
+            contents.append('from django.utils.translation import ugettext_lazy as _')
 
         for model in app['models']:
             contents.extend(['', ''])
-            model_lines = ModelBuilder(app, model)
+            model_lines = ModelBuilder(self, app, model)
             contents.extend(model_lines)
         
-        contents.append('') # last empty line
+        contents.append('')  # last empty line
 
         self.log('\n'.join(contents))
 
@@ -40,9 +42,9 @@ class ModelsStage(BuildStage):
 
 
 class ModelBuilder(codelines):
-    def __init__(self, app, model):
+    def __init__(self, stage, app, model):
         super(ModelBuilder, self).__init__()
-        self.app, self.model = app, model
+        self.stage, self.app, self.model = stage, app, model
         self._create()
 
     def _create(self):
@@ -80,6 +82,6 @@ class ModelBuilder(codelines):
         "Returns either _('<s>' or '<s>' based on build settings)"
         q = "'" in s and '"' or "'"
         result = q + s + q
-        if True:
+        if self.stage.use_ugettext:
             return '_(' + result + ')'
         return result
