@@ -30,7 +30,6 @@ export const FIELDS = {
     TimeField:  ['auto_now', 'auto_now_add'],
     URLField:  [],
     UUIDField:  [],
-    DateField:  ['auto_now', 'auto_now_add'],
 }
 
 export const RELATIONAL_FIELDS = [
