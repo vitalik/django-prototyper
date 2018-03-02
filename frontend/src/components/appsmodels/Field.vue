@@ -12,10 +12,10 @@
         <td>
             <field-type :field="field" @focus="on_focus" />
         </td>
-        <td class="quickattr"><span @click="toggle('null')" :class="{'badge-primary': field.null == true, 'badge-light': field.null == false}" class="badge">N</span></td>
-        <td class="quickattr"><span @click="toggle('blank')" :class="{'badge-primary': field.blank == true, 'badge-light': field.blank == false}" class="badge">B</span></td>
-        <td class="quickattr"><span @click="toggle('unique')" :class="{'badge-primary': field.unique == true, 'badge-light': field.unique == false}" class="badge">U</span></td>
-        <td class="quickattr"><span @click="toggle('db_index')" :class="{'badge-primary': field.db_index == true, 'badge-light': field.db_index == false}" class="badge">&nbsp;I&nbsp;</span></td>
+        <td class="quickattr"><span @click="toggle('null')" :class="{'badge-primary': field.attrs.null == true, 'badge-light': field.attrs.null == false}" class="badge">N</span></td>
+        <td class="quickattr"><span @click="toggle('blank')" :class="{'badge-primary': field.attrs.blank == true, 'badge-light': field.attrs.blank == false}" class="badge">B</span></td>
+        <td class="quickattr"><span @click="toggle('unique')" :class="{'badge-primary': field.attrs.unique == true, 'badge-light': field.attrs.unique == false}" class="badge">U</span></td>
+        <td class="quickattr"><span @click="toggle('db_index')" :class="{'badge-primary': field.attrs.db_index == true, 'badge-light': field.attrs.db_index == false}" class="badge">&nbsp;I&nbsp;</span></td>
     </tr>
 </template>
 
@@ -46,10 +46,10 @@ export default {
         },
         toggle(attr) {
             this.$emit('activate', this.field)
-            if (this.field[attr] === undefined)
-                this.$set(this.field, attr, true)
+            if (this.field.attrs[attr] === undefined)
+                this.$set(this.field.attrs, attr, true)
             else
-                this.field[attr] = !this.field[attr]
+                this.field.attrs[attr] = !this.field.attrs[attr]
         }
     },
     components: {

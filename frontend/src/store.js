@@ -58,6 +58,7 @@ export var store = {
         let res = guess_type(name, this)
         let fld = {
             name,
+            'attrs': {},
             'type': res.type,
             'relation': res.relation,
         }

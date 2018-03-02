@@ -32,17 +32,18 @@ export default {
         }
     },
     mounted() {
-        this.attr_value = this.field[this.attr]
+        // TODO: maybe if this.field.attrs[this.attr] == undefined - then set this.attr_default ?
+        this.attr_value = this.field.attrs[this.attr]
     },
     watch: {
         field: {
             handler: function(val) {
-                this.attr_value = this.field[this.attr]
+                this.attr_value = this.field.attrs[this.attr]
             },
             deep: true
         },
         attr_value(value) {
-            this.$set(this.field, this.attr, value)
+            this.$set(this.field.attrs, this.attr, value)
         }
     },
     computed: {
