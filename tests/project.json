@@ -1,13 +1,14 @@
 {
  "version": "0.1",
- "ui": {
-  "models_view": "designer"
+ "build_settings": {
+  "ugettext_lazy": true,
+  "pep8model_fields": false,
+  "charfield_max_length": 200
  },
- "build_settings": {},
  "settings": {
-  "ADMIN_SITE_HEADER": "project1",
-  "DEFAULT_FROM_EMAIL": "support@barbecook.com",
-  "EMAIL_SUBJECT_PREFIX": "[project1] ",
+  "ADMIN_SITE_HEADER": "project2",
+  "DEFAULT_FROM_EMAIL": "noreply@site.com",
+  "EMAIL_SUBJECT_PREFIX": "[project2] ",
   "LANGUAGE_CODE": "en-us",
   "TIME_ZONE": "Europe/Brussels",
   "USE_I18N": true,
@@ -21,179 +22,398 @@
    "django.contrib.staticfiles"
   ]
  },
+ "name": "project2",
+ "ui": {
+  "models_view": "designer"
+ },
  "apps": [
   {
-   "name": "products",
    "models": [
     {
+     "admin": {
+      "generate": true
+     },
+     "fields": [
+      {
+       "attrs": {
+        "max_length": "10"
+       },
+       "name": "title",
+       "relation": null,
+       "type": "CharField"
+      },
+      {
+       "attrs": {},
+       "name": "slug",
+       "relation": null,
+       "type": "SlugField"
+      }
+     ],
      "name": "Category",
-     "fields": [
-      {
-       "name": "title",
-       "type": "CharField",
-       "relation": null
-      },
-      {
-       "name": "slug",
-       "type": "SlugField",
-       "relation": null
-      }
-     ],
+     "ui_left": 20,
+     "ui_top": 20
+    },
+    {
      "admin": {
       "generate": true
      },
-     "ui_top": 20,
-     "ui_left": 20
-    },
-    {
-     "name": "Product",
      "fields": [
       {
+       "attrs": {},
        "name": "title",
-       "type": "CharField",
-       "relation": null
+       "relation": null,
+       "type": "CharField"
       },
       {
+       "attrs": {},
        "name": "slug",
-       "type": "SlugField",
-       "relation": null
+       "relation": null,
+       "type": "SlugField"
       },
       {
+       "attrs": {},
        "name": "categories",
-       "type": "ManyToManyField",
-       "relation": "products.Category"
+       "relation": "products.Category",
+       "type": "ManyToManyField"
       },
       {
+       "attrs": {},
        "name": "description",
-       "type": "TextField",
-       "relation": null
+       "relation": null,
+       "type": "TextField"
       },
       {
+       "attrs": {
+        "decimal_places": "2",
+        "max_digits": "10"
+       },
        "name": "price",
-       "type": "DecimalField",
        "relation": null,
-       "max_digits": "10",
-       "decimal_places": "2"
+       "type": "DecimalField"
       }
      ],
-     "admin": {
-      "generate": true
-     },
-     "ui_top": 104,
-     "ui_left": 20
+     "name": "Product",
+     "ui_left": 20,
+     "ui_top": 104
     },
     {
-     "name": "Image",
-     "fields": [
-      {
-       "name": "product",
-       "type": "ForeignKey",
-       "relation": "products.Product"
-      },
-      {
-       "name": "image",
-       "type": "ImageField",
-       "relation": null,
-       "upload_to": "products/%y/%m"
-      }
-     ],
      "admin": {
       "generate": true
      },
-     "ui_top": 264,
-     "ui_left": 20
+     "fields": [
+      {
+       "attrs": {},
+       "name": "product",
+       "relation": "products.Product",
+       "type": "ForeignKey"
+      },
+      {
+       "attrs": {},
+       "name": "image",
+       "relation": null,
+       "type": "ImageField"
+      }
+     ],
+     "name": "Image",
+     "ui_left": 20,
+     "ui_top": 264
     }
    ],
-   "ui_color": "#C1ABB7"
+   "name": "products",
+   "ui_color": "#9AAF90"
   },
   {
-   "name": "orders",
    "models": [
     {
-     "name": "Order",
-     "fields": [
-      {
-       "name": "number",
-       "type": "CharField",
-       "relation": null
-      },
-      {
-       "name": "timestamp",
-       "type": "DateTimeField",
-       "relation": null
-      }
-     ],
      "admin": {
       "generate": true
      },
-     "ui_top": 20,
-     "ui_left": 200
+     "fields": [
+      {
+       "attrs": {},
+       "name": "number",
+       "relation": null,
+       "type": "CharField"
+      },
+      {
+       "attrs": {},
+       "name": "timestamp",
+       "relation": null,
+       "type": "DateTimeField"
+      },
+      {
+       "attrs": {
+        "decimal_places": "2",
+        "max_digits": "10"
+       },
+       "name": "total_amount",
+       "relation": null,
+       "type": "DecimalField"
+      }
+     ],
+     "name": "Order",
+     "ui_left": 200,
+     "ui_top": 20
     },
     {
-     "name": "OrderItem",
-     "fields": [
-      {
-       "name": "order",
-       "type": "ForeignKey",
-       "relation": "orders.Order"
-      },
-      {
-       "name": "product",
-       "type": "ForeignKey",
-       "relation": "products.Product"
-      },
-      {
-       "name": "quantity",
-       "type": "CharField",
-       "relation": null
-      }
-     ],
      "admin": {
       "generate": true
      },
-     "ui_top": 100,
-     "ui_left": 200
+     "fields": [
+      {
+       "attrs": {},
+       "name": "order",
+       "relation": "orders.Order",
+       "type": "ForeignKey"
+      },
+      {
+       "attrs": {},
+       "name": "product",
+       "relation": "products.Product",
+       "type": "ForeignKey"
+      },
+      {
+       "attrs": {
+        "decimal_places": "2",
+        "max_digits": "10"
+       },
+       "name": "price",
+       "relation": null,
+       "type": "DecimalField"
+      },
+      {
+       "attrs": {},
+       "name": "quantity",
+       "relation": null,
+       "type": "PositiveSmallIntegerField"
+      }
+     ],
+     "name": "OrderItem",
+     "ui_left": 200,
+     "ui_top": 140
     }
    ],
+   "name": "orders",
    "ui_color": "#F77A5E"
   },
   {
-   "name": "news",
    "models": [
     {
-     "name": "News",
-     "fields": [
-      {
-       "name": "title",
-       "type": "CharField",
-       "relation": null
-      },
-      {
-       "name": "slug",
-       "type": "SlugField",
-       "relation": null
-      },
-      {
-       "name": "text",
-       "type": "TextField",
-       "relation": null
-      },
-      {
-       "name": "publication_time",
-       "type": "DateTimeField",
-       "relation": null,
-       "auto_now_add": false
-      }
-     ],
      "admin": {
       "generate": true
      },
-     "ui_top": 40,
-     "ui_left": 420
+     "fields": [
+      {
+       "attrs": {},
+       "name": "title",
+       "relation": null,
+       "type": "CharField"
+      },
+      {
+       "attrs": {},
+       "name": "slug",
+       "relation": null,
+       "type": "SlugField"
+      },
+      {
+       "attrs": {},
+       "name": "publication_date",
+       "relation": null,
+       "type": "DateTimeField"
+      },
+      {
+       "attrs": {},
+       "name": "text",
+       "relation": null,
+       "type": "TextField"
+      }
+     ],
+     "name": "News",
+     "ui_left": 480,
+     "ui_top": 20
     }
    ],
-   "ui_color": "#D7E684"
+   "name": "news",
+   "ui_color": "#DAC9B7"
+  },
+  {
+   "models": [
+    {
+     "admin": {
+      "generate": true
+     },
+     "fields": [
+
+      {
+       "attrs": {},
+       "name": "big_integer",
+       "relation": null,
+       "type": "BigIntegerField"
+      },
+      {
+       "attrs": {},
+       "name": "binary",
+       "relation": null,
+       "type": "BinaryField"
+      },
+      {
+       "attrs": {},
+       "name": "boolean",
+       "relation": null,
+       "type": "BooleanField"
+      },
+      {
+       "attrs": {},
+       "name": "char",
+       "relation": null,
+       "type": "CharField"
+      },
+      {
+       "attrs": {},
+       "name": "date",
+       "relation": null,
+       "type": "DateField"
+      },
+      {
+       "attrs": {},
+       "name": "date_time",
+       "relation": null,
+       "type": "DateTimeField"
+      },
+      {
+       "attrs": {},
+       "name": "decimal",
+       "relation": null,
+       "type": "DecimalField"
+      },
+      {
+       "attrs": {},
+       "name": "duration",
+       "relation": null,
+       "type": "DurationField"
+      },
+      {
+       "attrs": {},
+       "name": "email",
+       "relation": null,
+       "type": "EmailField"
+      },
+      {
+       "attrs": {},
+       "name": "file",
+       "relation": null,
+       "type": "FileField"
+      },
+      {
+       "attrs": {},
+       "name": "file_path",
+       "relation": null,
+       "type": "FilePathField"
+      },
+      {
+       "attrs": {},
+       "name": "float_f",
+       "relation": null,
+       "type": "FloatField"
+      },
+      {
+       "attrs": {},
+       "name": "foreign_key",
+       "relation": "products.Product",
+       "type": "ForeignKey"
+      },
+      {
+       "attrs": {},
+       "name": "generic_ipaddr",
+       "relation": null,
+       "type": "GenericIPAddressField"
+      },
+      {
+       "attrs": {},
+       "name": "image",
+       "relation": null,
+       "type": "ImageField"
+      },
+      {
+       "attrs": {},
+       "name": "integer",
+       "relation": null,
+       "type": "IntegerField"
+      },
+      {
+       "attrs": {},
+       "name": "many_to_many",
+       "relation": "news.News",
+       "type": "ManyToManyField"
+      },
+      {
+       "attrs": {},
+       "name": "null_boolean",
+       "relation": null,
+       "type": "NullBooleanField"
+      },
+      {
+       "attrs": {},
+       "name": "one_to_one",
+       "relation": "orders.Order",
+       "type": "OneToOneField"
+      },
+      {
+       "attrs": {},
+       "name": "positive_integer",
+       "relation": null,
+       "type": "PositiveIntegerField"
+      },
+      {
+       "attrs": {},
+       "name": "positive_small_int",
+       "relation": null,
+       "type": "PositiveSmallIntegerField"
+      },
+      {
+       "attrs": {},
+       "name": "slug",
+       "relation": null,
+       "type": "SlugField"
+      },
+      {
+       "attrs": {},
+       "name": "small_integer",
+       "relation": null,
+       "type": "SmallIntegerField"
+      },
+      {
+       "attrs": {},
+       "name": "text",
+       "relation": null,
+       "type": "TextField"
+      },
+      {
+       "attrs": {},
+       "name": "time",
+       "relation": null,
+       "type": "TimeField"
+      },
+      {
+       "attrs": {},
+       "name": "url",
+       "relation": null,
+       "type": "URLField"
+      },
+      {
+       "attrs": {},
+       "name": "uuid",
+       "relation": null,
+       "type": "UUIDField"
+      }
+     ],
+     "name": "AllFields",
+     "ui_left": 480,
+     "ui_top": 160
+    }
+   ],
+   "name": "temp",
+   "ui_color": "#9CC4E4"
   }
- ],
- "name": "project1"
+ ]
 }
