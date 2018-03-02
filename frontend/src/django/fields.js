@@ -17,7 +17,7 @@ export const FIELDS = {
     ForeignKey:  ['on_delete', 'related_name', 'related_query_name', 'parent_link', 'to_field'],
     GenericIPAddressField:  ['protocol', 'unpack_ipv4'],
     IPAddressField:  [],
-    ImageField:  ['width_field', 'height_field'],
+    ImageField:  ['upload_to', 'width_field', 'height_field'],
     IntegerField:  [],
     ManyToManyField:  ['related_name', 'related_query_name', 'symmetrical'],
     NullBooleanField:  [],
