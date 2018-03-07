@@ -8,10 +8,15 @@
                  
                 <span v-if="is_saving" class="badge badge-warning">Saving...</span>
             </span>
-            <router-link class="btn btn-outline-light my-2 my-sm-0" to="/build/">
-                <i class="fas fa-rocket"></i>
-                Build
-            </router-link>
+            <div style="width: 30%;">
+                <router-link class="btn btn-outline-light my-2 my-sm-0 float-right" to="/build/">
+                    <i class="fas fa-rocket"></i>
+                    Build
+                </router-link>
+
+                <validation-icon class="float-right mr-2"></validation-icon>
+            </div>
+            
             
         </nav>
         <div class="container-fluid h-100">
@@ -37,6 +42,7 @@
 <script>
 
 import { store } from './store'
+import ValidationIcon from './components/build/ValidationIcon.vue'
 
 export default {
     name: 'prototyper',
@@ -51,11 +57,15 @@ export default {
             deep: true,
             handler(val, old) {
                 this.is_saving = true
+                //TODO: I guess debaunce should be here better
                 store.save().then((response) => {
                     setTimeout(()=> { this.is_saving = false }, 300)
                 })
             }
         }
+    },
+    components: {
+        ValidationIcon,
     }
 }
 </script>
