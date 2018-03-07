@@ -31,7 +31,7 @@
                     style="width: 250px;"
                     placeholder="Type field..."
                     btnlabel="Add"
-                    :regExp="/^[a-z][a-z0-9_]*$/i">
+                    :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
                 </pattern-input>
 
                 <meta-editor :model="model" class="mt-4" />

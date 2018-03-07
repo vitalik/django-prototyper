@@ -37,7 +37,7 @@
                 class="mb-1"
                 style="width: 140px;"
                 :small="true"
-                :regExp="/^[a-z][a-z0-9_]*$/i">
+                :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
             </pattern-input>
     </div>
 

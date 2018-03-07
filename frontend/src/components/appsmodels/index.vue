@@ -9,7 +9,7 @@
                     @save="on_add_app"
                     placeholder="Type app name..."
                     btnlabel="Add"
-                    :regExp="/^[a-z][a-z0-9_]*$/i">
+                    :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
                 </pattern-input>
             </div>
             <div>
