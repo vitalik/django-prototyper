@@ -69,6 +69,18 @@ export default {
         },
         model() {
             return store.models_get(this.app.name, this.$route.params.model)
+        },
+        route_field() {
+            return _.find(this.model.fields, {name:this.$route.params.field})
+        },
+    },
+    watch: {
+        '$route' (to, from) {
+            if (this.route_field !== undefined) {
+                this.active_field = this.route_field
+            } else {
+                this.active_field = null
+            }
         }
     },
     methods: {

@@ -33,6 +33,11 @@ export default new Router({
             component: ModelEditor
         },
         {
+            path: '/apps/:app/:model/:field',
+            name: 'model-field',
+            component: ModelEditor
+        },
+        {
             path: '/admin/',
             name: 'admin',
             component: Admin

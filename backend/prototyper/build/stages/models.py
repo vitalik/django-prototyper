@@ -190,7 +190,7 @@ class FieldBuilder(object):
     def _attrs_FileField(self):
         attrs = self._common_attrs()
         if self.attrs.get('upload_to'):
-            attrs.append('upload_to=%s' % code_string(self.field.upload_to))
+            attrs.append('upload_to=%s' % code_string(self.attrs['upload_to']))
         return attrs
 
     _attrs_ImageField = _attrs_FileField

@@ -3,7 +3,6 @@ import _ from 'lodash'
 export function validate(project) {
     let results = []
     _.each(project.apps, (app) => check_app(app, results))
-    console.info(results)
     return results
 }
 
@@ -16,18 +15,25 @@ function check_model(app, model, results) {
 }
 
 function check_field(app, model, field, results) {
-    let field_key = `${app.name}.${model.name}.${field.name}`
+    let msgs = []
     if (field.type == 'DecimalField') {
         if (!field.attrs.max_digits) {
-            results.push({type:'field', 'id': field_key, message:'DecimalField - max_digits is required'})
+            msgs.push('max_digits is required')
         }
         if (!field.attrs.decimal_places) {
-            results.push({type:'field', 'id': field_key, message:'DecimalField - decimal_places is required'})
+            msgs.push('decimal_places is required')
         }
     } 
     else if (field.type == 'FileField' || field.type == 'ImageField') {
         if (!field.attrs.upload_to) {
-            results.push({type:'field', 'id': field_key, message:field.type + ' upload_to is required'})
+            msgs.push('upload_to is required')
         }
     }
+
+    // Final:
+    if (msgs.length > 0) {
+        let field_key = `${app.name}.${model.name}.${field.name}`
+        results.push({type:'field', 'id': field_key, message:field.type + ': ' + msgs.join(', ')})
+    }
+        
 }

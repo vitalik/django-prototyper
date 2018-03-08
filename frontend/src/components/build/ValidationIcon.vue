@@ -12,7 +12,11 @@
                     <div style="max-height: 300px; overflow-y: scroll;">
                         <table class="table table-sm">
                             <tr v-for="warn in warnings">
-                                <th>{{ warn.id }}</th>
+                                <th>
+                                    <router-link :to="warn_router_link(warn)" href="#">
+                                        {{ warn.id }}
+                                    </router-link>
+                                </th>
                                 <td class="text-danger">{{ warn.message }}</td>
                             </tr>
                             <tr v-if="warnings.length == 0"><td>No problems detected.</td></tr>
@@ -42,6 +46,9 @@ export default {
             project: store.project,
         }
     },
+    created() {
+        this.run_validate(this)
+    },
     watch: {
         project: {
             deep: true,
@@ -57,6 +64,10 @@ export default {
         },
         hide_details() {
             this.show_details = false
+        },
+        warn_router_link(warn) {
+            let items = warn.id.split('.')
+            return {name: 'model-field', params: {app: items[0], model:items[1], field:items[2]}}
         },
         run_validate: _.debounce((component)=>{
             component.warnings = validate(component.project)
