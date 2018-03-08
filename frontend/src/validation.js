@@ -29,6 +29,11 @@ function check_field(app, model, field, results) {
             msgs.push('upload_to is required')
         }
     }
+    else if (field.type == 'ForeignKey' || field.type == 'ManyToManyField' || field.type == 'OneToOneField') {
+        if (!field.relation) {
+            msgs.push('relation is required')
+        }
+    }
 
     // Final:
     if (msgs.length > 0) {
