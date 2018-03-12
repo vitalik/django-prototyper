@@ -17,7 +17,7 @@
             </div>
 
             <div v-show="active" class="badge model-app" :style="css_styles">{{ app.name }}</div>
-            <strong>{{ model.name }}</strong>
+            <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}" style="color: #333; font-weight: bold;" href="#">{{ model.name }}</router-link>
             
             
             <table style="width: 100%;">
