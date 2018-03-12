@@ -9,6 +9,7 @@ class Project(object):
         self.name = os.path.basename(self.path)
         self.storage_path = os.path.join(self.path, '.djangoprototyper')
         self.storage_file = os.path.join(self.storage_path, 'project.json')
+        self.plugins_path = os.path.join(self.storage_path, 'plugins')
         self.init_storage()
     
     def init_storage(self):

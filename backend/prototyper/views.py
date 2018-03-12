@@ -3,6 +3,7 @@ from django.conf import settings
 from django.template import Template, Context
 from django.http import JsonResponse, HttpResponse
 from .build import run_build
+from . import plugins
 
 HOME_TEMPLATE = """{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
@@ -46,3 +47,15 @@ def api_save(request):
     for a in data['apps']:
         print ('%20s' % a['name'], ':', [m['name'] for m in a['models']])
     return JsonResponse({'success': True})
+
+
+def discover_plugins(request):
+    n = request.GET['q']
+    data = list(map(lambda x: {'url': n + str(x), 'title': n + str(x)}, range(10)))
+    return JsonResponse({'success': True, 'results': data})
+
+
+def install_plugin(request):
+    url = json.loads(request.body)['url']
+    plugin = plugins.install(url)
+    return JsonResponse({'success': True, 'plugin': plugin})

@@ -15,4 +15,10 @@ export default {
     save(project) {
         return request.post('/save/', project)
     },
+    plugin_search(query) {
+        return request.get('/plugin/', {params:{q:query}})
+    },
+    plugin_install(url) {
+        return request.post('/plugin/install/', {url})
+    },
 }

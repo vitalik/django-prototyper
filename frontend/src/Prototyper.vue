@@ -27,6 +27,7 @@
                         <router-link to="/settings/" class="nav-link" active-class="active">Django Settings</router-link>
                         <router-link to="/apps/" class="nav-link" active-class="active">Apps / Models</router-link>
                         <router-link to="/admin/" class="nav-link" active-class="active">Admin</router-link>
+                        <router-link to="/plugins/" class="nav-link" active-class="active">Plugins</router-link>
                     </div>
                 </div>
                 <div class="col-9 col-lg-10 column h-100">

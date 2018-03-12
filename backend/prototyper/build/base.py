@@ -43,7 +43,7 @@ class BuildStage(object):
         self.build.log(message)
 
 
-def pipeline(build, stages):
+def pipeline(build, plugins, stages):
     for cls in stages:
         assert issubclass(cls, BuildStage)
         try:

@@ -31,6 +31,8 @@ INITIAL_PROJECT = {
 
     'ui': {'models_view': 'designer'},
 
+    'plugins': [],
+
     'apps': [
             {'models': [
                 {'admin': {'generate': True},
@@ -172,10 +174,6 @@ INITIAL_PROJECT = {
                 'relation': None,
                 'type': 'CharField'},
                 {'attrs': {},
-                'name': 'comma_separated_int',
-                'relation': None,
-                'type': 'CommaSeparatedIntegerField'},
-                {'attrs': {},
                 'name': 'date',
                 'relation': None,
                 'type': 'DateField'},
@@ -215,10 +213,6 @@ INITIAL_PROJECT = {
                 'name': 'generic_ipaddr',
                 'relation': None,
                 'type': 'GenericIPAddressField'},
-                {'attrs': {},
-                'name': 'ipaddress',
-                'relation': None,
-                'type': 'IPAddressField'},
                 {'attrs': {},
                 'name': 'image',
                 'relation': None,

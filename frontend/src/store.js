@@ -65,4 +65,9 @@ export var store = {
         model_fields.push(fld)
         return fld
     },
+
+    plugins_delete(url) {
+        let ind = _.findIndex(this.project.plugins, {url})
+        Vue.delete(this.project.plugins, ind)
+    }
 }

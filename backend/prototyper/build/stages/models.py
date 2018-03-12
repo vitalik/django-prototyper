@@ -41,7 +41,7 @@ class ModelsStage(BuildStage):
         
         contents.append('')  # last empty line
 
-        self.log('\n'.join(contents))
+        # self.log('\n'.join(contents))
 
         mdodels_py.write_text('\n'.join(contents))
 

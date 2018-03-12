@@ -7,6 +7,7 @@ import ModelEditor from './components/appsmodels/ModelEditor'
 import Build from './components/build'
 import BuildSettings from './components/buildsettings'
 import Settings from './components/settings'
+import Plugins from './components/plugins'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
             path: '/admin/:app/:model',
             name: 'admin-edit',
             component: AdminEditor
+        },
+        {
+            path: '/plugins/',
+            name: 'plugins',
+            component: Plugins
         },
         {
             path: '/build/',
