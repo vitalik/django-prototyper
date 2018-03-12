@@ -46,7 +46,7 @@ def parse_args():
 
 def run_server():
     from django.core.management import call_command
-    call_command('runserver')
+    call_command('runserver', '0.0.0.0:8000') # TODO: get from args
 
 
 def build():
