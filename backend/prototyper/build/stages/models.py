@@ -155,7 +155,7 @@ class FieldBuilder(object):
         if self.attrs.get('max_length'):
             max_length = self.attrs['max_length']
         else:
-            max_length = build_settings['charfield_max_length']
+            max_length = build_settings.get('charfield_max_length', 200)
         attrs.append('max_length=%s' % max_length)
         return attrs
     
