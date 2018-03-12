@@ -9,8 +9,8 @@
 
 
             <div v-show="active" class="dropdown float-right" :class="{show:show_menu}" v-click-outside="hide_menu">
-                <button @click="show_menu=true" class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" :class="{show:show_menu}">
+                <button @click="show_menu=true" class="btn btn-sm btn-link dropdown-toggle" type="button"></button>
+                <div class="dropdown-menu" :class="{show:show_menu}">
                     <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}" class="dropdown-item" href="#">Edit</router-link>
                     <a @click="delete_model" class="dropdown-item" href="#">Delete</a>
                 </div>
