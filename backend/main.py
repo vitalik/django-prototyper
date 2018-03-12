@@ -9,7 +9,8 @@ from django.conf import settings
 BASE_DIR = os.path.dirname(__file__)
 
 SECRET_KEY = os.environ.get('SECRET_KEY', '{{ secret_key }}')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+ALLOWED_HOSTS = ['*']
 
 
 settings.configure(
