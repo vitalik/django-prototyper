@@ -53,6 +53,10 @@ def pipeline(build, plugins, stages):
         except Exception as e:
             build.logger.error(traceback.format_exc())
             return False
+    
+    for plug in plugins:
+        plug.on_build_complete()
+
     build.save()
     build.success = True
     return True

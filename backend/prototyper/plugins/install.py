@@ -10,10 +10,13 @@ def install(url):
     return plugin
 
 
-DEMO_PLUGIN = """
-class Plugin(object):
-    def __init__(self):
-        print('plugin works')
+DEMO_PLUGIN = """from prototyper.plugins import PluginBase
+
+
+class Plugin(PluginBase):
+    
+    def on_build_complete(self):
+        print('on_build_complete')
 """
 
 

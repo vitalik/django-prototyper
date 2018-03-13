@@ -1,4 +1,5 @@
 import shutil
+import traceback
 from django.conf import settings
 from .base import Build, BuildStage, pipeline
 from . import stages
@@ -7,6 +8,14 @@ from ..plugins import load_plugins
 
 def run_build():
     build = Build(settings.PROTOTYPER_PROJECT)
+    try:
+        return _run_build(build)
+    except Exception as e:
+        build.logger.error(traceback.format_exc())
+        return build
+
+
+def _run_build(build):
     plugins = _init_plugins(build)
     pipeline(build, plugins, [
         stages.FirstStage,
@@ -23,5 +32,8 @@ def run_build():
 
 def _init_plugins(build):
     build.log('Loading plugins...')
-    for klass in load_plugins():
-        build.log(klass)
+    plugins = []
+    for plugin in load_plugins():
+        plugins.append(plugin)
+    build.log(str(plugins))
+    return plugins
