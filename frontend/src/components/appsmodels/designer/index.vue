@@ -33,7 +33,7 @@
 
         <div class="card-body designer h-100">
 
-            <line-drawer :lines="model_relations_lines" @click.native="unselect_model"/>
+            <relations :lines="model_relations_lines" @click.native="unselect_model"/>
 
             <model v-for="item in models"
                    @click.native="select_model(item, $event)"
@@ -56,7 +56,7 @@
     import AppColors from './AppColors'
     import Modal from '../../utils/Modal'
     import PatternInput from '../../utils/PatternInput'
-    import LineDrawer from "./LineDrawer";
+    import Relations from "./Relations";
 
     export default {
         name: 'modeldesigner',
@@ -96,11 +96,9 @@
                 if (this.selected_models.length != 1)
                     return []
                 let m = _.find(this.models, {key:this.selected_models[0]}).model
-                console.info(m)
                 let lines =  [
                     {from_top: 0, to_top: m.ui_top, from_left: 0, to_left: m.ui_left},
                 ]
-                console.info(lines)
                 return lines
             }
         },
@@ -144,7 +142,7 @@
             }
         },
         components: {
-            LineDrawer,
+            Relations,
             Model,
             AppColors,
             Modal,
