@@ -1,12 +1,13 @@
 <template>
+
     <svg :height="height" :width="width">
-        <line v-for="(line, key) in lines" 
+        <line v-for="(line, key) in all_relations" 
             :key="key" 
             :x1="line.from_left" 
             :y1="line.from_top" 
             :x2="line.to_left"
             :y2="line.to_top" 
-            class="foreignkey-line" />
+            :class="line.class" />
     </svg>
 </template>
 
@@ -24,32 +25,34 @@ export default {
         }
     },
     computed: {
-        selected_model() {
-            // outputs object if only one model is selected
-            if (this.selected.length != 1)
-                return null
-            return _.find(this.models, {key:this.selected[0]}).model
-        },
-        rel_to_models() {
-            if (this.selected_model === null)
-                return []
-            let rel_fields = _.filter(this.selected_model.fields, f => f.relation)
-            return _.filter(this.models, (m) => {
-                let ind = _.findIndex(rel_fields, (f) => f.relation == m.key)
-                return ind != -1
+        all_relations() {
+            let pos = {}
+            _.each(this.models, (m) => {
+                pos[m.key] = {x: m.model.ui_left, y: m.model.ui_top, selected:m.selected}
             })
-        },
-        lines() {
-            let m = this.selected_model
-            return _.map(this.rel_to_models, (rel) => {
-                console.info(rel)
-                return {
-                    from_top: rel.model.ui_top,
-                    from_left: rel.model.ui_left,
-                    to_top: m.ui_top,
-                    to_left: m.ui_left,
-                }
+
+            let result = []
+            _.each(this.models, (m) => {
+                _.each(m.model.fields, (fld) => {
+                    if (!fld.relation || !pos[m.key] || !pos[fld.relation])
+                        return
+                    
+                    let cls = 'rel-muted'
+                    if (m.selected)
+                        cls = 'rel-to'
+                    else if (pos[fld.relation].selected)
+                        cls = 'rel-from'
+                    
+                    result.push({
+                        from_top: pos[m.key].y,
+                        from_left: pos[m.key].x,
+                        to_top: pos[fld.relation].y,
+                        to_left: pos[fld.relation].x,
+                        class: cls,
+                    })
+                })
             })
+            return result
         },
     }
 }
@@ -58,8 +61,16 @@ export default {
 
 
 <style scoped>
-  .foreignkey-line {
-    stroke: rgb(255, 0, 0);
-    stroke-width: 2;
-  }
+    .rel-muted {
+        stroke-width: 1;
+        stroke: rgba(0, 0, 0, 0.08);
+    }
+    .rel-to {
+        stroke: rgb(0, 255, 0);
+        stroke-width: 2;
+    }
+    .rel-from {
+        stroke:  rgb(0, 0, 200);
+        stroke-width: 1;
+    }
 </style>
