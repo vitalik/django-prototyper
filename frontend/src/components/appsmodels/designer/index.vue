@@ -33,8 +33,8 @@
 
         <div class="card-body designer h-100">
 
-            <line-drawer :lines="lines"/>
-            <button @click="add_line">test</button>
+            <line-drawer :lines="model_relations_lines" @click.native="unselect_model"/>
+
             <model v-for="item in models"
                    @click.native="select_model(item, $event)"
                    class="model"
@@ -65,10 +65,6 @@
                 edit_colors: false,
                 selected_app: null,
                 selected_models: [],
-                lines: [
-                    {from_top: 0, to_top: 50, from_left: 0, to_left: 50},
-                    {from_top: 100, to_top: 500, from_left: 100, to_left: 150},
-                ]
             }
         },
         computed: {
@@ -96,17 +92,19 @@
                 })
                 return result
             },
+            model_relations_lines() {
+                if (this.selected_models.length != 1)
+                    return []
+                let m = _.find(this.models, {key:this.selected_models[0]}).model
+                console.info(m)
+                let lines =  [
+                    {from_top: 0, to_top: m.ui_top, from_left: 0, to_left: m.ui_left},
+                ]
+                console.info(lines)
+                return lines
+            }
         },
         methods: {
-            add_line() {
-                let ll = this.lines[this.lines.length - 1];
-                this.lines.push({
-                    from_top: ll.from_top -5,
-                    to_top: ll.to_top + 25,
-                    from_left: ll.from_left + 25,
-                    to_left: ll.to_left + 25
-                })
-            },
             autosort() {
                 let x = 20
                 let y = 20
@@ -140,6 +138,9 @@
                     this.selected_models = [item.key]
                 else
                     this.selected_models.push(item.key)
+            },
+            unselect_model() {
+                this.selected_models = []
             }
         },
         components: {

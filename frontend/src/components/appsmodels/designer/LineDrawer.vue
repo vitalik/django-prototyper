@@ -13,19 +13,7 @@
         lines: {
           type: Array,
           required: true,
-          validator: function (arr) {
-            let invalid = false;
-            for (let i = 0; i < arr.length; i++) {
-              const el = arr[i];
-              invalid = el.from_left === undefined && el.from_top === undefined && el.to_left === undefined && el.to_top === undefined;
-              if (invalid) {
-                return false
-              }
-            }
-            return true
-          }
-        }
-        ,
+        },
       },
     data() {
       return {
