@@ -33,7 +33,10 @@
 
         <div class="card-body designer h-100">
 
-            <relations :lines="model_relations_lines" @click.native="unselect_model"/>
+            <relations 
+                :models="models" 
+                :selected="selected_models" 
+                @click.native="unselect_model" />
 
             <model v-for="item in models"
                    @click.native="select_model(item, $event)"
@@ -91,15 +94,6 @@
                     })
                 })
                 return result
-            },
-            model_relations_lines() {
-                if (this.selected_models.length != 1)
-                    return []
-                let m = _.find(this.models, {key:this.selected_models[0]}).model
-                let lines =  [
-                    {from_top: 0, to_top: m.ui_top, from_left: 0, to_left: m.ui_left},
-                ]
-                return lines
             }
         },
         methods: {
