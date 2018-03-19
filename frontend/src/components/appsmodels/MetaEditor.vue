@@ -2,15 +2,14 @@
     <div class="card">
         <strong class="card-header">Meta</strong>
         <div class="card-body">
-            <check-label v-model="abstract" label="abstract" :initial="false" />
-            <check-label v-model="proxy"    label="proxy"    :initial="false" />
-            <check-label v-model="managed"  label="managed"  :initial="true" />
-            
-            
+            <check-label v-model="abstract" label="abstract" :initial="false"/>
+            <check-label v-model="proxy" label="proxy" :initial="false"/>
+            <check-label v-model="managed" label="managed" :initial="true"/>
+
+             <select-negative-fields attribute="ordering" :model="model" class="mt-1"/>
             <pre>
 .
 //multivalue (with "-" opt)
-ordering
 get_latest_by
 
 //multivalue
@@ -36,27 +35,28 @@ default_related_name
 
 <script>
 
-import CheckLabel from '../utils/CheckLabel'
+    import CheckLabel from '../utils/CheckLabel'
+    import SelectNegativeFields from "./SelectOrderableFields";
 
-
-export default {
-    name: 'meta-editor',
-    props: {
-        model: {
-            required: true,
-            type: Object
+    export default {
+        name: 'meta-editor',
+        props: {
+            model: {
+                required: true,
+                type: Object
+            }
+        },
+        data() {
+            return {
+                abstract: false,
+                managed: true,
+                proxy: false,
+            }
+        },
+        components: {
+            SelectNegativeFields,
+            CheckLabel,
         }
-    },
-    data() {
-        return {
-            abstract: false,
-            managed: true,
-            proxy: false,
-        }
-    },
-    components: {
-        CheckLabel,
     }
-}
 </script>
 
