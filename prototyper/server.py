@@ -17,14 +17,7 @@ def django_configure():
         ALLOWED_HOSTS=ALLOWED_HOSTS,
         ROOT_URLCONF='prototyper.urls',
         INSTALLED_APPS=[
-            'webpack_loader',
         ],
-        WEBPACK_LOADER={
-            'DEFAULT': {
-                'BUNDLE_DIR_NAME': os.path.join(BASE_DIR, '..', 'frontend', 'dist'),
-                'STATS_FILE': os.path.join(BASE_DIR, '..', 'frontend', 'webpack-stats.json'),
-            }
-        },
         TEMPLATES=[{
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
         }],
