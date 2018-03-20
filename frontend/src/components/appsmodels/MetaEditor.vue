@@ -6,15 +6,12 @@
             <check-label v-model="proxy" label="proxy" :initial="false"/>
             <check-label v-model="managed" label="managed" :initial="true"/>
 
-             <select-negative-fields attribute="ordering" :model="model" class="mt-1"/>
-            <pre>
-.
-//multivalue (with "-" opt)
-get_latest_by
+            <select-negative-fields attribute="ordering" :model="model" class="mt-1"/>
+            <select-negative-fields attribute="get_latest_by" :model="model" class="mt-1"/>
 
-//multivalue
-indexes
-unique_together
+            <select-multiple-fields attribute="indexes" :model="model" class="mt-1"/>
+            <select-multiple-fields attribute="unique_together" :model="model" class="mt-1"/>
+            <pre>
 
 
 // empty-by-default string attrs
@@ -37,6 +34,7 @@ default_related_name
 
     import CheckLabel from '../utils/CheckLabel'
     import SelectNegativeFields from "./SelectOrderableFields";
+    import SelectMultipleFields from "./SelectMultipleFields";
 
     export default {
         name: 'meta-editor',
@@ -54,6 +52,7 @@ default_related_name
             }
         },
         components: {
+            SelectMultipleFields,
             SelectNegativeFields,
             CheckLabel,
         }

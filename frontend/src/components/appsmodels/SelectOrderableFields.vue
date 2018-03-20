@@ -7,8 +7,8 @@
             </div>
             <div class="col-md-6" v-click-outside="on_outside_click">
 
-                <draggable v-model="selected_fields" element="span">
-                    <div class="row">
+                <div class="row">
+                    <draggable v-model="selected_fields" element="div" class="row">
                         <div v-for="fld in selected_fields">
                             <a @click="toggle_order(fld)"
                                class="btn btn-sm"
@@ -22,8 +22,8 @@
                             </a>
                             <span>|</span>
                         </div>
-                    </div>
-                </draggable>
+                    </draggable>
+                </div>
 
                 <a @click="edit_mode = true" class="badge badge-light mr-1" href="javascript:void(0)">select...</a>
 
