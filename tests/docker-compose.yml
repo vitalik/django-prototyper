@@ -6,5 +6,4 @@ services:
       dockerfile: tests/Dockerfile
     tty: true
     volumes:
-     - ../backend:/code/backend
-     - .:/code/tests
+     - ..:/code
