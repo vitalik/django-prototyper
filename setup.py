@@ -41,13 +41,14 @@ setup(
     package_data={'prototyper': ['static/build.js']},
     include_package_data=True,
 
-    entry_points={  # Optional
+    entry_points={
         'console_scripts': [
             'prototyper=prototyper.cli:main',
         ],
     },
-    
-    classifiers=[  # Optional
+
+
+    classifiers=[
         'Development Status :: 3 - Alpha',  # 3 - Alpha, 4 - Beta, 5 - Production
 
         'Intended Audience :: Developers',
@@ -59,5 +60,5 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    keywords='django prototype boilerplate development uml diagrams',  # Optional
+    keywords='django prototype boilerplate development uml diagrams',
 )
