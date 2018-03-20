@@ -12,6 +12,7 @@ def django_configure():
 
     settings.configure(
         DEBUG=True,
+        BASE_DIR=BASE_DIR,
         SECRET_KEY=SECRET_KEY,
         ALLOWED_HOSTS=ALLOWED_HOSTS,
         ROOT_URLCONF='prototyper.urls',
