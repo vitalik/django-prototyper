@@ -1,3 +1,4 @@
+import os
 import json
 from django.conf import settings
 from django.template import Template, Context
@@ -5,8 +6,7 @@ from django.http import JsonResponse, HttpResponse
 from .build import run_build
 from . import plugins
 
-HOME_TEMPLATE = """{% load render_bundle from webpack_loader %}
-<!DOCTYPE html>
+HOME_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -20,15 +20,24 @@ HOME_TEMPLATE = """{% load render_bundle from webpack_loader %}
     <script>
         var PROJECT_DATA = {{ PROJECT_DATA|safe }}
     </script>
-    {% render_bundle 'main' %}
+    <script type="text/javascript" src="{{JS_BUNDLE}}"></script>
 </body>
 </html>
 """
 
 
+def _js_bundle():
+    if os.environ.get('PROTOTYPER_DEV') and not os.environ.get('STATIC_BUNDLE'):
+        return 'http://localhost:9000/dist/build.js'
+    return '/static/build.js'
+
+
 def main_view(request):
     data = settings.PROTOTYPER_PROJECT.load()
-    ctx = {'PROJECT_DATA': json.dumps(data)}
+    ctx = {
+        'PROJECT_DATA': json.dumps(data),
+        'JS_BUNDLE': _js_bundle(),
+    }
     html = Template(HOME_TEMPLATE).render(Context(ctx))
     return HttpResponse(html)
 
