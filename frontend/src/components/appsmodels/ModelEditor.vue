@@ -2,7 +2,16 @@
     <div class="settings">
         <h2>
             {{ app.name }}.{{ model.name }}
+
+            <small style="font-size: 14px;">
+                <i class="fas fa-chevron-right"></i>
+                models.Model
+                <button @click="show_inheritance=true" class="btn btn-sm btn-outline-secondary ml-2">...</button>
+            </small> 
+
             <button @click="delete_model" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
+
+
             <button @click="go_to_model(1)" class="btn btn-sm btn-outline-secondary float-right ml-1"><i class="fas fa-chevron-right"></i></button>
             <button @click="go_to_model(-1)" class="btn btn-sm btn-outline-secondary float-right"><i class="fas fa-chevron-left"></i></button>
             
@@ -37,12 +46,17 @@
                 <meta-editor :model="model" class="mt-4" />
             </div>
             <div class="col-6 col-lg-4">
+                <div>
+                    
+                </div>
                 <div v-if="active_field" class="card">
                     <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
                     <field-attrs-editor :field="active_field" class="card-body" />
                 </div>
             </div>
         </div>
+
+        <inheritance v-show="show_inheritance" :model="model" @close="show_inheritance=false" />
     </div>
 
 </template>
@@ -54,6 +68,7 @@ import draggable from 'vuedraggable'
 import FieldAttrsEditor from './FieldAttrsEditor'
 import Field from './Field'
 import MetaEditor from './MetaEditor'
+import Inheritance from './Inheritance'
 import PatternInput from '../utils/PatternInput'
 
 export default {
@@ -61,6 +76,7 @@ export default {
     data() {
         return {
             active_field: null,
+            show_inheritance: false,
         }
     },
     computed: {
@@ -123,6 +139,7 @@ export default {
         Field,
         PatternInput,
         MetaEditor,
+        Inheritance,
     }
 }
 </script>
