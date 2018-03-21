@@ -1,11 +1,15 @@
 <template>
     <div class="settings">
         <h2>
-            {{ app.name }}.{{ model.name }}
+            {{ model.name }}
 
             <small style="font-size: 14px;">
-                <i class="fas fa-chevron-right"></i>
-                models.Model
+                (
+                    <span v-for="m in model.inheritance">
+                        {{m}}
+                    </span>
+                    <span v-if="model.inheritance === undefined || model.inheritance.length == 0" class="text-muted">models.Model</span>
+                )
                 <button @click="show_inheritance=true" class="btn btn-sm btn-outline-secondary ml-2">...</button>
             </small> 
 
