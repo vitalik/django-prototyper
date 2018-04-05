@@ -33,6 +33,8 @@ class ModelsStage(BuildStage):
         contents = ['from django.db import models']
         if self.use_ugettext:
             contents.append('from django.utils.translation import ugettext_lazy as _')
+        
+        self._inheritance_imports(app, contents)
 
         for model in app['models']:
             contents.extend(['', ''])
@@ -44,6 +46,15 @@ class ModelsStage(BuildStage):
         # self.log('\n'.join(contents))
 
         mdodels_py.write_text('\n'.join(contents))
+    
+    def _inheritance_imports(self, app, contents):
+        all_classes = set()
+        for model in app['models']:
+            for m in model.get('inheritance', []):
+                all_classes.add(m)
+        for cls in sorted(all_classes):
+            app, model = cls.split('.')
+            contents.append('from %s.models import %s' % (app, model))
 
 
 class ModelBuilder(codelines):
@@ -53,7 +64,7 @@ class ModelBuilder(codelines):
         self._create()
 
     def _create(self):
-        self.append('class %s(models.Model):' % self.model['name'])
+        self.append('class %s(%s):' % (self.model['name'], self._inheritance()))
 
         for field in self.model['fields']:
             self.extend_indent(self._handle_field(field))
@@ -62,6 +73,12 @@ class ModelBuilder(codelines):
         
         if len(self) == 1:
             self.append('    pass')
+    
+    def _inheritance(self):
+        classes = self.model.get('inheritance', [])
+        if not classes:
+            return 'models.Model'
+        return ', '.join([i.split('.')[-1] for i in classes])
     
     def _handle_field(self, field):
         line = FieldBuilder(self, field).render()

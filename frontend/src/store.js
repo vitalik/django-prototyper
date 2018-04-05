@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import Vue from 'vue'
 import API from './backend'
+import { DJANGO_CONTRIB_APPS } from './django/apps'
 import { guess_type }  from './django/guess'
 
 
@@ -17,12 +18,22 @@ export var store = {
     app_add (name) {
         this.project.apps.push({
             name,
+            external: false,
             models: [],
         })
     },
     app_delete(name) {
         let ind = _.findIndex(this.project.apps, {name:name})
         Vue.delete(this.project.apps, ind)
+    },
+    apps_add_django(name) {
+        this.app_add(name)
+        let app = this.app_get(name)
+        app.external = true
+        let models = DJANGO_CONTRIB_APPS[name]
+        for (let i=0; i<models.length; i++) {
+            this.models_add(name, models[i])
+        }
     },
 
     models_get(app_name, name) {
