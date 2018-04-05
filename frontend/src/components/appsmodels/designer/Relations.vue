@@ -74,10 +74,10 @@
                                 (dist - 20 < min && (middle1 || middle2))
                                 || (dist - 30 < min && middle1 && middle2)) {
                                 let priority;
-                                if (dist - 30 < min){
+                                if (dist - 30 < min) {
                                     priority = 28;
                                 }
-                                else if (dist - 20 < min){
+                                else if (dist - 20 < min) {
                                     priority = 18;
                                 }
                                 min = dist - priority;
@@ -139,7 +139,8 @@
                 const middle_y = (y1 + y2) / 2;
 
                 // find the proportions if which line from center to the top of triangle divides the half of the line
-                const top_lamb = (10) / ((Math.sqrt(Math.pow(x2 - middle_x, 2) + Math.pow(y2 - middle_y, 2))) - 10);
+                const triangle_height = 20;
+                const top_lamb = (triangle_height) / ((Math.sqrt(Math.pow(x2 - middle_x, 2) + Math.pow(y2 - middle_y, 2))) - triangle_height);
                 // find top coords by formula
                 let x_top = (middle_x + top_lamb * x2) / (1 + top_lamb);
                 let y_top = (middle_y + top_lamb * y2) / (1 + top_lamb);
@@ -151,8 +152,9 @@
 
 
                 // params of line equation that is parallel to the main
-                const C_left = C_main + 10 * (Math.sqrt(A_main * A_main + B_main * B_main));
-                const C_right = C_main - 10 * (Math.sqrt(A_main * A_main + B_main * B_main));
+                const triangle_half_width = 5;
+                const C_left = C_main + triangle_half_width * (Math.sqrt(A_main * A_main + B_main * B_main));
+                const C_right = C_main - triangle_half_width * (Math.sqrt(A_main * A_main + B_main * B_main));
                 // params of line equation of the perpendicular line
                 const A_perp = -B_main;
                 const B_perp = A_main;
