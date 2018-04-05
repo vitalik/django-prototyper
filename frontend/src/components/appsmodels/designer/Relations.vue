@@ -30,75 +30,14 @@
         },
         computed: {
             all_relations() {
-                function closest_dots(first_block, second_block) {
-                    function distance(x1, y1, x2, y2) {
-                        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
-                    }
-
-                    // all edges of the blocks
-                    const f1 = {x: first_block.x1, y: first_block.y1, middle: false};
-                    const f2 = {x: first_block.x2, y: first_block.y1, middle: false};
-                    const f12 = {x: (f1.x + f2.x) / 2, y: (f1.y + f2.y) / 2, middle: true};
-                    const f3 = {x: first_block.x2, y: first_block.y2, middle: false};
-                    const f23 = {x: (f2.x + f3.x) / 2, y: (f2.y + f3.y) / 2, middle: true};
-                    const f4 = {x: first_block.x1, y: first_block.y2, middle: false};
-                    const f34 = {x: (f3.x + f4.x) / 2, y: (f3.y + f4.y) / 2, middle: true};
-                    const f41 = {x: (f4.x + f1.x) / 2, y: (f4.y + f1.y) / 2, middle: true};
-
-                    const s1 = {x: second_block.x1, y: second_block.y1, middle: false};
-                    const s2 = {x: second_block.x2, y: second_block.y1, middle: false};
-                    const s12 = {x: (s1.x + s2.x) / 2, y: (s1.y + s2.y) / 2, middle: true};
-                    const s3 = {x: second_block.x2, y: second_block.y2, middle: false};
-                    const s23 = {x: (s2.x + s3.x) / 2, y: (s2.y + s3.y) / 2, middle: true};
-                    const s4 = {x: second_block.x1, y: second_block.y2, middle: false};
-                    const s34 = {x: (s3.x + s4.x) / 2, y: (s3.y + s4.y) / 2, middle: true};
-                    const s41 = {x: (s4.x + s1.x) / 2, y: (s4.y + s1.y) / 2, middle: true};
-
-                    const firsts = [f1, f2, f3, f4, f12, f23, f34, f41];
-                    const seconds = [s1, s2, s3, s4, s12, s23, s34, s41];
-                    let results = [0, 0, 0, 0];
-                    let min = Number.MAX_SAFE_INTEGER;
-                    // find the closet dots
-                    for (let i = 0; i < firsts.length; i++) {
-                        for (let k = 0; k < firsts.length; k++) {
-                            const x1 = firsts[i].x;
-                            const y1 = firsts[i].y;
-                            const middle1 = firsts[i].middle;
-                            const x2 = seconds[k].x;
-                            const y2 = seconds[k].y;
-                            const middle2 = seconds[k].middle;
-
-                            const dist = distance(x1, y1, x2, y2);
-                            // five priority to center coordinates
-                            if (dist < min ||
-                                (dist - 20 < min && (middle1 || middle2))
-                                || (dist - 30 < min && middle1 && middle2)) {
-                                let priority;
-                                if (dist - 30 < min) {
-                                    priority = 28;
-                                }
-                                else if (dist - 20 < min) {
-                                    priority = 18;
-                                }
-                                min = dist - priority;
-                                results = [x1, y1, x2, y2]
-                            }
-                        }
-                    }
-                    return results;
-                }
-
                 let pos = {}
                 _.each(this.models, (m) => {
                     pos[m.key] = {
-                        //approximate coordinates of edges
-                        x1: m.model.ui_left - 20,
-                        y1: m.model.ui_top - 20,
-                        x2: m.model.ui_left + 130,
-                        y2: m.model.ui_top + (m.model.fields.length * 23),
+                        x1: m.model.ui_left,
+                        y1: m.model.ui_top,
                         selected: m.selected
                     }
-                })
+                });
 
                 let result = []
                 _.each(this.models, (m) => {
@@ -111,14 +50,11 @@
                             cls = 'rel-to';
                         else if (pos[fld.relation].selected)
                             cls = 'rel-from';
-                        let x1, y1, x2, y2;
-                        [x1, y1, x2, y2] = closest_dots(pos[m.key], pos[fld.relation]);
-                        console.log(x1, y1, x2, y2);
                         result.push({
-                            from_left: x1,
-                            from_top: y1,
-                            to_left: x2,
-                            to_top: y2,
+                            from_left: pos[m.key].x1,
+                            from_top: pos[m.key].y1,
+                            to_left: pos[fld.relation].x1,
+                            to_top: pos[fld.relation].y1,
                             class: cls,
                         })
                     })
@@ -133,10 +69,18 @@
                 const y1 = line.from_top;
                 const x2 = line.to_left;
                 const y2 = line.to_top;
-                console.log(x1, y1);
-                console.log(x2, y2);
-                const middle_x = (x1 + x2) / 2;
-                const middle_y = (y1 + y2) / 2;
+                let middle_x = (x1 + x2) / 2;
+                let middle_y = (y1 + y2) / 2;
+
+                // make an in the right direction to make arrow visible
+                if (y2 + 80 > y1 && x2 + 80 > x1) {
+                    middle_x += (x2 - x1) * 0.15;
+                    middle_y += (y2 - y1) * 0.15;
+                }
+                else if (y2 - 80 < y1 && x2 - 80 < x1) {
+                    middle_x -= (x2 - x1) * 0.15;
+                    middle_y -= (y2 - y1) * 0.15;
+                }
 
                 // find the proportions if which line from center to the top of triangle divides the half of the line
                 const triangle_height = 20;
