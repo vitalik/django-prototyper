@@ -52,7 +52,8 @@ export default {
     },
     computed: {
         apps() {
-            return _.sortBy(store.project.apps, ['name'])
+            let apps = _.filter(store.project.apps, {'external': false})
+            return _.sortBy(apps, ['name'])
         }
     },
     methods: {
