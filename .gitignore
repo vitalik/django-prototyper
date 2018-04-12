@@ -13,9 +13,9 @@ build/
 *.ntvs*
 *.njsproj
 *.sln
+*.code-workspace
 .idea
 .vscode
 frontend/node_modules
 frontend/webpack-stats.json
 frontend/dist
-
