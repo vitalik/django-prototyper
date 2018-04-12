@@ -4,7 +4,7 @@
         <hr>
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-md-6  col-lg-5">
                 <table>
                     <tr>
                         <th>USE_I18N = </th>
@@ -36,15 +36,13 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-3">
-                <h5>Django contib apps:</h5>
-                <button v-for="app in django_apps"
-                    @click="toggle_app(app)"
-                    :key="app.name"
-                    :class="{'btn-primary': app.selected, 'btn-secondary': !app.selected}" 
-                    class="btn btn-block btn-sm text-left">
-                        django.contrib.{{app.name}}
-                </button>
+            <div class="col-md-6 col-lg-5">
+                <div class="card">
+                    <div class="card-body">
+                        <django-contrib />
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -55,6 +53,7 @@ import _ from 'lodash'
 import { store } from '../../store'
 import { DJANGO_CONTRIB_APPS } from '../../django/apps'
 import InputTrueFalse from '../utils/InputTrueFalse'
+import DjangoContrib from './DjangoContrib'
 
 export default {
     name: 'settings',
@@ -63,27 +62,9 @@ export default {
             settings: store.project.settings
         }
     },
-    computed: {
-        django_apps() {
-            return _.map(_.keys(DJANGO_CONTRIB_APPS), (app) => {
-                return {
-                    'name': app,
-                    'selected': (store.app_get(app) !== undefined),
-                }
-            })
-        }
-    },
-    methods: {
-        toggle_app(app) {
-            if (app.selected) {
-                store.app_delete(app.name)
-            } else {
-                store.apps_add_django(app.name)
-            }
-        }
-    },
     components: {
         InputTrueFalse,
+        DjangoContrib,
     }
 }
 </script>
