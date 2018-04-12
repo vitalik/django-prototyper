@@ -53,9 +53,11 @@ export var store = {
         let ind = _.findIndex(app.models, {name:name})
         Vue.delete(app.models, ind)
     },
-    models_keys() {
+    models_keys(skip_external=false) {
         let result = []
         _.each(_.sortBy(store.project.apps, ['name']), (app) => {
+            if (skip_external && app.external)
+                return
             _.each(app.models, (model) => result.push(app.name + '.' + model.name))
         })
         return result

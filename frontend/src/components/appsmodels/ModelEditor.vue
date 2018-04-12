@@ -105,7 +105,7 @@ export default {
     },
     methods: {
         go_to_model(pos) {
-            let keys = store.models_keys()
+            let keys = store.models_keys(true) // true - skip_exernal
             let ind = _.indexOf(keys, `${this.app.name}.${this.model.name}`) + pos
             if (ind < 0) ind = keys.length-1
             if (ind >= keys.length) ind = 0

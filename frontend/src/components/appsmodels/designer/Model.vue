@@ -4,7 +4,7 @@
          @dragstart="dragstart"
          @dragend="dragend"
          draggable="true"
-         :class="{active:active}"
+         :class="{active:active, external:app.external}"
          :style="css_styles">
 
 
@@ -16,8 +16,11 @@
                 </div>
             </div>
 
-            <div v-show="active" class="badge model-app" :style="css_styles">{{ app.name }}</div>
-            <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}" style="color: #333; font-weight: bold;" href="#">{{ model.name }}</router-link>
+            <div v-show="show_app_name" class="badge model-app" :style="css_styles">{{ app.name }}</div>
+            
+            <span v-if="app.external" class="model-name">{{ model.name }}</span>
+            <router-link v-else 
+                :to="{name: 'model', params: {app: app.name, model:model.name}}" class="model-name" href="#">{{ model.name }}</router-link>
             
             
             <table style="width: 100%;">
@@ -61,6 +64,7 @@ export default {
     data() {
         return {
             active: false,
+            show_app_name: false,
             drag_start_pos: null,
             show_menu: false,
         }
@@ -87,10 +91,13 @@ export default {
 
     methods: {
         expand() {
-            this.active = true
+            if (!this.app.external)
+                this.active = true
+            this.show_app_name = true
         },
         shrink() {
             this.active = false
+            this.show_app_name = false
         },
         add_field(name) {
             if (store.fields_get(this.model, name) !== undefined) {
@@ -132,6 +139,14 @@ export default {
         top: -20px; 
         left: 0; 
         font-weight: normal;
+    }
+    .model-name {
+        color: #333; 
+        font-weight: bold;
+    }
+    .external {
+        opacity: 0.7 !important;
+        border-style: dashed !important;
     }
 </style>
 
