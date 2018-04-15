@@ -1,9 +1,7 @@
 <template>
     <div @mouseover="expand" 
          @mouseout="shrink" 
-         @dragstart="dragstart"
-         @dragend="dragend"
-         draggable="true"
+
          :class="{active:active, external:app.external}"
          :style="css_styles">
 
@@ -65,7 +63,6 @@ export default {
         return {
             active: false,
             show_app_name: false,
-            drag_start_pos: null,
             show_menu: false,
         }
     },
@@ -82,7 +79,6 @@ export default {
         },
         css_styles() {
             return {
-                'opacity': this.drag_start_pos == null ? 1 : 0.3,
                 'background-color': this.app_color,
                 'border': '1px solid ' + lightness(this.app_color, -10)
             }
@@ -112,18 +108,6 @@ export default {
         hide_menu() {
             this.show_menu = false
         },
-        dragstart(e) {
-            this.drag_start_pos = [e.clientX, e.clientY]
-        },
-        dragend(e) {
-            let offsetX = e.clientX - this.drag_start_pos[0]
-            let offsetY = e.clientY - this.drag_start_pos[1]
-            this.model.ui_left = Math.round((this.model.ui_left + offsetX) / 20) * 20
-            this.model.ui_top = Math.round((this.model.ui_top + offsetY) / 20) * 20
-            if (this.model.ui_left < 0) this.model.ui_left = 0
-            if (this.model.ui_top < 0) this.model.ui_top = 0
-            this.drag_start_pos = null
-        }
 
     },
     components: {

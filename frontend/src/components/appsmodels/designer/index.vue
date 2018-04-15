@@ -32,21 +32,9 @@
         </div>
 
         <div class="card-body designer h-100">
+            
+            <drag-area />
 
-            <relations 
-                :models="models" 
-                :selected="selected_models" 
-                @click.native="unselect_model" />
-
-            <model v-for="item in models"
-                   @click.native="select_model(item, $event)"
-                   class="model"
-                   :class="{selected:item.selected}"
-                   :key="item.key"
-                   :model="item.model"
-                   :app="item.app"
-                   :style="{left: item.model.ui_left+'px', top: item.model.ui_top+'px'}">
-            </model>
         </div>
     </div>
 </template>
@@ -55,11 +43,10 @@
 
     import _ from 'lodash'
     import {store} from '../../../store'
-    import Model from './Model'
+    import DragArea from './DragArea'
     import AppColors from './AppColors'
     import Modal from '../../utils/Modal'
     import PatternInput from '../../utils/PatternInput'
-    import Relations from "./Relations";
 
     export default {
         name: 'modeldesigner',
@@ -67,34 +54,12 @@
             return {
                 edit_colors: false,
                 selected_app: null,
-                selected_models: [],
             }
         },
         computed: {
             apps() {
                 return store.project.apps
             },
-            models() {
-                let result = []
-                let n = 0
-                _.each(this.apps, (app) => {
-                    _.each(app.models, (m) => {
-                        if (m.ui_top == undefined) {
-                            this.$set(m, 'ui_top', n * 40)
-                            this.$set(m, 'ui_left', n * 40)
-                        }
-                        let key = app.name + '.' + m.name
-                        result.push({
-                            app: app,
-                            model: m,
-                            selected: _.indexOf(this.selected_models, key) != -1,
-                            key: key
-                        })
-                        n += 1
-                    })
-                })
-                return result
-            }
         },
         methods: {
             autosort() {
@@ -124,20 +89,9 @@
                 }
                 store.models_add(this.selected_app, name)
             },
-            select_model(item, event) {
-                let modifier = event.shiftKey || event.altKey || event.ctrlKey
-                if (!modifier)
-                    this.selected_models = [item.key]
-                else
-                    this.selected_models.push(item.key)
-            },
-            unselect_model() {
-                this.selected_models = []
-            }
         },
         components: {
-            Relations,
-            Model,
+            DragArea,
             AppColors,
             Modal,
             PatternInput,
