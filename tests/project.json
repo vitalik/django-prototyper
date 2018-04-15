@@ -12,15 +12,7 @@
   "LANGUAGE_CODE": "en-us",
   "TIME_ZONE": "Europe/Brussels",
   "USE_I18N": true,
-  "USE_L10N": true,
-  "django_contrib_apps": [
-   "django.contrib.admin",
-   "django.contrib.auth",
-   "django.contrib.contenttypes",
-   "django.contrib.sessions",
-   "django.contrib.messages",
-   "django.contrib.staticfiles"
-  ]
+  "USE_L10N": true
  },
  "name": "project2",
  "ui": {

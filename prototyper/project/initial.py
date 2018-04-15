@@ -4,7 +4,24 @@ def create_new_project(name):
     result = INITIAL_PROJECT.copy()
     result['settings']['ADMIN_SITE_HEADER'] = name
     result['settings']['EMAIL_SUBJECT_PREFIX'] = '[{}] '.format(name)
+    for app, models in INITIAL_DJANGO_APPS:
+        result['apps'].append({
+            'name': app.split('.')[-1],
+            'external': True,
+            'models': [{'name': m, 'fields': [], 'admin': {'generate': False}} for m in models]
+        })
+
     return result
+
+
+INITIAL_DJANGO_APPS = [
+    ('django.contrib.admin', ['LogEntry']),
+    ('django.contrib.auth', ['AbstractBaseUser', 'AbstractUser', 'Group', 'Permission', 'PermissionsMixin', 'User']),
+    ('django.contrib.contenttypes', ['ContentType']),
+    ('django.contrib.sessions', ['AbstractBaseSession', 'Session']),
+    ('django.contrib.messages', []),
+    ('django.contrib.staticfiles', []),
+]
 
 
 INITIAL_PROJECT = {
@@ -18,14 +35,6 @@ INITIAL_PROJECT = {
         'TIME_ZONE': 'Europe/Brussels',
         'USE_I18N': True,
         'USE_L10N': True,
-        'django_contrib_apps': [
-            'django.contrib.admin',
-            'django.contrib.auth',
-            'django.contrib.contenttypes',
-            'django.contrib.sessions',
-            'django.contrib.messages',
-            'django.contrib.staticfiles'
-        ]
     },
     'name': 'project1',
 
