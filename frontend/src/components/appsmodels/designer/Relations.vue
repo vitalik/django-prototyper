@@ -1,6 +1,6 @@
 <template>
 
-    <svg :height="height" :width="width">
+    <svg>
         <template v-for="(line, key) in all_relations">
             <line :key="key"
                   :x1="line.from_left"
@@ -16,18 +16,19 @@
 </template>
 
 <script>
+    import _ from 'lodash'
 
     export default {
         props: {
             models: {type: Array, required: true},
             selected: {type: Array, required: true},
         },
-        data() {
-            return {
-                height: window.innerHeight,
-                width: window.innerWidth,
-            }
-        },
+        // data() {
+        //     return {
+        //         height: window.innerHeight,
+        //         width: window.innerWidth,
+        //     }
+        // },
         computed: {
             all_relations() {
                 let pos = {}
@@ -60,7 +61,7 @@
                     })
                 })
                 return result
-            },
+            }
         },
         methods: {
             get_triangle(line) {

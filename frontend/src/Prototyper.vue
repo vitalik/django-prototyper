@@ -16,27 +16,24 @@
 
                 <validation-icon class="float-right mr-2"></validation-icon>
             </div>
-            
-            
         </nav>
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <div class="col-3 col-lg-2 column siebar h-100">
-                    <div class="nav flex-column nav-pills">
-                        <router-link to="/buildsettings/" class="nav-link" active-class="active">Build Settings</router-link>
-                        <router-link to="/settings/" class="nav-link" active-class="active">Django Settings</router-link>
-                        <router-link to="/apps/" class="nav-link" active-class="active">Apps / Models</router-link>
-                        <router-link to="/admin/" class="nav-link" active-class="active">Admin</router-link>
-                        <router-link to="/plugins/" class="nav-link" active-class="active">Plugins</router-link>
-                    </div>
-                </div>
-                <div class="col-9 col-lg-10 column h-100">
-                    <router-view></router-view>
-                </div>
+
+        <div id="sidebar" class="pt-2">
+            <div class="nav flex-column nav-pills">
+                <router-link to="/buildsettings/" class="nav-link" active-class="active">Build Settings</router-link>
+                <router-link to="/settings/" class="nav-link" active-class="active">Django Settings</router-link>
+                <router-link to="/apps/" class="nav-link" active-class="active">Apps / Models</router-link>
+                <router-link to="/admin/" class="nav-link" active-class="active">Admin</router-link>
+                <router-link to="/plugins/" class="nav-link" active-class="active">Plugins</router-link>
             </div>
-            
         </div>
-        
+
+        <div id="maincontent">
+            <div class="pl-3 pr-3 pt-1">
+                <router-view></router-view>
+            </div> 
+        </div>
+
     </div>
 </template>
 

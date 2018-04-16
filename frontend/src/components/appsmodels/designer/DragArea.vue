@@ -1,11 +1,11 @@
 <template>
-    <div :style="styles" style="border: 1px dotted red;">
+    <div :style="{width:size.width, height:size.height}">
 
-        <div style="position: fixed; top: 0; left: 0; background-color: yellow;">{{styles}}</div>
-        
         <relations 
             :models="models" 
             :selected="selected_models" 
+            :height="size.height" 
+            :width="size.width"
             @click.native="unselect_model" />
         
         
@@ -64,15 +64,23 @@
                 })
                 return result
             },
-            styles() {
-                let w = 0
-                let h = 0
-                _.each(this.models, (m) => {
-                    if (m.ui_top > h)  h = m.ui_top
-                    if (m.ui_left > w) w = m.ui_left
-                })
-                return {width: 1000 + 'px', height: 1000 + 'px'}
-            },
+            size() {
+                let w = _.maxBy(this.models, m => m.model.ui_left).model.ui_left + 200
+                let h = _.maxBy(this.models, m => m.model.ui_top).model.ui_top + 200
+                return {
+                    width: w + 'px',
+                    height: h + 'px',
+                }
+            }
+            // styles() {
+            //     let w = 0
+            //     let h = 0
+            //     _.each(this.models, (m) => {
+            //         if (m.ui_top > h)  h = m.ui_top
+            //         if (m.ui_left > w) w = m.ui_left
+            //     })
+            //     return {width: 1000 + 'px', height: 1000 + 'px'}
+            // },
             // model - 'opacity': this.drag_start_pos == null ? 1 : 0.3,
 
         },

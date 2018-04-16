@@ -1,9 +1,11 @@
-body, html, #app { /// take all available height
-    height: 100%;
-}
-
 
 #app {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
     >.navbar {
         position: fixed;
         top: 0;
@@ -11,24 +13,33 @@ body, html, #app { /// take all available height
         right: 0;
         z-index: 100;
     }
-    >.container-fluid {
-        padding-top: 3rem;
 
-        .column {
-            padding-top: 1rem;
+    #sidebar {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        top: 57px;
+        width: 200px;
+
+        background-color: #F4F6F8;
+        border-right: 1px solid #DFE3E8;
+
+        .nav-pills .nav-link.active {
+            color: black;
+            background-color: #DFE3E8;
+            border-radius: 0;
         }
     }
-}
 
-.siebar {
-    background-color: #F4F6F8;
-    border-right: 1px solid #DFE3E8;
-
-    .nav-pills .nav-link.active {
-        color: black;
-        background-color: #DFE3E8;
+    #maincontent {
+        position: fixed;
+        left: 200px;
+        bottom: 0;
+        top: 57px;
+        right: 0;
     }
 }
+
 
 .sortable-ghost {
     opacity: 0.3;
