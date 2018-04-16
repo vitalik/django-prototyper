@@ -88,12 +88,13 @@
                 this.selected_models = []
             },
             dragstart(e) {
-                this.drag_start_pos = [e.clientX, e.clientY]
+                e.dataTransfer.setData('Text', 'model') // firefox needs this
+                this.drag_start_pos = [e.screenX, e.screenY]
             },
             dragend(item, e) {
                 let model = item.model
-                let offsetX = e.clientX - this.drag_start_pos[0]
-                let offsetY = e.clientY - this.drag_start_pos[1]
+                let offsetX = e.screenX - this.drag_start_pos[0]
+                let offsetY = e.screenY - this.drag_start_pos[1]
                 if (item.selected) {
                     _.each(this.models, (item) => {
                         if (item.selected)
