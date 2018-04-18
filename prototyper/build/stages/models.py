@@ -26,7 +26,7 @@ class ModelsStage(BuildStage):
     def run(self):
         self.use_ugettext = self.build.details['build_settings'].get('ugettext_lazy', True)
         for app in self.build.details['apps']:
-            if app['external'] is False:
+            if not app['external']:
                 self._handle_app(app)
     
     def _handle_app(self, app):

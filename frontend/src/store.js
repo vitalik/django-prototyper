@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import Vue from 'vue'
 import API from './backend'
-import { DJANGO_CONTRIB_APPS } from './django/apps'
-import { guess_type }  from './django/guess'
+import {DJANGO_CONTRIB_APPS} from './django/apps'
+import {guess_type} from './django/guess'
 
 
 export var store = {
@@ -12,10 +12,10 @@ export var store = {
         return API.save(this.project)
     },
 
-    app_get (name) {
+    app_get(name) {
         return _.find(this.project.apps, {name})
     },
-    app_add (name) {
+    app_add(name) {
         this.project.apps.push({
             name,
             external: false,
@@ -23,7 +23,7 @@ export var store = {
         })
     },
     app_delete(name) {
-        let ind = _.findIndex(this.project.apps, {name:name})
+        let ind = _.findIndex(this.project.apps, {name: name})
         Vue.delete(this.project.apps, ind)
     },
     apps_add_django(name) {
@@ -31,7 +31,7 @@ export var store = {
         let app = this.app_get(name)
         app.external = true
         let models = DJANGO_CONTRIB_APPS[name]
-        for (let i=0; i<models.length; i++) {
+        for (let i = 0; i < models.length; i++) {
             this.models_add(name, models[i])
         }
     },
@@ -43,17 +43,17 @@ export var store = {
     models_add(app_name, name) {
         let app = this.app_get(app_name)
         app.models.push({
-            name: name, 
-            fields:[],
+            name: name,
+            fields: [],
             admin: {'generate': true},
         })
     },
     models_delete(app_name, name) {
         let app = this.app_get(app_name)
-        let ind = _.findIndex(app.models, {name:name})
+        let ind = _.findIndex(app.models, {name: name})
         Vue.delete(app.models, ind)
     },
-    models_keys(skip_external=false) {
+    models_keys(skip_external = false) {
         let result = []
         _.each(_.sortBy(store.project.apps, ['name']), (app) => {
             if (skip_external && app.external)

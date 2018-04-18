@@ -33,6 +33,7 @@ class AppsPackages(BuildStage):
     def run(self):
         root = Path(self.build.build_path)
         for app in self.build.details['apps']:
-            app_pkg = root / app['name']
-            app_pkg.mkdir()
-            (app_pkg / '__init__.py').touch()
+            if not app['external']:
+                app_pkg = root / app['name']
+                app_pkg.mkdir()
+                (app_pkg / '__init__.py').touch()

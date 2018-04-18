@@ -152,5 +152,6 @@ class SettingsStage(BuildStage):
             "",
         ]
         for app in self.build.details['apps']:
-            result.append("'{}',".format(app['name']))
+            if not app['external']:
+                result.append("'{}',".format(app['name']))
         return '\n    '.join(result)

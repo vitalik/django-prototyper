@@ -59,13 +59,20 @@
         name: 'SelectFields',
         props: ['model', 'attribute', 'single'],
         data() {
+            let fields = [];
+            if (this.model['admin'] && this.model['admin'][this.attribute] && this.model['admin'][this.attribute]['fields']) {
+                fields = this.model['admin'][this.attribute]['fields']
+            }
             return {
-                selected_fields: this.model['admin'][this.attribute] || [],
+                selected_fields: fields,
                 edit_mode: false,
             }
         },
         mounted() {
-            this.$set(this.model['admin'], this.attribute, this.selected_fields)
+            console.log(this.single);
+            this.$set(this.model['admin'], this.attribute, {});
+            this.$set(this.model['admin'][this.attribute], "single", this.single || false);
+            this.$set(this.model['admin'][this.attribute], "fields", this.selected_fields);
         },
         computed: {
             applicable_fields() {
@@ -91,7 +98,7 @@
                 }
                 else {
                     if (this.single)
-                        this.selected_fields = [];
+                        this.selected_fields.splice(0, 1);
                     this.selected_fields.push(name)
                 }
 
