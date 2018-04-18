@@ -26,7 +26,8 @@ class ModelsStage(BuildStage):
     def run(self):
         self.use_ugettext = self.build.details['build_settings'].get('ugettext_lazy', True)
         for app in self.build.details['apps']:
-            self._handle_app(app)
+            if app['external'] is False:
+                self._handle_app(app)
     
     def _handle_app(self, app):
         mdodels_py = Path(self.build.build_path) / app['name'] / 'models.py'
