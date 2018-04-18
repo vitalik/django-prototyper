@@ -5,7 +5,8 @@ from pathlib import Path
 class AdminStage(BuildStage):
     def run(self):
         for app in self.build.details['apps']:
-            self._handle_app(app)
+            if app['external'] is False:
+                self._handle_app(app)
     
     def _handle_app(self, app):
         contents = ['from django.contrib import admin', 'from .models import *']
