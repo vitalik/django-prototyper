@@ -54,19 +54,19 @@ def api_save(request):
     data = _json_body(request)
     settings.PROTOTYPER_PROJECT.save(data)
     for a in data['apps']:
-        print ('%20s' % a['name'], ':', [m['name'] for m in a['models']])
+        print('%20s' % a['name'], ':', [m['name'] for m in a['models']])
     return JsonResponse({'success': True})
 
 
 def discover_plugins(request):
-    n = request.GET['q']
-    data = list(map(lambda x: {'url': n + str(x), 'title': n + str(x)}, range(10)))
+    query = request.GET['q']
+    data = plugins.search_plugins(query)
     return JsonResponse({'success': True, 'results': data})
 
 
 def install_plugin(request):
-    url = _json_body(request)['url']
-    plugin = plugins.install(url)
+    data = _json_body(request)
+    plugin = plugins.install(data['name'], data['url'])
     return JsonResponse({'success': True, 'plugin': plugin})
 
 

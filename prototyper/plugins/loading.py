@@ -2,7 +2,7 @@ import os
 from django.conf import settings
 
 
-def load_plugins():
+def load_py_plugins():
     results = []
     path = settings.PROTOTYPER_PROJECT.plugins_path
     if not os.path.exists(path):
@@ -15,7 +15,7 @@ def load_plugins():
         if p not in installed_plugins:
             continue
         plugin_module = os.path.join(path, p, 'plugin.py')
-        print (plugin_module)
+        print(plugin_module)
         if os.path.exists(plugin_module):
             klass = load(plugin_module)
             plugin = klass(p)

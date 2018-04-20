@@ -19,7 +19,7 @@ export default {
     plugin_search(query) {
         return request.get('/plugin/', {params:{q:query}})
     },
-    plugin_install(url) {
-        return request.post('/plugin/install/', {url})
+    plugin_install(name, url) {
+        return request.post('/plugin/install/', {name, url})
     },
 }

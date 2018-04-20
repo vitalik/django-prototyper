@@ -7,9 +7,12 @@
         
         <div v-for="item in results" class="card mb-1 p-1">
             <div>
-                <button v-if="!is_installed(item.url)" @click="$emit('install', item.url)" class="btn btn-sm btn-primary float-right pt-0 pb-0">install</button>
-                <strong>{{ item.url }}</strong>
-                <p class="text-muted mb-1">Lorem ipsum dolor sit amet asd fasdfs daf </p>
+                <span   v-if="is_installed(item.name)" class="text-muted float-right">installed</span>
+                <button v-if="!is_installed(item.name)" @click="$emit('install', item.name, item.url)" class="btn btn-sm btn-primary float-right pt-0 pb-0">install</button>
+                
+                <strong>{{ item.name }}</strong>
+                <small class="text-muted">{{ item.version }}</small>
+                <p class="text-muted mb-1">{{ item.description }} </p>
             </div>
         </div>
     </div>
@@ -31,9 +34,9 @@ export default {
         }
     },
     computed: {
-        installed_plugins_urls() {
+        installed_plugins() {
             return _.reduce(store.project.plugins, function(result, p) {
-                result.push(p.url)
+                result.push(p.name)
                 return result
             }, [])
         }
@@ -63,8 +66,8 @@ export default {
             });
         }, 300),
 
-        is_installed(url) {
-            return _.indexOf(this.installed_plugins_urls, url) != -1
+        is_installed(name) {
+            return _.indexOf(this.installed_plugins, name) != -1
         }
     }
 }

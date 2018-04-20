@@ -79,8 +79,24 @@ export var store = {
         return fld
     },
 
-    plugins_delete(url) {
-        let ind = _.findIndex(this.project.plugins, {url})
+    plugins_install(plugin) {
+        this.project.plugins.push(plugin)
+        let plugin_apps = _.get(plugin, 'apps', [])
+        _.each(plugin_apps, (a) => {
+            this.app_add(a.name)
+            let app = this.app_get(a.name)
+            app.external = true
+            let models = _.get(a, 'models', [])
+            for (let i = 0; i < models.length; i++) {
+                this.models_add(a.name, models[i])
+            }
+        })
+    },
+
+    plugins_delete(name) {
+        let ind = _.findIndex(this.project.plugins, {name})
+        if (ind == -1)
+            alert('Cannot find plugin: ' + name)
         Vue.delete(this.project.plugins, ind)
     }
 }

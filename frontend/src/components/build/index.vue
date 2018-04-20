@@ -42,6 +42,7 @@ export default {
     methods: {
         on_buld_click() {
             this.show_complete = false
+            this.logs = []
             
             API.build().then((response)=>{
                 this.logs = response.data.logs

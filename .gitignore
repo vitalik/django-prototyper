@@ -6,9 +6,9 @@
 *.py[co]
 __pycache__
 *.egg-info
-.venv/
-dist/
-build/
+.env/*
+dist/*
+build/*
 *.suo
 *.ntvs*
 *.njsproj

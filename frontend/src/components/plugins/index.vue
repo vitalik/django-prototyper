@@ -12,9 +12,9 @@
 
                         <div v-for="plugin in plugins" class="card p-1 mb-1">
                             <div>
-                                <button @click="uninstall(plugin.url)" class="btn btn-link text-danger float-right pt-0 pb-0">uninstall</button>
-                                <strong>{{ plugin.title }}</strong>
-                                <p class="text-muted mb-1">Lorem</p>
+                                <button @click="uninstall(plugin.name)" class="btn btn-link text-danger float-right pt-0 pb-0">uninstall</button>
+                                <strong>{{ plugin.name }}</strong>
+                                <p class="text-muted mb-1">{{ plugin.description }}</p>
                             </div>
 
                         </div>
@@ -49,13 +49,14 @@ export default {
         }
     },
     methods: {
-        install(url) {
-            API.plugin_install(url).then((resp) => {
-                store.project.plugins.push(resp.data.plugin)
+        install(name, url) {
+            //TODO: check if name not present alrready
+            API.plugin_install(name, url).then((resp) => {
+                store.plugins_install(resp.data.plugin)
             })
         },
-        uninstall(url) {
-            store.plugins_delete(url)
+        uninstall(name) {
+            store.plugins_delete(name)
         }
     },
     components: {

@@ -21,7 +21,7 @@ class Project(object):
             self.load()  # pasing check
     
     def init_new(self):
-        print ('Creating new project', self.name)
+        print('Creating new project', self.name)
         os.makedirs(self.storage_path)
         data = create_new_project(self.name)
         self.save(data)
