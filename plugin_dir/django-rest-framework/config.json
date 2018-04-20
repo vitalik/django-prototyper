@@ -1,0 +1,11 @@
+{
+    "name": "django-rest-framework",
+    "version": "1.0",
+    "description": "Powerful and flexible toolkit for building Web APIs.",
+    "apps": [
+        {"name": "rest_framework", "models": []}
+    ],
+    "requirements": [
+        "djangorestframework"
+    ]
+}

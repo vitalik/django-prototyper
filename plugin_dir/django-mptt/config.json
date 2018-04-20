@@ -1,0 +1,11 @@
+{
+    "name": "django-mptt",
+    "version": "1.0",
+    "description": "Modified Preorder Tree Traversal(MPTT) Implementation for Django models",
+    "apps": [
+        {"name": "mptt", "models": ["MPTTModel"]}
+    ],
+    "requirements": [
+        "django-mptt"
+    ]
+}

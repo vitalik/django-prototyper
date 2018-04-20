@@ -1,0 +1,11 @@
+{
+    "name": "django-compressor",
+    "version": "1.0",
+    "description": "Compresses linked and inline JavaScript or CSS into a single cached file.",
+    "apps": [
+        {"name": "compressor", "models": []}
+    ],
+    "requirements": [
+        "django_compressor"
+    ]
+}
