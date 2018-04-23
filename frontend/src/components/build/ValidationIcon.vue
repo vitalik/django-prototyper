@@ -1,6 +1,6 @@
 <template>
     <span>
-        <button @click="toggle" class="btn btn-link text-light" :class="{'bg-dark':show_details}">
+        <button @click="toggle" class="btn btn-link text-primary" :class="{'bg-light':show_details}">
             <i v-if="status == 'ok'" class="far fa-check-circle"></i>
             <i v-if="status == 'sync'" class="fas fa-sync"></i>
             <i v-if="status == 'warn'" class="fas fa-exclamation-triangle text-warning"></i>

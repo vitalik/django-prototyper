@@ -1,7 +1,10 @@
 <template>
     <div class="h-100">
-        <h2>Apps and Models</h2>
-        <hr>
+        <div class="heading">
+            <div class="container-fluid">
+                <h2>Apps and Models</h2>
+            </div>
+        </div>
 
         <div class="d-flex justify-content-between mb-2">
             <div>

@@ -1,61 +1,67 @@
 <template>
-    <div class="settings">
-        <h2>
-            {{ model.name }}
+    <div>
 
-            <small style="font-size: 14px;">
-                (
-                    <span v-for="m in model.inheritance">
-                        {{m}}
-                    </span>
-                    <span v-if="model.inheritance === undefined || model.inheritance.length == 0" class="text-muted">models.Model</span>
-                )
-                <button @click="show_inheritance=true" class="btn btn-sm btn-outline-secondary ml-2">...</button>
-            </small> 
+        <div class="heading">
+            <div class="container-fluid">
+                <h2>
+                    {{ model.name }}
 
-            <button @click="delete_model" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
+                    <small style="font-size: 14px;">
+                        (
+                            <span v-for="m in model.inheritance">
+                                {{m}}
+                            </span>
+                            <span v-if="model.inheritance === undefined || model.inheritance.length == 0" class="text-muted">models.Model</span>
+                        )
+                        <button @click="show_inheritance=true" class="btn btn-sm btn-outline-secondary ml-2">...</button>
+                    </small> 
+
+                    <button @click="delete_model" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
 
 
-            <button @click="go_to_model(1)" class="btn btn-sm btn-outline-secondary float-right ml-1"><i class="fas fa-chevron-right"></i></button>
-            <button @click="go_to_model(-1)" class="btn btn-sm btn-outline-secondary float-right"><i class="fas fa-chevron-left"></i></button>
-            
-        </h2>
-        <hr>
-        <div class="row">
-            <div class="col-6">
-                <h5>Fields:</h5>
-                <table class="table table-sm table-striped ">
-                    <draggable v-model="model.fields" element="tbody">
-                        <field v-for="(field, pos) in model.fields" 
-                            @activate="on_field_activate"
-                            @activatenext="on_field_next"
-                            @activateprev="on_field_prev"
-                            :class="{'table-primary': active_field && active_field.name == field.name}"
-                            :field="field" 
-                            :pos="pos"
-                            :id="'f_' + pos"
-                            :key="pos">
-                        </field>
-                    </draggable>
-                </table>
-                
-                <pattern-input 
-                    @save="add_field"
-                    style="width: 250px;"
-                    placeholder="Type field..."
-                    btnlabel="Add"
-                    :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
-                </pattern-input>
-
-                <meta-editor :model="model" class="mt-4" />
+                    <button @click="go_to_model(1)" class="btn btn-sm btn-outline-secondary float-right ml-1"><i class="fas fa-chevron-right"></i></button>
+                    <button @click="go_to_model(-1)" class="btn btn-sm btn-outline-secondary float-right"><i class="fas fa-chevron-left"></i></button>
+                </h2>
             </div>
-            <div class="col-6 col-lg-4">
-                <div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Fields:</h5>
+                    <table class="table table-sm table-striped ">
+                        <draggable v-model="model.fields" element="tbody">
+                            <field v-for="(field, pos) in model.fields" 
+                                @activate="on_field_activate"
+                                @activatenext="on_field_next"
+                                @activateprev="on_field_prev"
+                                :class="{'table-primary': active_field && active_field.name == field.name}"
+                                :field="field" 
+                                :pos="pos"
+                                :id="'f_' + pos"
+                                :key="pos">
+                            </field>
+                        </draggable>
+                    </table>
                     
+                    <pattern-input 
+                        @save="add_field"
+                        style="width: 250px;"
+                        placeholder="Type field..."
+                        btnlabel="Add"
+                        :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
+                    </pattern-input>
+
+                    <meta-editor :model="model" class="mt-4" />
                 </div>
-                <div v-if="active_field" class="card">
-                    <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
-                    <field-attrs-editor :field="active_field" class="card-body" />
+                <div class="col-6 col-lg-4">
+                    <div>
+                        
+                    </div>
+                    <div v-if="active_field" class="card">
+                        <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
+                        <field-attrs-editor :field="active_field" class="card-body" />
+                    </div>
                 </div>
             </div>
         </div>

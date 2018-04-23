@@ -1,36 +1,30 @@
 <template>
-    <div>
-        <h2>Plugins</h2>
-        <hr>
-
-        <div class="row">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Installed plugins</h4>
-                        <span v-if="plugins.length == 0">Nothing</span>
-
-                        <div v-for="plugin in plugins" class="card p-1 mb-1">
-                            <div>
-                                <button @click="uninstall(plugin.name)" class="btn btn-link text-danger float-right pt-0 pb-0">uninstall</button>
-                                <strong>{{ plugin.name }}</strong>
-                                <p class="text-muted mb-1">{{ plugin.description }}</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Discover</h4>
-                        <discover @install="install" />
-                    </div>
-                </div>
+    <div class="h-100 plugins">
+        <div class="heading">
+            <div class="container-fluid">
+                <h2>Plugins</h2>
             </div>
         </div>
 
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-4 h-100" style="border-right: 1px solid #EBEDF8;">
+                    <h4>Installed plugins</h4>
+                    <span v-if="plugins.length == 0">Nothing</span>
+
+                    <div v-for="plugin in plugins" class="plugin-item">
+                        <button @click="uninstall(plugin.name)" class="btn btn-link text-danger float-right pt-0 pb-0">uninstall</button>
+                        <strong>{{ plugin.name }}</strong>
+                        <p class="text-muted mb-1">{{ plugin.description }}</p>
+                    </div>
+
+                </div>
+                <div class="col-8 h-100">
+                    <h4>Discover</h4>
+                    <discover @install="install" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

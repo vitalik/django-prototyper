@@ -1,15 +1,14 @@
 <template>
     <div id="app">
-        <nav class="navbar navbar-dark bg-dark justify-content-between">
+        <nav class="navbar navbar-light bg-white justify-content-between">
             <span class="navbar-text">
-                <span  class="badge badge-light" style="font-size: 1.1rem; font-weight: 100">Prototyper</span>
-                &nbsp;
+                <span class="branding mr-2">Prototyper</span>
                 {{ project.name }}
                  
                 <span v-if="is_saving" class="badge badge-warning">Saving...</span>
             </span>
             <div style="width: 30%;">
-                <router-link class="btn btn-outline-light my-2 my-sm-0 float-right" to="/build/">
+                <router-link class="btn btn-outline-primary my-2 my-sm-0 float-right" to="/build/">
                     <i class="fas fa-rocket"></i>
                     Build
                 </router-link>
@@ -29,9 +28,7 @@
         </div>
 
         <div id="maincontent">
-            <div class="pl-3 pr-3 pt-1">
-                <router-view></router-view>
-            </div> 
+            <router-view></router-view>
         </div>
 
     </div>

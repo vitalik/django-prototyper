@@ -4,15 +4,16 @@
         <h5>Django contib apps:</h5>
         <div class="row">
             <div class="col-6">
-                INSTALLED_APPS = [
+                <code>INSTALLED_APPS = [</code>
                 <button v-for="app in selected_apps"
                     @click="toggle_app(app)"
                     :key="app.name"
                     class="btn btn-primary btn-block btn-sm text-left ml-3">
-                        django.contrib.{{app.name}} <span class="float-right">></span>
+                        <span class="float-right">&gt;</span>
+                        django.contrib.{{app.name}} 
                 </button>
                 &nbsp; ...<br>
-                ]
+                <code>]</code>
             </div>
             <div class="col-6">
                 Available
@@ -20,7 +21,7 @@
                     @click="toggle_app(app)"
                     :key="app.name"
                     class="btn btn-secondary btn-block btn-sm text-left ml-1">
-                        < django.contrib.{{app.name}}
+                        &lt; django.contrib.{{app.name}}
                 </button>
             </div>
         </div>

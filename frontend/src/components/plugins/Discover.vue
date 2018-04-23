@@ -5,15 +5,15 @@
             <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 100%;"></div>
         </div>
         
-        <div v-for="item in results" class="card mb-1 p-1">
-            <div>
-                <span   v-if="is_installed(item.name)" class="text-muted float-right">installed</span>
-                <button v-if="!is_installed(item.name)" @click="$emit('install', item.name, item.url)" class="btn btn-sm btn-primary float-right pt-0 pb-0">install</button>
-                
-                <strong>{{ item.name }}</strong>
-                <small class="text-muted">{{ item.version }}</small>
-                <p class="text-muted mb-1">{{ item.description }} </p>
-            </div>
+        <div v-for="item in results" class="plugin-item">
+
+            <span   v-if="is_installed(item.name)" class="text-muted float-right">installed</span>
+            <button v-if="!is_installed(item.name)" @click="$emit('install', item.name, item.url)" class="btn btn-sm btn-primary float-right pt-0 pb-0">install</button>
+            
+            <strong>{{ item.name }}</strong>
+            <small class="text-muted">{{ item.version }}</small>
+            <p class="text-muted mb-1">{{ item.description }} </p>
+
         </div>
     </div>
 </template>

@@ -12,6 +12,14 @@
         left: 0;
         right: 0;
         z-index: 100;
+        background-color: white;
+        border: 1px solid #EBEDF8;
+
+        .branding {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #212529;
+        }
     }
 
     #sidebar {
@@ -21,13 +29,19 @@
         top: 57px;
         width: 200px;
 
-        background-color: #F4F6F8;
+        background-color: #272C38;
         border-right: 1px solid #DFE3E8;
 
-        .nav-pills .nav-link.active {
-            color: black;
-            background-color: #DFE3E8;
-            border-radius: 0;
+        .nav-pills .nav-link {
+            color: #fff;
+
+            &.active {
+                background-color: #1E222E;
+                border-radius: 0;
+                border-left: 0.3rem solid #00C187;
+                padding-left: 0.7rem;
+            }
+
         }
     }
 
@@ -38,8 +52,37 @@
         top: 57px;
         right: 0;
     }
+
+    .heading {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        background-color: #f1f6fa;
+        border-bottom: 1px solid #EBEDF8;
+    }
 }
 
+
+.plugins {
+    .plugin-item {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #EBEDF8;
+    }
+}
+
+.admin {
+    .djangoapp {
+        table {
+            margin-bottom: 0;
+            
+            tr:first-child td {
+                border: none !important;
+             }
+
+        }
+    }
+}
 
 .sortable-ghost {
     opacity: 0.3;
