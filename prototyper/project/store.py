@@ -1,4 +1,5 @@
 import os
+import re
 import json
 from .initial import create_new_project
 
@@ -6,7 +7,7 @@ from .initial import create_new_project
 class Project(object):
     def __init__(self, path):
         self.path = os.path.abspath(path)
-        self.name = os.path.basename(self.path)
+        self.name = self.get_name(path)
         self.storage_path = os.path.join(self.path, '.djangoprototyper')
         self.storage_file = os.path.join(self.storage_path, 'project.json')
         self.plugins_path = os.path.join(self.storage_path, 'plugins')
@@ -35,3 +36,7 @@ class Project(object):
     def save(self, data):
         with open(self.storage_file, 'w') as f:
             json.dump(data, f, indent=1)
+    
+    def get_name(self, path):
+        name = os.path.basename(self.path)
+        return re.sub(r'[^a-z\d_]', '', name)
