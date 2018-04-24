@@ -5,6 +5,11 @@
             {{ app.name }}
         </div>
         <div class="card-body">
+            
+            <div v-if="app.models.length == 0">
+                No models created yet for this application.
+            </div>
+
             <div v-if="compact">
                 <draggable v-model="app.models">
                     <span v-for="model in app.models" 
@@ -13,6 +18,7 @@
                             <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}">{{ model.name }}</router-link>
                     </span>
                 </draggable>
+
             </div>
 
             <table v-else>
@@ -28,7 +34,9 @@
                 </draggable>
             </table>
 
-            <pattern-input class="new-model mt-1"
+            <pattern-input 
+                class="new-model mt-1"
+                :class="{'force-show': app.models.length == 0}"
                 @save="add_model"
                 style="width: 220px"
                 placeholder="Type model name..."
@@ -80,6 +88,10 @@ export default {
 
         .new-model {
             opacity: 0;
+
+            &.force-show {
+                opacity: 1 !important;
+            }
         }
 
         .card-body, .card-header {

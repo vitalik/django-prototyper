@@ -10,7 +10,7 @@
             <div class="row h-100">
                 <div class="col-4 h-100" style="border-right: 1px solid #EBEDF8;">
                     <h4>Installed plugins</h4>
-                    <span v-if="plugins.length == 0">Nothing</span>
+                    <span v-if="plugins.length == 0">0 plugins installed</span>
 
                     <div v-for="plugin in plugins" class="plugin-item">
                         <button @click="uninstall(plugin.name)" class="btn btn-link text-danger float-right pt-0 pb-0">uninstall</button>

@@ -43,6 +43,10 @@
                             </field>
                         </draggable>
                     </table>
+
+                    <div v-if="model.fields.length == 0" class="mb-4">
+                        This models does not have fields.
+                    </div>
                     
                     <pattern-input 
                         @save="add_field"

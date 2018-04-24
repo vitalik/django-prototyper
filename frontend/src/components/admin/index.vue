@@ -24,7 +24,12 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            
 
+            <div v-if="apps.length == 0">
+                You do not have any apps yet.
+                <router-link to="/apps/">Go to apps and models</router-link> to create some.
             </div>
         </div>
 
