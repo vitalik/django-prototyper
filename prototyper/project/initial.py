@@ -6,7 +6,7 @@ def create_new_project(name):
     result['settings']['ADMIN_SITE_HEADER'] = name
     result['settings']['EMAIL_SUBJECT_PREFIX'] = '[{}] '.format(name)
 
-    if os.environ.get('PROTOTYPER_DEV'):
+    if os.environ.get('PROTOTYPER_DEV') == 'yes':
         result['apps'].extend(DEMO_APPS)
 
     for app, models in INITIAL_DJANGO_APPS:

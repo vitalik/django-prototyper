@@ -26,6 +26,8 @@ def django_configure():
             'django.middleware.csrf.CsrfViewMiddleware',
             'django.middleware.clickjacking.XFrameOptionsMiddleware',
         ),
+
+        DEV_MODE=os.environ.get('PROTOTYPER_DEV', 'yes') == 'yes'
     )
 
 

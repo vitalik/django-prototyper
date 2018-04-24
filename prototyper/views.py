@@ -27,7 +27,7 @@ HOME_TEMPLATE = """<!DOCTYPE html>
 
 
 def _js_bundle():
-    if os.environ.get('PROTOTYPER_DEV') and not os.environ.get('STATIC_BUNDLE'):
+    if settings.DEV_MODE and not os.environ.get('STATIC_BUNDLE'):
         return 'http://localhost:9000/dist/build.js'
     return '/static/build.js'
 
