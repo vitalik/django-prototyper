@@ -27,7 +27,7 @@ def django_configure():
             'django.middleware.clickjacking.XFrameOptionsMiddleware',
         ),
 
-        DEV_MODE=os.environ.get('PROTOTYPER_DEV', 'yes') == 'yes'
+        DEV_MODE=os.environ.get('PROTOTYPER_DEV', 'no') == 'yes'
     )
 
 
