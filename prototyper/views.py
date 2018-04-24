@@ -12,6 +12,7 @@ HOME_TEMPLATE = """<!DOCTYPE html>
     <meta charset="utf-8">
     <title>prototyper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="preload" as="style">
     <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 </head>
 <body>
