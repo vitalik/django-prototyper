@@ -11,7 +11,7 @@
                 <span v-if="is_saving" class="badge badge-warning">Saving...</span>
             </span>
             <div style="width: 30%;">
-                <router-link class="btn btn-outline-primary my-2 my-sm-0 float-right" to="/build/">
+                <router-link class="btn btn-primary my-2 my-sm-0 float-right" to="/build/">
                     <i class="fas fa-rocket"></i>
                     Build
                 </router-link>
