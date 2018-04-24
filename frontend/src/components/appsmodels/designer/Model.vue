@@ -73,7 +73,7 @@ export default {
         },
         app_color() {
             if (this.app.ui_color == undefined) {
-                this.$set(this.app, 'ui_color', get_some_color())
+                this.$set(this.app, 'ui_color', get_some_color(this.app.external))
             }
             return this.app.ui_color
         },

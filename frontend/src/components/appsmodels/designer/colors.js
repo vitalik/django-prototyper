@@ -14,7 +14,11 @@ export const APP_COLORS = [
     "#9AAF90",
 ]
 
+const GRAY = '#eeeeee' // should be in APP_COLORS
 
-export function get_some_color() {
+
+export function get_some_color(external) {
+    if (external)
+        return GRAY
     return APP_COLORS[_.random(APP_COLORS.length-1)]
 }
