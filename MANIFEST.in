@@ -1,1 +1,2 @@
 include prototyper/static/*.js
+include prototyper/static/*.png

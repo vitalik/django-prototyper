@@ -2,7 +2,10 @@
     <div id="app">
         <nav class="navbar navbar-light bg-white justify-content-between">
             <span class="navbar-text">
-                <span class="branding mr-2">Prototyper</span>
+                <span class="branding mr-2">
+                    <img src="/static/logo.png" style="width: 25px; height: 24px;">
+                    Prototyper
+                </span>
                 {{ project.name }}
                  
                 <span v-if="is_saving" class="badge badge-warning">Saving...</span>
