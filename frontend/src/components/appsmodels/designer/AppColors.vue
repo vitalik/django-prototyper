@@ -29,7 +29,7 @@
 
 <script>
 
-import { sortBy } from 'lodash'
+import _ from 'lodash'
 import { store } from '../../../store'
 import { APP_COLORS } from './colors'
 
@@ -43,7 +43,8 @@ export default {
     },
     computed: {
         apps() {
-            return sortBy(store.project.apps, ['name'])
+            let apps = _.filter(store.project.apps, a => a.models.length > 0)
+            return _.sortBy(apps, ['name'])
         },
         colors() {
             return APP_COLORS

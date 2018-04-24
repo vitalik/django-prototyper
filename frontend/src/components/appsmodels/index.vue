@@ -2,39 +2,56 @@
     <div class="h-100">
         <div class="heading">
             <div class="container-fluid">
-                <h2>Apps and Models</h2>
+                <div class="row">
+                    <div class="col">
+                        <h2>Apps and Models</h2>
+                    </div>
+                    <div class="col text-right">
+                        <div class="btn-group">
+                            <button :class="{active:ui.models_view=='list'}" @click="ui.models_view='list'" class="btn btn-outline-secondary">List</button>
+                            <button :class="{active:ui.models_view=='compact'}"  @click="ui.models_view='compact'"  type="button" class="btn btn-outline-secondary">Compact</button>
+                            <button :class="{active:ui.models_view=='designer'}"  @click="ui.models_view='designer'"  type="button" class="btn btn-outline-secondary">Designer</button>
+                        </div>
+                    </div>
+
+                </div>
+                
             </div>
         </div>
 
-        <div class="d-flex justify-content-between mb-2">
-            <div>
+
+        
+
+
+
+        <model-designer v-if="ui.models_view=='designer'" />
+
+        <div v-if="ui.models_view!='designer'">
+            <div class="container-fluid">
+
                 <pattern-input 
                     @save="on_add_app"
                     placeholder="Type app name..."
                     btnlabel="Add"
+                    style="max-width: 200px;"
+                    class="mb-1"
                     :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
                 </pattern-input>
-            </div>
-            <div>
-                <div class="btn-group">
-                    <button :class="{active:ui.models_view=='full'}" @click="ui.models_view='full'" class="btn btn-outline-secondary">full</button>
-                    <button :class="{active:ui.models_view=='compact'}"  @click="ui.models_view='compact'"  type="button" class="btn btn-outline-secondary">compact</button>
-                    <button :class="{active:ui.models_view=='designer'}"  @click="ui.models_view='designer'"  type="button" class="btn btn-outline-secondary">designer</button>
+
+                <app v-for="app in apps" 
+                    :app="app" 
+                    :key="app.name" 
+                    :compact="ui.models_view == 'compact'"
+                    class="mb-2">
+                </app>
+
+                <div v-if="apps.length == 0">
+                    No apps created yet.
                 </div>
+
             </div>
         </div>
-
-        <model-designer v-if="ui.models_view=='designer'" />
-
-        <div v-else>
-            <app v-for="app in apps" 
-                :app="app" 
-                :key="app.name" 
-                :compact="ui.models_view == 'compact'"
-                class="mb-2">
-            </app>
-        </div>
-
+    
 
     </div>
 </template>

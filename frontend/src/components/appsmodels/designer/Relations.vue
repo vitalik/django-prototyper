@@ -23,19 +23,13 @@
             models: {type: Array, required: true},
             selected: {type: Array, required: true},
         },
-        // data() {
-        //     return {
-        //         height: window.innerHeight,
-        //         width: window.innerWidth,
-        //     }
-        // },
         computed: {
             all_relations() {
                 let pos = {}
                 _.each(this.models, (m) => {
                     pos[m.key] = {
-                        x1: m.model.ui_left,
-                        y1: m.model.ui_top,
+                        x1: m.model.ui_left + 20,
+                        y1: m.model.ui_top + 10,
                         selected: m.selected
                     }
                 });

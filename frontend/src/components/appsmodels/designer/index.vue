@@ -1,41 +1,36 @@
 <template>
-    <div class="card h-100">
+    <div class="h-100">
 
-        <modal v-show="edit_colors" title="App colours" @close="edit_colors=false" class="appcolors">
+        <div class="p-1" style="margin-top: -1rem; border-bottom: 1px solid #ccc; background-color: #eee;">
+            <button @click="add_model_popup=true" class="btn btn-sm btn-outline-secondary">Add model(s)...</button>
+            <button @click="edit_colors_popup=true" class="btn btn-sm btn-outline-secondary">Change colors</button>
+            <button @click="autosort" class="btn btn-sm btn-outline-secondary">Auto sort</button>
+        </div>
+
+        <div class="designer h-100">
+            <drag-area />
+        </div>
+
+
+        <modal v-show="edit_colors_popup" title="App colours" @close="edit_colors_popup=false" class="appcolors">
             <app-colors/>
         </modal>
 
-        <div class="card-header">
-            <div class="form-row align-items-center">
-                <div class="col-auto">
-                    <select v-model="selected_app" class="form-control form-control-sm">
-                        <option :value="null">Select app...</option>
-                        <option v-for="app in apps">{{ app.name }}</option>
-                    </select>
-                </div>
-                <div class="col-auto">
-                    <pattern-input class="new-model"
-                                   @save="add_model"
-                                   style="width: 220px"
-                                   placeholder="Type model name..."
-                                   btnlabel="Add"
-                                   :small="true"
-                                   :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
-                    </pattern-input>
-                </div>
-                <div class="col-auto text-right">
-                    &nbsp; &nbsp; &nbsp; &nbsp;
-                    <button @click="edit_colors=true" class="btn btn-sm btn-secondary">colors</button>
-                    <button @click="autosort" class="btn btn-sm btn-secondary">Auto sort</button>
-                </div>
-            </div>
-        </div>
+        <modal v-show="add_model_popup" title="Add app/model.." @close="add_model_popup=false" class="appcolors">
+            <select v-model="selected_app" class="form-control form-control-sm">
+                <option :value="null">Select app...</option>
+                <option v-for="app in apps">{{ app.name }}</option>
+            </select>
 
-        <div class="card-body designer h-100">
-            
-            <drag-area />
-
-        </div>
+            <pattern-input class="new-model"
+                            @save="add_model"
+                            style="width: 220px"
+                            placeholder="Type model name..."
+                            btnlabel="Add"
+                            :small="true"
+                            :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
+            </pattern-input>
+        </modal>
     </div>
 </template>
 
@@ -52,7 +47,8 @@
         name: 'modeldesigner',
         data() {
             return {
-                edit_colors: false,
+                edit_colors_popup: false,
+                add_model_popup: false,
                 selected_app: null,
             }
         },
