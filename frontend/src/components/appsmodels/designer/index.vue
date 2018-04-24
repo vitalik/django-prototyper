@@ -17,19 +17,7 @@
         </modal>
 
         <modal v-show="add_model_popup" title="Add app/model.." @close="add_model_popup=false" class="appcolors">
-            <select v-model="selected_app" class="form-control form-control-sm">
-                <option :value="null">Select app...</option>
-                <option v-for="app in apps">{{ app.name }}</option>
-            </select>
-
-            <pattern-input class="new-model"
-                            @save="add_model"
-                            style="width: 220px"
-                            placeholder="Type model name..."
-                            btnlabel="Add"
-                            :small="true"
-                            :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
-            </pattern-input>
+            <add-model-dialog />
         </modal>
     </div>
 </template>
@@ -40,8 +28,9 @@
     import {store} from '../../../store'
     import DragArea from './DragArea'
     import AppColors from './AppColors'
+    import AddModelDialog from './AddModelDialog'
     import Modal from '../../utils/Modal'
-    import PatternInput from '../../utils/PatternInput'
+
 
     export default {
         name: 'modeldesigner',
@@ -49,13 +38,7 @@
             return {
                 edit_colors_popup: false,
                 add_model_popup: false,
-                selected_app: null,
             }
-        },
-        computed: {
-            apps() {
-                return store.project.apps
-            },
         },
         methods: {
             autosort() {
@@ -78,19 +61,12 @@
                     }
                 })
             },
-            add_model(name) {
-                if (store.models_get(this.selected_app, name) !== undefined) {
-                    alert(`Model "${name}" already exist`)
-                    return
-                }
-                store.models_add(this.selected_app, name)
-            },
         },
         components: {
             DragArea,
             AppColors,
             Modal,
-            PatternInput,
+            AddModelDialog,
         }
     }
 
