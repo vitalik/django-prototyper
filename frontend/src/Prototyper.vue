@@ -22,6 +22,7 @@
 
         <div id="sidebar" class="pt-2">
             <div class="nav flex-column nav-pills">
+                <router-link to="/" class="nav-link" :class="{'active':$route.path == '/'}">Home</router-link>
                 <router-link to="/buildsettings/" class="nav-link" active-class="active">Build Settings</router-link>
                 <router-link to="/settings/" class="nav-link" active-class="active">Django Settings</router-link>
                 <router-link to="/apps/" class="nav-link" active-class="active">Apps / Models</router-link>
