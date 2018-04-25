@@ -24,11 +24,12 @@
             <table v-else>
                 <draggable v-model="app.models">
                     <tr v-for="model in app.models">
-                        <td class="model-name">
+                        <td class="model-name pr-2" style="min-width: 120px;">
                             <router-link :to="{name: 'model', params: {app: app.name, model:model.name}}">{{ model.name }}</router-link>
                         </td>
-                        <td class="fields pl-2">
+                        <td class="fields pl-2 border-left">
                             <span v-for="field in model.fields" class="badge badge-secondary mr-1">{{ field.name }}</span>
+                            <span v-if="model.fields.length == 0">no fields</span>
                         </td>
                     </tr>
                 </draggable>
