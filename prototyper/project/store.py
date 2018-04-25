@@ -31,6 +31,7 @@ class Project(object):
         with open(self.storage_file, 'r') as f:
             data = json.load(f)
         data['name'] = self.name
+        data['path'] = self.path
         return data
     
     def save(self, data):
