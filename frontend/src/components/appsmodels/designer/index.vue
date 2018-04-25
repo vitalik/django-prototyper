@@ -42,9 +42,10 @@
         },
         methods: {
             autosort() {
+                let apps = store.project.apps
                 let x = 20
                 let y = 20
-                _.each(this.apps, (app) => {
+                _.each(apps, (app) => {
                     _.each(app.models, (m) => {
                         m.ui_top = y
                         m.ui_left = x
