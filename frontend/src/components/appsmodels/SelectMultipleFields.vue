@@ -27,7 +27,6 @@
         methods: {
             remove_fields(field) {
                 this.multiple_fields.splice(this.multiple_fields.indexOf(field), 1);
-                console.log(this.multiple_fields)
             },
             add_fields() {
 

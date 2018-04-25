@@ -13,7 +13,6 @@ export default {
         return request.post('/build/', body)
     },
     save(project) {
-        console.log(project)
         return request.post('/save/', project)
     },
     plugin_search(query) {

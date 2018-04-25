@@ -69,7 +69,6 @@
             }
         },
         mounted() {
-            console.log(this.single);
             this.$set(this.model['admin'], this.attribute, {});
             this.$set(this.model['admin'][this.attribute], "single", this.single || false);
             this.$set(this.model['admin'][this.attribute], "fields", this.selected_fields);
