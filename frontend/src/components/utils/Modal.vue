@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.3); margin-top: 50px;">
+    <div class="modal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5); margin-top: 50px;">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">

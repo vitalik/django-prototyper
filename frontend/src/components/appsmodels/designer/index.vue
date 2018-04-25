@@ -2,9 +2,12 @@
     <div class="h-100">
 
         <div class="p-1" style="margin-top: -1rem; border-bottom: 1px solid #ccc; background-color: #eee;">
-            <button @click="add_model_popup=true" class="btn btn-sm btn-primary mr-4">Add model(s)...</button>
-            <button @click="edit_colors_popup=true" class="btn btn-sm btn-outline-secondary" title="Change colors"><i class="fas fa-paint-brush"></i></button>
-            <button @click="autosort" class="btn btn-sm btn-outline-secondary" title="Auto sort"><i class="fas fa-list"></i></button>
+            <div class="container-fluid">
+                <button @click="add_model_popup=true" class="btn btn-sm btn-primary mr-4">Add model(s)...</button>
+                <button @click="edit_colors_popup=true" class="btn btn-sm btn-outline-secondary" title="Change colors"><i class="fas fa-paint-brush"></i></button>
+                <button @click="autosort" class="btn btn-sm btn-outline-secondary" title="Auto sort"><i class="fas fa-list"></i></button>
+            </div>
+
         </div>
 
         <div class="designer h-100">
