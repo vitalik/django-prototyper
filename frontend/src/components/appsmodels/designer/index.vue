@@ -40,12 +40,26 @@
                 add_model_popup: false,
             }
         },
+        computed: {
+            apps() {
+                return _.orderBy(store.project.apps, ['external', 'name'], ['desc', 'asc'])
+            }
+        },
         methods: {
             autosort() {
-                let apps = store.project.apps
                 let x = 20
                 let y = 20
-                _.each(apps, (app) => {
+                let external_done = false
+                _.each(this.apps, (app) => {
+                    if (app.models.length == 0)
+                        return
+                    
+                    if (!external_done && !app.external) {
+                        y = 20
+                        x += 160
+                        external_done = true
+                    }
+
                     _.each(app.models, (m) => {
                         m.ui_top = y
                         m.ui_left = x
@@ -72,38 +86,4 @@
     }
 
 </script>
-
-
-<style>
-    .designer {
-        overflow: scroll;
-        position: relative;
-    }
-
-    .designer .model {
-        padding: 0.1rem 0.3rem;
-        position: absolute;
-        min-width: 150px;
-        border-radius: 2px;
-    }
-
-    .designer .model.selected {
-        border: 1px solid #00f !important;
-        box-shadow: 0px 0px 4px #00f;
-    }
-
-    .designer .model.active {
-        box-shadow: 1px 1px 4px ", " #ccc;
-        z-index: 100;
-        margin-left: -4px;
-        margin-top: -4px;
-        padding-left: 8px;
-        padding-top: 6px;
-        box-shadow: 0px 0px 4px #ccc;
-    }
-
-    .appcolors .modal-dialog {
-        max-width: 700px;
-    }
-</style>
 

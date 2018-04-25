@@ -84,6 +84,37 @@
     }
 }
 
+.designer {
+    overflow: scroll;
+    position: relative;
+
+    .model {
+        padding: 0.1rem 0.3rem;
+        position: absolute;
+        min-width: 150px;
+        border-radius: 2px;
+
+        &.selected {
+            border: 1px solid #00f !important;
+            box-shadow: 0px 0px 4px #00f;
+        }
+
+        &.active {
+            box-shadow: 1px 1px 4px ", " #ccc;
+            z-index: 100;
+            margin-left: -4px;
+            margin-top: -4px;
+            padding-left: 8px;
+            padding-top: 6px;
+            box-shadow: 0px 0px 4px #ccc;
+        }
+    }
+}
+
+.appcolors .modal-dialog {
+    max-width: 700px;
+}
+
 .sortable-ghost {
     opacity: 0.3;
 }
