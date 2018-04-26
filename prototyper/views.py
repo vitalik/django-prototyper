@@ -54,8 +54,6 @@ def api_build(request):
 def api_save(request):
     data = _json_body(request)
     settings.PROTOTYPER_PROJECT.save(data)
-    for a in data['apps']:
-        print('%20s' % a['name'], ':', [m['name'] for m in a['models']])
     return JsonResponse({'success': True})
 
 
