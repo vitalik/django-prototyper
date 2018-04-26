@@ -1,3 +1,5 @@
-Django prototyper
+django-prototyper
+===============
 
-Coming soon...
+Installation
+-----------------
