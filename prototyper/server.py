@@ -31,6 +31,8 @@ def django_configure():
     )
 
 
-def run_server():
+def run_server(bind):
     from django.core.management import call_command
-    call_command('runserver', '0.0.0.0:8000')  # TODO: get from args
+    if not bind:
+        bind = '8080'
+    call_command('runserver', bind)

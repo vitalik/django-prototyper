@@ -10,6 +10,7 @@ def _parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_project')
     parser.add_argument('--build', action='store_true')
+    parser.add_argument('--bind', help='HOST:PORT to bind http server on.  example  --bind=0.0.0.0:8000')
     return parser.parse_args()
 
 
@@ -29,4 +30,4 @@ def main():
     if args.build is True:
         build()
     else:
-        run_server()
+        run_server(args.bind)

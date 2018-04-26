@@ -34,4 +34,4 @@ WORKDIR /code/backend/
 
 EXPOSE 8000
 
-CMD ["python", "main.py", "/tmp/testproject1"]
+CMD ["python", "main.py", "--bind=0.0.0.0:8000", "/tmp/testproject1"]
