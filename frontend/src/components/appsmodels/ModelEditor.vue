@@ -1,7 +1,7 @@
 <template>
     <div class="h-100">
 
-        <div class="heading">
+        <div class="heading" style="padding-bottom: 0;">
             <div class="container-fluid">
                 <h2>
                     {{ model.name }}
@@ -22,6 +22,7 @@
                     <button @click="go_to_model(1)" class="btn btn-sm btn-outline-secondary float-right ml-1"><i class="fas fa-chevron-right"></i></button>
                     <button @click="go_to_model(-1)" class="btn btn-sm btn-outline-secondary float-right"><i class="fas fa-chevron-left"></i></button>
                 </h2>
+                <router-link :to="{name: 'appsmodels'}" style="color: #666;">&lt; Back</router-link>
             </div>
         </div>
 
