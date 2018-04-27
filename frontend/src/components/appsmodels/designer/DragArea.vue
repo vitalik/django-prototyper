@@ -11,6 +11,7 @@
         
         <model v-for="item in models"
                 @click.native="select_model(item, $event)"
+                @dblclick.native="on_dblclick(item, $event)"
                 @dragstart.native="dragstart"
                 @dragend.native="dragend(item, $event)"
                 draggable="true"
@@ -72,17 +73,6 @@
                     height: h + 'px',
                 }
             }
-            // styles() {
-            //     let w = 0
-            //     let h = 0
-            //     _.each(this.models, (m) => {
-            //         if (m.ui_top > h)  h = m.ui_top
-            //         if (m.ui_left > w) w = m.ui_left
-            //     })
-            //     return {width: 1000 + 'px', height: 1000 + 'px'}
-            // },
-            // model - 'opacity': this.drag_start_pos == null ? 1 : 0.3,
-
         },
         methods: {
             select_model(item, event) {
@@ -94,6 +84,10 @@
             },
             unselect_model() {
                 this.selected_models = []
+            },
+            on_dblclick(item, event) {
+                let key = item.key.split('.')
+                this.$router.push({name: 'model', params: {app: key[0], model:key[1]}})
             },
             dragstart(e) {
                 e.dataTransfer.setData('Text', 'model') // firefox needs this
