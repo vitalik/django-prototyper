@@ -95,8 +95,10 @@ class ModelBuilder(codelines):
             v_name_plural = v_name_plural[:-1] + 'ies'
         elif not v_name_plural.endswith('s'):
             v_name_plural += 's'
-        lines.extend_indent(["verbose_name = %s" % self._trans_str(v_name)])
-        lines.extend_indent(["verbose_name_plural = %s" % self._trans_str(v_name_plural)])
+        lines.extend_indent([
+            "verbose_name = %s" % self._trans_str(v_name),
+            "verbose_name_plural = %s" % self._trans_str(v_name_plural),
+        ])
         
         return lines
     
