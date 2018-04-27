@@ -93,10 +93,20 @@ export var store = {
         })
     },
 
+    plugins_get(name) {
+        return _.find(this.project.plugins, {name})
+    },
+
     plugins_delete(name) {
         let ind = _.findIndex(this.project.plugins, {name})
         if (ind == -1)
             alert('Cannot find plugin: ' + name)
+        
+        // cleaning plugin apps:
+        let plugin = this.plugins_get(name)
+        let plugin_apps = _.get(plugin, 'apps', [])
+        _.each(plugin_apps, a => this.app_delete(a.name))
+
         Vue.delete(this.project.plugins, ind)
     }
 }
