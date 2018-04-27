@@ -24,11 +24,10 @@
         </modal>
 
         <div class="container-fluid">
-            <button @click="build_warning_popup=true" v-if="!build_in_progress" class="btn btn-success">Build again</button>
 
             <div v-if="show_complete" class="mt-2">
                 <div v-if="build_success">
-                    <span class="text-success">Build success</span>
+                    <h2 class="text-success">Build success</h2>
                     <p>Now you can check your project:</p>
 
                     <div class="p-1" style="background-color: #eee; max-width: 400px;">
@@ -51,6 +50,11 @@
 
                 </div>
                 <span v-else class="text-danger">Build failed</span>
+
+
+                <button @click="build_warning_popup=true" v-if="!build_in_progress" class="btn btn-success mb-1 float-right">Build again</button>
+
+                <h3 class="mt-4">Logs</h3>
             </div>
 
             <div v-if="build_in_progress">

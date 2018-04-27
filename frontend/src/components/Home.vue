@@ -29,6 +29,12 @@
                         <router-link to="/settings/" class="btn btn-outline-success btn-block">Change settings</router-link>
                         <br>
                         <router-link to="/plugins/" class="btn btn-outline-success btn-block">Install some plugins</router-link>
+
+
+                        <div v-if="project_apps.length > 0">
+                            <br><br>
+                            <router-link to="/build/" class="btn btn-outline-danger btn-block">Build</router-link>
+                        </div>
                     </div>
                     
                 </div>

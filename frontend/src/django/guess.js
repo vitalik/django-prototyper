@@ -14,6 +14,9 @@ function guess_common_names(name) {
 
     if (_.includes(name, 'date'))
         return 'DateField'
+    
+    if (_.includes(name, 'price'))
+        return 'DecimalField'
 
     if (_.includes(name, 'duration'))
         return 'DurationField'
