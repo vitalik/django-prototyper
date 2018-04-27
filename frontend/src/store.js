@@ -5,6 +5,11 @@ import {DJANGO_CONTRIB_APPS} from './django/apps'
 import {guess_type} from './django/guess'
 
 
+function firstUpCase(s) {
+    return s[0].toUpperCase() + s.substr(1);
+}
+
+
 export var store = {
     project: PROJECT_DATA,  // Global var (comes from html)
 
@@ -38,9 +43,11 @@ export var store = {
 
     models_get(app_name, name) {
         let app = this.app_get(app_name)
+        name = firstUpCase(name)
         return _.find(app.models, {name})
     },
     models_add(app_name, name) {
+        name = firstUpCase(name)
         let app = this.app_get(app_name)
         app.models.push({
             name: name,
