@@ -24,16 +24,19 @@ class AdminStage(BuildStage):
         admin_py.write_text('\n'.join(contents))
 
     def _handle_model(self, app, model):
-        admin = [f"@admin.register({model['name']})", f"class {model['name']}Admin(admin.ModelAdmin):"]
+        admin = [
+            "@admin.register(%s)" % model['name'],
+            "class %sAdmin(admin.ModelAdmin):" % model['name'],
+        ]
         lines = []
         if model['admin']:
             for name, attr in model['admin'].items():
                 if attr['fields']:
                     if attr['single']:
-                        lines.append(f"    {name} = '{attr['fields'][0]}'")
+                        lines.append("    {0} = '{1}'".format(name, attr['fields'][0]))
                     else:
-                        fields = [f'"{field}"' for field in attr['fields']]
-                        lines.append(f"    {name} = [{', '.join(fields)}]")
+                        fields = ["'%s'" % f for f in attr['fields']]
+                        lines.append("    {0} = [{1}]".format(name, ', '.join(fields)))
         if not lines:
             lines.append("    pass")
         return admin + lines
