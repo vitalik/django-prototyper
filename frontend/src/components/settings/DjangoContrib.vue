@@ -9,7 +9,7 @@
                     @click="toggle_app(app)"
                     :key="app.name"
                     class="btn btn-primary btn-block btn-sm text-left ml-3">
-                        <span class="float-right">&gt;</span>
+                        <span class="float-right"><i class="fas fa-trash-alt"></i></span>
                         django.contrib.{{app.name}} 
                 </button>
                 &nbsp; ...<br>
@@ -21,7 +21,7 @@
                     @click="toggle_app(app)"
                     :key="app.name"
                     class="btn btn-secondary btn-block btn-sm text-left ml-1">
-                        &lt; django.contrib.{{app.name}}
+                        <i class="fas fa-plus mr-1"></i> django.contrib.{{app.name}}
                 </button>
             </div>
         </div>
