@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-100">
 
         <div class="heading">
             <div class="container-fluid">
@@ -25,45 +25,49 @@
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid h-100 pt-2" style="background-color: #f5f5f5; margin-top: -1rem;">
             <div class="row">
                 <div class="col-6">
-                    <h5>Fields:</h5>
-                    <table class="table table-sm table-striped ">
-                        <draggable v-model="model.fields" element="tbody">
-                            <field v-for="(field, pos) in model.fields" 
-                                @activate="on_field_activate"
-                                @activatenext="on_field_next"
-                                @activateprev="on_field_prev"
-                                :class="{'table-primary': active_field && active_field.name == field.name}"
-                                :field="field" 
-                                :pos="pos"
-                                :id="'f_' + pos"
-                                :key="pos">
-                            </field>
-                        </draggable>
-                    </table>
+                    <div class="bg-white p-2">
+                        <strong>Fields</strong>
 
-                    <div v-if="model.fields.length == 0" class="mb-4">
-                        This models does not have fields.
+                        <hr>
+
+                        <table class="table table-sm">
+                            <draggable v-model="model.fields" element="tbody">
+                                <field v-for="(field, pos) in model.fields" 
+                                    @activate="on_field_activate"
+                                    @activatenext="on_field_next"
+                                    @activateprev="on_field_prev"
+                                    :class="{'bg-light': active_field && active_field.name == field.name}"
+                                    :field="field" 
+                                    :pos="pos"
+                                    :id="'f_' + pos"
+                                    :key="pos">
+                                </field>
+                            </draggable>
+                        </table>
+
+                        <div v-if="model.fields.length == 0" class="mb-4">
+                            0 fields.
+                        </div>
+
+                        <hr>
+                        
+                        <pattern-input 
+                            @save="add_field"
+                            style="width: 250px;"
+                            placeholder="Type field..."
+                            btnlabel="Add"
+                            :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
+                        </pattern-input>
                     </div>
                     
-                    <pattern-input 
-                        @save="add_field"
-                        style="width: 250px;"
-                        placeholder="Type field..."
-                        btnlabel="Add"
-                        :regExp="/^[a-z]([a-z0-9_]*[a-z0-9])?$/i">
-                    </pattern-input>
 
                     <meta-editor :model="model" class="mt-4" />
                 </div>
                 <div class="col-6 col-lg-4">
-                    <div>
-                        
-                    </div>
                     <div v-if="active_field" class="card">
-                        <div class="card-header"><strong>{{active_field.name}}</strong> = {{active_field.type}}</div>
                         <field-attrs-editor :field="active_field" class="card-body" />
                     </div>
                 </div>

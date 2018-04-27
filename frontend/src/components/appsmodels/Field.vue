@@ -12,10 +12,10 @@
         <td>
             <field-type :field="field" @focus="on_focus" />
         </td>
-        <td class="quickattr"><span @click="toggle('null')" :class="{'badge-primary': field.attrs.null == true, 'badge-light': field.attrs.null == false}" class="badge">N</span></td>
-        <td class="quickattr"><span @click="toggle('blank')" :class="{'badge-primary': field.attrs.blank == true, 'badge-light': field.attrs.blank == false}" class="badge">B</span></td>
-        <td class="quickattr"><span @click="toggle('unique')" :class="{'badge-primary': field.attrs.unique == true, 'badge-light': field.attrs.unique == false}" class="badge">U</span></td>
-        <td class="quickattr"><span @click="toggle('db_index')" :class="{'badge-primary': field.attrs.db_index == true, 'badge-light': field.attrs.db_index == false}" class="badge">&nbsp;I&nbsp;</span></td>
+        <td class="quickattr"><span @click="toggle('null')" :class="{'badge-warning': field.attrs.null == true, 'badge-light': field.attrs.null == false}" class="badge">N</span></td>
+        <td class="quickattr"><span @click="toggle('blank')" :class="{'badge-warning': field.attrs.blank == true, 'badge-light': field.attrs.blank == false}" class="badge">B</span></td>
+        <td class="quickattr"><span @click="toggle('unique')" :class="{'badge-warning': field.attrs.unique == true, 'badge-light': field.attrs.unique == false}" class="badge">U</span></td>
+        <td class="quickattr"><span @click="toggle('db_index')" :class="{'badge-warning': field.attrs.db_index == true, 'badge-light': field.attrs.db_index == false}" class="badge">&nbsp;I&nbsp;</span></td>
     </tr>
 </template>
 
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style scoped>
-    .table-primary .name {
+    .bg-light .name {
         background-color: white !important;
     }
     .name {
@@ -81,7 +81,7 @@ export default {
         opacity: 0.3;
     }
 
-    tr.field td.quickattr .badge-primary {
+    tr.field td.quickattr .badge-warning {
         opacity: 1;
     }
 

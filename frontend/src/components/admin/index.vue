@@ -7,6 +7,8 @@
         </div>
 
         <div class="col-md-6 col-lg-4">
+            <p>Select models which should have admin generated:</p>
+
             <div v-for="app in apps" class="card djangoapp mb-1">
                 <strong class="card-header">{{app.name}}</strong>
                 <div  class="card-body">

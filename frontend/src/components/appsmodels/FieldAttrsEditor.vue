@@ -1,5 +1,6 @@
 <template>
     <div>
+        <strong>{{field.name}}</strong> = {{field.type}} (
         <table style="width: 100%;">
             <field-attr v-for="attr in field_attrs" :field="field" :attr="attr" :key="attr" />
         </table>
