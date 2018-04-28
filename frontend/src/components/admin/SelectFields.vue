@@ -2,10 +2,10 @@
     <div class="card card-body">
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-4 text-nowrap">
                 {{ attribute }}
             </div>
-            <div class="col-md-6" v-click-outside="on_outside_click">
+            <div class="col" v-click-outside="on_outside_click">
 
                 <draggable :list="selected_fields" element="span">
                     <a v-for="fld in selected_fields"

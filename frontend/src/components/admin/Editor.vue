@@ -9,7 +9,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-6">
                     <SelectFields attribute="list_display" :model="model" class="mt-1"></SelectFields>
                     <SelectFields attribute="list_display_links" :model="model" class="mt-1"></SelectFields>
                     <SelectFields attribute="list_editable" :model="model" class="mt-1"></SelectFields>
@@ -17,7 +17,7 @@
                     <SelectFields attribute="search_fields" :model="model" class="mt-1"></SelectFields>
                     <SelectFields attribute="date_hierarchy" :single="true" :model="model" class="mt-1"></SelectFields>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <SelectFields attribute="radio_fields" :model="model" class="mt-1"></SelectFields>
                     <SelectFields attribute="raw_id_fields" :model="model" class="mt-1"></SelectFields>
                     <SelectFields attribute="autocomplete_fields" :model="model" class="mt-1"></SelectFields>

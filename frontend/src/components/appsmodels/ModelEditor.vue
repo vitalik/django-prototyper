@@ -28,7 +28,7 @@
 
         <div class="container-fluid h-100 pt-2" style="background-color: #f5f5f5; margin-top: -1rem;">
             <div class="row">
-                <div class="col-6">
+                <div class="col-8">
                     <div class="bg-white p-2">
                         <strong>Fields</strong>
 
@@ -67,7 +67,7 @@
 
                     <meta-editor :model="model" class="mt-4" />
                 </div>
-                <div class="col-6 col-lg-4">
+                <div class="col-4">
                     <div v-if="active_field" class="card">
                         <field-attrs-editor :field="active_field" class="card-body" />
                     </div>

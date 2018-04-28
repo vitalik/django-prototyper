@@ -8,7 +8,7 @@
         
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6  col-lg-5">
+                <div class="col-5">
                     <table>
                         <tr>
                             <th>USE_I18N = </th>
@@ -40,7 +40,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-md-6 col-lg-5">
+                <div class="col-7">
                     <div class="card">
                         <div class="card-body">
                             <django-contrib />

@@ -1,9 +1,9 @@
 <template>
     <div class="text-nowrap">
-        <select v-model="field.type" @focus="$emit('focus')">
+        <select v-model="field.type" @focus="$emit('focus')" style="max-width: 120px;">
             <option v-for="t in type_choices">{{t}}</option>
         </select>
-        <select v-if="is_relational_type" v-model="field.relation">
+        <select v-if="is_relational_type" v-model="field.relation" style="max-width: 180px;">
             <option :value="null">Select model...</option>
             <option v-for="model in relation_options">{{model}}</option>
         </select>

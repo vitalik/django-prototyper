@@ -1,6 +1,6 @@
 <template>
     <tr class="field-attr">
-        <td class="text-right text-nowrap" style="width: 150px;">{{attr}} = </td>
+        <td class="text-right text-nowrap" style="width: 130px;">{{attr}} = </td>
         <td>
             <input v-if="attr_value_type == String" v-model.lazy="attr_value" type="text" class="form-control form-control-sm">
             <input v-if="attr_value_type == Number" v-model.lazy="attr_value" type="number" class="form-control form-control-sm" style="width: 60px;">
