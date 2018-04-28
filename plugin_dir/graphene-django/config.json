@@ -1,0 +1,19 @@
+{
+    "name": "graphene-django",
+    "version": "1.0",
+    "description": "A Django integration for Graphene.",
+    "apps": [
+        {"name": "graphene_django", "models": []}
+    ],
+    "requirements": [
+        "graphene-django"
+    ],
+    "urls": {
+        "imports": [
+            "from graphene_django.views import GraphQLView"
+        ],
+        "urls": [
+            "# path('graphql', GraphQLView.as_view(graphiql=True)),"
+        ]
+    }
+}

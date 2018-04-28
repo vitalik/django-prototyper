@@ -18,10 +18,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 \"\"\"
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import include, path
+%(extra_imports)s
 urlpatterns = [
     path('admin/', admin.site.urls),
+    %(extra_lines)s
 ]
 """
 
@@ -29,4 +30,23 @@ urlpatterns = [
 class UrlsStage(BuildStage):
     def run(self):
         urls_py = Path(self.build.settings_pckg_path) / 'urls.py'
-        urls_py.write_text(TPL)
+
+        extra_lines = []
+        extra_imports = []
+
+        plugins = self.build.details['plugins']
+        for plugin in plugins:
+            urls_conf = plugin.get('urls', {})
+
+            imports = urls_conf.get('imports', [])
+            extra_imports.extend(imports)
+            
+            urls = urls_conf.get('urls', [])
+            extra_lines.append('')
+            extra_lines.extend(urls)
+
+        code = TPL % {
+            'extra_lines': '\n    '.join(extra_lines),
+            'extra_imports': '\n'.join(extra_imports),
+        }
+        urls_py.write_text(code)
