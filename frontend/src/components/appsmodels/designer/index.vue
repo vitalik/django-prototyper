@@ -48,6 +48,20 @@
                 return _.orderBy(store.project.apps, ['external', 'name'], ['desc', 'asc'])
             }
         },
+        created() {
+            // detecting if ui_top/left is not set - autosorting
+            let have_positions = false
+             _.each(this.apps, (app) => {
+                _.each(app.models, (m) => {
+                    if (m.ui_top !== undefined)
+                        have_positions = true
+                })
+            })
+
+            if(!have_positions) {
+                this.autosort()
+            }
+        },
         methods: {
             autosort() {
                 let x = 20
