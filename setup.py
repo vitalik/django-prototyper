@@ -27,7 +27,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-prototyper',
-    version='0.1.8',
+    version='0.1.16',
     description='Django prototyping tool',
     long_description=long_description,
     url='https://github.com/vitalik/django-prototyper',
