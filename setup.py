@@ -38,7 +38,10 @@ setup(
 
     install_requires=['django'],
 
-    package_data={'prototyper': ['static/build.js', 'static/logo.png', 'static/welcome.png']},  # TODO: make it automatic
+    package_data={'prototyper': [
+        'static/build.js', 'static/logo.png', 'static/welcome.png',  # TODO: make it automatic
+        'demo_plugins/**/*.json',
+    ]},
     include_package_data=True,
 
     entry_points={

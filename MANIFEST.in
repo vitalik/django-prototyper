@@ -1,2 +1,4 @@
 include prototyper/static/*.js
 include prototyper/static/*.png
+
+recursive-include prototyper/demo_plugins *.json *.py

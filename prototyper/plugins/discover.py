@@ -1,7 +1,7 @@
 import os
 import json
 
-USER_PLUGINS_DIR = './plugin_dir'  # TODO: mabye ~/.prototyper ?
+USER_PLUGINS_DIR = os.path.join(os.path.dirname(__file__), '..', 'demo_plugins')  # TODO: mabye ~/.prototyper ?
 
 
 def search_plugins(query):
