@@ -35,4 +35,9 @@ def run_server(bind):
     from django.core.management import call_command
     if not bind:
         bind = '8080'
-    call_command('runserver', bind)
+    kwargs = {}
+    DEV_MODE = os.environ.get('PROTOTYPER_DEV', 'no') == 'yes'
+    if not DEV_MODE:
+        kwargs['use_reloader'] = False
+    call_command('runserver', bind, **kwargs)
+
