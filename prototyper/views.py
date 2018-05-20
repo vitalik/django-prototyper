@@ -3,6 +3,7 @@ import json
 from django.conf import settings
 from django.template import Template, Context
 from django.http import JsonResponse, HttpResponse
+from prototyper import VERSION
 from .build import run_build
 from . import plugins
 
@@ -20,6 +21,7 @@ HOME_TEMPLATE = """<!DOCTYPE html>
     
     <script>
         var PROJECT_DATA = {{ PROJECT_DATA|safe }}
+        var PROTOTYPER_VERSION = '{{ VERSION }}'
     </script>
     <script type="text/javascript" src="{{JS_BUNDLE}}"></script>
 </body>
@@ -38,6 +40,7 @@ def main_view(request):
     ctx = {
         'PROJECT_DATA': json.dumps(data),
         'JS_BUNDLE': _js_bundle(),
+        'VERSION': VERSION,
     }
     html = Template(HOME_TEMPLATE).render(Context(ctx))
     return HttpResponse(html)

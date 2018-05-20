@@ -5,6 +5,7 @@
                 <span class="branding mr-2">
                     <img src="/static/logo.png" style="width: 25px; height: 24px;">
                     Prototyper
+                    <sup>{{version}}</sup>
                 </span>
                 {{ project.name }}
                  
@@ -48,6 +49,7 @@ export default {
     data () {
         return {
             project: store.project,
+            version: PROTOTYPER_VERSION,  // globals
             is_saving: false,
         }
     },

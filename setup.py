@@ -25,9 +25,11 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
+version = __import__('prototyper').VERSION
+
 setup(
     name='django-prototyper',
-    version='0.1.17',
+    version=version,
     description='Django prototyping tool',
     long_description=long_description,
     url='https://github.com/vitalik/django-prototyper',

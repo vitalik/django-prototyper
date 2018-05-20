@@ -3,6 +3,7 @@ import os
 import argparse
 import django
 from django.conf import settings
+from prototyper import VERSION
 from prototyper.server import django_configure, run_server
 
 
@@ -20,6 +21,7 @@ def build():
 
 
 def main():
+    print('Django Prototyper %s' % VERSION)
     args = _parse_args()
     django_configure()
 
