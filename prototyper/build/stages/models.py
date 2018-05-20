@@ -71,6 +71,8 @@ class ModelBuilder(codelines):
             self.extend_indent(self._handle_field(field))
 
         self.extend_indent(self._handle_meta())
+        self.extend_indent([''])
+        self.extend_indent(self._handle_str_output())
         
         if len(self) == 1:
             self.append('    pass')
@@ -101,6 +103,23 @@ class ModelBuilder(codelines):
         ])
         
         return lines
+    
+    def _handle_str_output(self):
+        "Renders the __str__ method"
+        if len(self.model['fields']) == 0:
+            return []
+        non_rel_fields = [i for i in self.model['fields'] if not i['relation']]
+        if len(non_rel_fields) == 0:
+            return []
+        
+        fld = 'self.' + non_rel_fields[0]['name']
+        if non_rel_fields[0]['type'] not in ('CharField', 'TextField', 'SlugField', 'EmailField'):
+            fld = 'str(%s)' % fld
+
+        return [
+            'def __str__(self):',
+            '    return %s' % fld
+        ]
     
     def _trans_str(self, s):
         "Returns either _('<s>' or '<s>' based on build settings)"
