@@ -2,7 +2,7 @@
 
 A UI for generating django code
 
-Plese see introduction video for more details:
+Please see introduction video for more details:
 
 [<img src="http://f.code-on.be/d/18/06/0223EPzm.png">](http://youtube.com)
 
