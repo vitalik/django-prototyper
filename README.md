@@ -4,7 +4,7 @@ A UI for generating django code
 
 Please see introduction video for more details:
 
-[<img src="http://f.code-on.be/d/18/06/0223EPzm.png">](http://youtube.com)
+[<img src="http://f.code-on.be/d/18/06/0223EPzm.png">](https://www.youtube.com/watch?v=QqHm2LfcKx0)
 
 
 ## Installation
