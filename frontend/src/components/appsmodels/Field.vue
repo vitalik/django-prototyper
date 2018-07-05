@@ -16,6 +16,11 @@
         <td class="quickattr"><span @click="toggle('blank')" :class="{'badge-warning': field.attrs.blank == true, 'badge-light': field.attrs.blank == false}" class="badge">B</span></td>
         <td class="quickattr"><span @click="toggle('unique')" :class="{'badge-warning': field.attrs.unique == true, 'badge-light': field.attrs.unique == false}" class="badge">U</span></td>
         <td class="quickattr"><span @click="toggle('db_index')" :class="{'badge-warning': field.attrs.db_index == true, 'badge-light': field.attrs.db_index == false}" class="badge">&nbsp;I&nbsp;</span></td>
+        <td class="quickattr">
+            <button class="btn btn-sm btn-link text-danger del-field-btn" @click="on_delete">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        </td>
     </tr>
 </template>
 
@@ -43,6 +48,9 @@ export default {
         },
         on_keyup() {
             this.$emit('activateprev', this.pos)
+        },
+        on_delete() {
+            this.$emit('deleteclick', this.pos)
         },
         toggle(attr) {
             this.$emit('activate', this.field)
@@ -75,6 +83,7 @@ export default {
     }
     tr.field td.quickattr {
         padding: 0px;
+        width: 1.5rem;
     }
 
     tr.field td.quickattr .badge {
@@ -82,6 +91,13 @@ export default {
     }
 
     tr.field td.quickattr .badge-warning {
+        opacity: 1;
+    }
+
+    .del-field-btn {
+        opacity: 0.2;
+    }
+    .del-field-btn:hover {
         opacity: 1;
     }
 

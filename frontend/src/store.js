@@ -86,6 +86,14 @@ export var store = {
         return fld
     },
 
+    fields_delete(model, name){
+        let ind = _.findIndex(model.fields, {name: name})
+        console.info(name)
+        console.info(ind)
+        console.info(model.fields)
+        Vue.delete(model.fields, ind)
+    },
+
     plugins_install(plugin) {
         this.project.plugins.push(plugin)
         let plugin_apps = _.get(plugin, 'apps', [])

@@ -40,6 +40,7 @@
                                     @activate="on_field_activate"
                                     @activatenext="on_field_next"
                                     @activateprev="on_field_prev"
+                                    @deleteclick="on_field_delete(field)"
                                     :class="{'bg-light': active_field && active_field.name == field.name}"
                                     :field="field" 
                                     :pos="pos"
@@ -137,6 +138,9 @@ export default {
         delete_model() {
             store.models_delete(this.app.name, this.model.name)
             this.$router.push('/apps/')
+        },
+        on_field_delete(field) {
+            store.fields_delete(this.model, field.name)
         },
         on_field_activate(field) {
             this.active_field = field
