@@ -55,6 +55,7 @@ def pipeline(build, plugins, stages):
             return False
     
     for plug in plugins:
+        plug.set_build(build)
         plug.on_build_complete()
 
     build.save()
