@@ -14,7 +14,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}")
 
 application = get_wsgi_application()
 """
@@ -23,4 +23,4 @@ application = get_wsgi_application()
 class WsgiStage(BuildStage):
     def run(self):
         wsgi_py = Path(self.build.settings_pckg_path) / 'wsgi.py'
-        wsgi_py.write_text(TPL.format(self.build.project.name))
+        wsgi_py.write_text(TPL.format(self.settings_module('settings')))

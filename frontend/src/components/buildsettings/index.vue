@@ -12,6 +12,17 @@
                     <td class="border-top-0"><InputTrueFalse v-model.boolean="build_settings.ugettext_lazy" option_true="Yes" option_false="No" class="form-control form-control-sm" /></td>
                     <td class="border-top-0 w-50 text-muted">use ugettext_lazy <code>_('abc')</code> for text chunks in code</td>
                 </tr>
+                <tr>
+                    <td class="border-top-0">settings.py</td>
+                    <td class="border-top-0">
+                        <select v-model="build_settings.settings_path" class="form-control form-control-sm">
+                            <option></option>
+                            <option value="separate">separate</option>
+                            <option value="same">next to manage.py</option>
+                        </select>
+                    </td>
+                    <td class="border-top-0 w-50 text-muted">where will be saved <code>settings.py</code> abd <code>urls.py</code> files</td>
+                </tr>
                 <!--
                 <tr>
                     <td>PEP8 models.py</td>
@@ -42,6 +53,7 @@ export default {
     },
     mounted() {
         this._set_default('ugettext_lazy', true)
+        this._set_default('settings_path', 'separate')
         this._set_default('pep8model_fields', false)
         this._set_default('charfield_max_length', 200)
     },

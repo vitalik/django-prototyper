@@ -7,7 +7,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -25,7 +25,7 @@ class FirstStage(BuildStage):
         root = Path(self.build.build_path)
         manage_py = root / 'manage.py'
         manage_py.touch(0o755)
-        contents = MANAGE_PY.format(self.build.project.name)
+        contents = MANAGE_PY.format(self.settings_module('settings'))
         manage_py.write_text(contents)
 
 

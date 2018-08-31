@@ -9,8 +9,14 @@ class Build(object):
     def __init__(self, project):
         self.details = project.load()
         self.project = project
-        self.build_path = tempfile.mkdtemp(prefix='djprototyper')
-        self.settings_pckg_path = os.path.join(self.build_path, project.name)  # TODO: can be configurable
+        self.temp_folder = tempfile.mkdtemp(prefix='djprototyper')
+        self.build_path = os.path.join(self.temp_folder, project.name)
+        os.mkdir(self.build_path)
+
+        self.settings_pckg_path = self.build_path
+        if self.is_settings_py_separate():
+            self.settings_pckg_path = os.path.join(self.settings_pckg_path, project.name)
+        
         self.logger = get_logger()
         self.success = False  # succesful build finished
     
@@ -18,18 +24,29 @@ class Build(object):
         self.logger.info(message)
     
     def save(self):
-        result_path = os.path.join(self.project.path, self.project.name)
-        assert len(result_path) > 3  # just in case making sure no root folder is ever removed :)
-        if os.path.exists(result_path):
-            self.log('Cleaning previous build {}'.format(result_path))
-            shutil.rmtree(result_path)
-        self.log('Saving to "{}"'.format(result_path))
-        shutil.move(self.build_path, result_path)
+        self.log('Cleaning previous build {}'.format(self.project.path))
+        for i in os.listdir(self.project.path):
+            if i == '.djangoprototyper':
+                continue
+            name = os.path.join(self.project.path, i)
+            if os.path.isdir(name):
+                shutil.rmtree(name)
+            else:
+                os.remove(name)
+        
+        for f in os.listdir(self.temp_folder):
+            self.log('Saving {}'.format(f))
+            src = os.path.join(self.temp_folder, f)
+            dst = os.path.join(self.project.path, f)
+            shutil.move(src, dst)
 
     def cleanup(self):
-        if os.path.exists(self.build_path):
-            self.log('Cleaning: {}'.format(self.build_path))
-            shutil.rmtree(self.build_path)
+        if os.path.exists(self.temp_folder):
+            self.log('Cleaning: {}'.format(self.temp_folder))
+            shutil.rmtree(self.temp_folder)
+    
+    def is_settings_py_separate(self):
+        return self.details['build_settings'].get('settings_path', 'separate') == 'separate'
 
 
 class BuildStage(object):
@@ -41,6 +58,12 @@ class BuildStage(object):
     
     def log(self, message):
         self.build.log(message)
+    
+    def settings_module(self, module):
+        "returns py module path based on settings_path build setting"
+        if self.build.is_settings_py_separate():
+            return '{0}.{1}'.format(self.build.project.name, module)
+        return module
 
 
 def pipeline(build, plugins, stages):
