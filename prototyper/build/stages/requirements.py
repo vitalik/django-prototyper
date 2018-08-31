@@ -2,7 +2,7 @@ from ..base import BuildStage
 from pathlib import Path
 from prototyper.conf import DJANGO_TARGET
 
-DJ_VER_REQ = '{maj}.{min}>=,<{maj}.{next}'.format(
+DJ_VER_REQ = '>={maj}.{min},<{maj}.{next}'.format(
     maj=DJANGO_TARGET[0],
     min=DJANGO_TARGET[1],
     next=DJANGO_TARGET[1] + 1,

@@ -164,11 +164,11 @@ class SettingsStage(BuildStage):
         for plugin in self.build.details['plugins']:
             apps = plugin.get('apps', [])
             for app in apps:
-                result.append("'{}',".format(app['name']))
+                result.append("'{0}',".format(app['name']))
         
         result.append('')
 
         for app in self.build.details['apps']:
             if not app['external']:
-                result.append("'{}',".format(app['name']))
+                result.append("'{0}',".format(app['name']))
         return '\n    '.join(result)
