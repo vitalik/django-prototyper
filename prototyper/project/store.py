@@ -15,7 +15,7 @@ class Project(object):
     
     def init_storage(self):
         if os.path.exists(self.path) and not os.path.exists(self.storage_path):
-            raise RuntimeError('Cannot init project. Path "%s" already exist and it is not djangoprototyper' % self.path)
+            raise RuntimeError('Cannot init project.\n\nPath "%s" already exist and it is not djangoprototyper\n\n' % self.path)
         if not os.path.exists(self.path):
             self.init_new()
         else:
