@@ -38,7 +38,7 @@ setup(
 
     packages=find_packages(exclude=['tests']),
 
-    install_requires=['django'],
+    install_requires=['django>=2'],
 
     package_data={'prototyper': [
         'static/build.js', 'static/logo.png', 'static/welcome.png',  # TODO: make it automatic
