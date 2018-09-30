@@ -13,7 +13,7 @@ def inspect(to_path):
     project = create_new_project(proj_name)
     project['apps'] = []  # clearnig default apps
     
-    print('path=%s' % to_path)
+    print('Bulding to %s' % to_path)
     for a, ext, models in installed_apps_with_models():
 
         app = {
@@ -22,7 +22,7 @@ def inspect(to_path):
             'models': []
         }
         
-        print(' ----- %s %s - ' % (ext and '~' or ' ', a))
+        print(' %s %s' % (ext and '~' or '+', a))
         for m in models:
             res_model = get_model_details(m)
             if ext:
@@ -33,6 +33,8 @@ def inspect(to_path):
         project['apps'].append(app)
 
     save(to_path, project)
+    print('Done.')
+    print('now run:\nprototyper %s' % to_path)
 
 
 def save(to_path, data):
