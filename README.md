@@ -1,5 +1,7 @@
 # django-prototyper
 
+[![Downloads](https://pepy.tech/badge/django-prototyper)](https://pepy.tech/project/django-prototyper)
+
 A UI for generating django code
 
 Please see introduction video for more details:
